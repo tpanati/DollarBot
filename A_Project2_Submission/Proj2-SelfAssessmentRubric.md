@@ -1,5 +1,5 @@
 For each items, score yourself zero (none), one (a litte), two (somewhat), three (a lot).
-
+Total Score = 88 / 90
 |Notes|evidence|Score|
 |-----|---------|---|
 |Video| https://www.youtube.com/watch?v=XlndmRhr9Lc | 3 |
@@ -16,8 +16,8 @@ but nevertheless, here is a track record that everyone is contributing a lot)| (
 |Docs: why: docs tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing| | 3
 |Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code.| <a href="https://www.canva.com/design/DAFxwU4ABIg/LqMkLeGUBhC__JmWmdkFiQ/watch?utm_content=DAFxwU4ABIg&utm_campaign=designshare&utm_medium=link&utm_source=editor">Click here for a video overview!!</a> | 3
 |Use of version control tools| Hosted on GitHub (Repo link)[https://github.com/aditikilledar/dollar_bot_SE23/] | 3
-|Use of style checkers |config files in GH showing your config|
-|Use of code formatters. |config files in GH showing your this formatter's  config|
+|Use of style checkers |config files in GH showing your config| 2 
+|Use of code formatters. |config files in GH showing your this formatter's  config| 2
 |Use of syntax checkers. | Python & VSCode Syntax checkers | 3 |
 |Use of code coverage | (Config file in GH)[https://github.com/aditikilledar/dollar_bot_SE23/blob/main/.github/workflows/python-app.yml] | 3 |
 |Other automated analysis tools|[config files in GH](https://github.com/aditikilledar/dollar_bot_SE23/blob/main/.github/workflows/python-app.yml)| 3
