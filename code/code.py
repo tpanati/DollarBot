@@ -158,6 +158,16 @@ def command_history(message):
     """
     history.run(message, bot)
 
+# function to fetch expenditure history of the user
+@bot.message_handler(commands=["sendEmail"])
+def command_sendEmail(message):
+    """
+    command_history(message): Takes 1 argument message which contains the message from
+    the user along with the chat ID of the user chat. It then calls history.py to run to execute
+    the add functionality. Commands used to run this: commands=['history']
+    """
+    history.run(message, bot)
+
 # function to edit date, category or cost of a transaction
 @bot.message_handler(commands=["edit"])
 def command_edit(message):
