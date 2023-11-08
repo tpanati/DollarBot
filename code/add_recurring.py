@@ -50,7 +50,7 @@ def post_amount_input(message, bot, selected_category):
         amount_value = helper.validate_entered_amount(amount_entered)  # validate
         if amount_value == 0:  # cannot be $0 spending
             raise Exception("Spent amount has to be a non-zero number.")
-        helper.validate_transaction_limit(chat_id, amount_value, bot)
+        # helper.validate_transaction_limit(chat_id, amount_value, bot)
 
         message = bot.send_message(chat_id, 'For how many months in the future will the expense be there? \n(Enter integer values only)'.format(str(option[chat_id])))
         bot.register_next_step_handler(message, post_duration_input, bot, selected_category, amount_value)

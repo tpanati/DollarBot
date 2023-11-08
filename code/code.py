@@ -14,6 +14,7 @@ import add
 import budget
 import analytics
 import predict
+import add_recurring
 from datetime import datetime
 from jproperties import Properties
 
