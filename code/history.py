@@ -21,15 +21,15 @@ def run(message, bot):
         if user_history is None:
             raise Exception("Sorry! No spending records found!")
         if len(user_history) == 0:
-            spend_total_str = "Sorry! No spending records found!"
+            raise Exception("Sorry! No spending records found!")
         else:
             for rec in user_history:
                 values = rec.split(',')
                 # Store each value in separate variables
                 date, category, amount = values
                 table.append([date, category, "$ " + amount])
-        spend_total_str="<pre>"+ tabulate(table, headers='firstrow')+"</pre>"
-        bot.send_message(chat_id, spend_total_str, parse_mode="HTML")
+            spend_total_str="<pre>"+ tabulate(table, headers='firstrow')+"</pre>"
+            bot.send_message(chat_id, spend_total_str, parse_mode="HTML")
     except Exception as e:
         logging.exception(str(e))
-        bot.reply_to(message, "Oops!" + str(e))
+        bot.reply_to(message, "Oops! " + str(e))
