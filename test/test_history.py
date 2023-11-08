@@ -48,11 +48,6 @@ def test_run_without_data(mock_telebot, mocker):
     mc.reply_to.return_value = True
     history.run(MOCK_Message_data, mc)
     assert mc.reply_to.called
-    """
-    mc.send_message.return_value = True
-    history.run(MOCK_Message_data, mc)
-    assert mc.send_message.called
-    """
 
 
 @patch("telebot.telebot")
