@@ -45,9 +45,14 @@ def test_run_without_data(mock_telebot, mocker):
     history.helper.getUserHistory.return_value = MOCK_USER_DATA["1574038305"]
     MOCK_Message_data = create_message("Hello")
     mc = mock_telebot.return_value
+    mc.reply_to.return_value = True
+    history.run(MOCK_Message_data, mc)
+    assert mc.reply_to.called
+    """
     mc.send_message.return_value = True
     history.run(MOCK_Message_data, mc)
     assert mc.send_message.called
+    """
 
 
 @patch("telebot.telebot")
