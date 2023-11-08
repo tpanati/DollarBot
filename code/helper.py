@@ -93,6 +93,15 @@ def validate_entered_amount(amount_entered):
             return str(amount)
     return 0
 
+def validate_entered_duration(duration_entered):
+    if duration_entered is None:
+        return 0
+    if re.match("^[1-9][0-9]{0,14}", duration_entered):
+        duration = int(duration_entered)
+        if duration > 0:
+            return str(duration)
+    return 0
+
 def getUserHistory(chat_id):
     """
     getUserHistory(chat_id): Takes 1 argument chat_id and uses this to get the relevant user's historical data.

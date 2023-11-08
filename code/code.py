@@ -138,6 +138,11 @@ def command_add(message):
     """
     add.run(message, bot)
 
+#handles add_recurring command
+@bot.message_handler(commands=['add_recurring'])
+def command_add_recurring(message):
+    add_recurring.run(message, bot)
+
 # handles pdf command
 @bot.message_handler(commands=["pdf"])
 def command_pdf(message):
