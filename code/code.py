@@ -14,6 +14,7 @@ import add
 import budget
 import analytics
 import predict
+import sendEmail
 from datetime import datetime
 from jproperties import Properties
 
@@ -166,7 +167,7 @@ def command_sendEmail(message):
     the user along with the chat ID of the user chat. It then calls history.py to run to execute
     the add functionality. Commands used to run this: commands=['history']
     """
-    history.run(message, bot)
+    sendEmail.run(message, bot)
 
 # function to edit date, category or cost of a transaction
 @bot.message_handler(commands=["edit"])
