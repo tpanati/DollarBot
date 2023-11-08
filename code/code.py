@@ -164,8 +164,8 @@ def command_history(message):
 def command_sendEmail(message):
     """
     command_history(message): Takes 1 argument message which contains the message from
-    the user along with the chat ID of the user chat. It then calls history.py to run to execute
-    the add functionality. Commands used to run this: commands=['history']
+    the user along with the chat ID of the user chat. It then calls sendEmail.py to run to execute
+    the sending an email of the expense history. Commands used to run this: commands=['sendEmail']
     """
     sendEmail.run(message, bot)
 

@@ -42,6 +42,7 @@ commands = {
         \n 1. The Add/update category is to set the new budget or update the existing budget \
         \n 2. The view category gives the detail if budget is exceeding or in limit with the difference amount \
         \n 3. The delete category allows to delete the budget and start afresh!  ",
+    "sendEmail": "Send an email with an attachment showing your history",
 }
 
 dateFormat = "%d-%b-%Y"

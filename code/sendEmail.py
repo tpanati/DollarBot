@@ -1,5 +1,4 @@
 import csv
-import io
 import re
 import helper
 import logging
@@ -10,15 +9,15 @@ from email.mime.base import MIMEBase
 from email import encoders
 
 
-# === Documentation of history.py ===
+# === Documentation of sendEmail.py ===
 
 def run(message, bot):
     """
-    run(message, bot): This is the main function used to implement the delete feature.
+    run(message, bot): This is the main function used to implement the sendEmail feature.
     It takes 2 arguments for processing - message which is the message from the user, and bot which
     is the telegram bot object from the main code.py function. It calls helper.py to get the user's
     historical data and based on whether there is data available, it either prints an error message or
-    displays the user's historical data.
+    send an email with the csvFile - the user's historical data.
     """
     try:
         helper.read_json()
