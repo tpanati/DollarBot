@@ -16,19 +16,18 @@ def run(message, bot):
     and bot which is the telegram bot object from the main code.py function.
     """
     helper.read_json()
+    chat_id = message.chat.id
+    bot.send_message(chat_id, "Select date")
+    bot.register_next_step_handler(message,category_selection,bot)
+
+def category_selection(msg,bot):
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
     markup.row_width = 2
-    chat_id = message.chat.id
-    expense_history = helper.getUserHistory(chat_id)
-    if expense_history:
-        recur_msg = bot.send_message(chat_id,"You have previously recorded expenses. Do you want to repeat one of these expenses?(Y/N)")
-        bot.register_next_step_handler(recur_msg, record_expense, bot, expense_history)
-    else:
-        for c in helper.getSpendCategories():
-            markup.add(c)
-        markup.add("Add new category")
-        msg = bot.reply_to(message, "Select Category", reply_markup=markup)
-        bot.register_next_step_handler(msg, post_category_selection, bot)
+    for c in helper.getSpendCategories():
+        markup.add(c)
+    markup.add("Add new category")
+    msg = bot.reply_to(msg, "Select Category", reply_markup=markup)
+    bot.register_next_step_handler(msg, post_category_selection, bot)
 
 def post_append_spend(message, bot):
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
