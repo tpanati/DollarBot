@@ -51,7 +51,7 @@ def enter_updated_data(m, bot, selected_data, updated):
         bot.send_message(m.chat.id, f"Select {LSTEP[step]}", reply_markup=calendar)
 
         @bot.callback_query_handler(func=DetailedTelegramCalendar.func())
-        def cal(c):
+        def edit_cal(c):
             result, key, step = DetailedTelegramCalendar().process(c.data)
 
             if not result and key:
