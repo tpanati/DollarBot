@@ -50,7 +50,6 @@ def post_amount_input(message, bot, selected_category):
         amount_value = helper.validate_entered_amount(amount_entered)  # validate
         if amount_value == 0:  # cannot be $0 spending
             raise Exception("Spent amount has to be a non-zero number.")
-        # helper.validate_transaction_limit(chat_id, amount_value, bot)
 
         message = bot.send_message(chat_id, 'For how many months in the future will the expense be there? \n(Enter integer values only)'.format(str(option[chat_id])))
         bot.register_next_step_handler(message, post_duration_input, bot, selected_category, amount_value)
@@ -68,7 +67,7 @@ def post_duration_input(message, bot, selected_category, amount_value):
             raise Exception("Duration has to be a non-zero integer.")
                 
         for i in range(int(duration_value)):
-            date_of_entry = (datetime.today() + relativedelta(months=+i)).strftime(helper.getDateFormat() + ' ' + helper.getTimeFormat())
+            date_of_entry = (datetime.today().date() + relativedelta(months=+i)).strftime(helper.getDateFormat())
             date_str, category_str, amount_str = str(date_of_entry), str(option[chat_id]), str(amount_value)
             helper.write_json(add_user_record(chat_id, "{},{},{}".format(date_str, category_str, amount_str)))
         
