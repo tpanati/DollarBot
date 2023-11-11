@@ -175,6 +175,12 @@ def isCategoryBudgetByCategoryAvailable(chatId, cat):
         return False
     return cat in data.keys()
 
+def isCategoryBudgetByCategoryNotZero(chatId):
+    for cat in spend_categories:
+        if getCategoryBudgetByCategory(chatId, cat) == '0':
+                return False
+    return True
+
 def get_uncategorized_amount(chatId, amount):
     overall_budget = float(amount)
     category_budget_data = getCategoryBudget(chatId)
