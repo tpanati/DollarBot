@@ -34,7 +34,45 @@ def run(message, bot):
         print("Exception occurred : ")
         logging.error(str(ex), exc_info=True)
         bot.reply_to(message, "Processing Failed - \nError : " + str(ex))
-    
+
+def process_delete_argument(message, bot):
+    """
+    This function receives the choice that user inputs for delete and asks for a confirmation. 'handle_confirmation'
+    is called next.
+
+    :param message: telebot.types.Message object representing the message object
+    :type: object
+    :return: None
+    """
+    text = message.text
+    chat_id = message.chat.id
+
+    date = text
+    if text.lower() == "all":
+        helper.write_json(deleteHistory(chat_id))
+        bot.send_message(chat_id, "History has been deleted!")
+    else:
+        if date is None:
+            # if none of the formats worked
+            bot.reply_to(message, "Error parsing date")
+        else:
+            # get the records either by given day, month, or all records
+            records_to_delete = helper.getUserHistoryByDate(chat_id, date)
+            # if none of the records match that day
+            if len(records_to_delete) == 0:
+                bot.reply_to(message, f"No transactions within {text}")
+                return
+            response_str = "Confirm records to delete\n"
+            for record in records_to_delete:
+                response_str += record + "\n"
+
+            markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
+            markup.add("Yes")
+            markup.add("No")
+            response_str += "\nReply Yes or No"
+            response = bot.reply_to(message, response_str, reply_markup=markup)
+            bot.register_next_step_handler(response, handle_confirmation, bot, records_to_delete)
+ 
 # function to delete a record
 def deleteHistory(chat_id):
     """
