@@ -15,6 +15,7 @@ import budget
 import analytics
 import predict
 import sendEmail
+import add_recurring
 from datetime import datetime
 from jproperties import Properties
 
@@ -138,6 +139,11 @@ def command_add(message):
     the add functionality. Commands used to run this: commands=['add']
     """
     add.run(message, bot)
+
+#handles add_recurring command
+@bot.message_handler(commands=['add_recurring'])
+def command_add_recurring(message):
+    add_recurring.run(message, bot)
 
 # handles pdf command
 @bot.message_handler(commands=["pdf"])
