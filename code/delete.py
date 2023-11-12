@@ -72,7 +72,31 @@ def process_delete_argument(message, bot):
             response_str += "\nReply Yes or No"
             response = bot.reply_to(message, response_str, reply_markup=markup)
             bot.register_next_step_handler(response, handle_confirmation, bot, records_to_delete)
- 
+
+def handle_confirmation(message, bot, records_to_delete):
+    """
+    Deletes the transactions in the previously chosen time period if the user chooses 'yes'.
+
+    :param message: telebot.types.Message object representing the message object
+    :param records_to_delete: the records to remove
+    :type: object
+    :return: None
+    """
+
+    chat_id = str(message.chat.id)
+    if message.text.lower() == "yes":
+        if str(chat_id) in user_list:
+            # Get the user's data
+            user_data = user_list.get(str(chat_id), {}).get('data', [])
+            # Remove the specified records
+            user_data = [record for record in user_data if record not in records_to_delete]
+            # Update the userlist with the modified data
+            user_list[str(chat_id)]['data'] = user_data
+        helper.write_json(user_list)
+        bot.send_message(message.chat.id, "Successfully deleted records")
+    else:
+        bot.send_message(message.chat.id, "No records deleted")
+
 # function to delete a record
 def deleteHistory(chat_id):
     """
