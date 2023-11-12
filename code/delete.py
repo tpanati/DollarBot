@@ -1,4 +1,7 @@
+from datetime import datetime
+import logging
 import helper
+from telebot import types
 
 # === Documentation of delete.py ===
 
@@ -12,16 +15,26 @@ def run(message, bot):
     to remove it. Then it ensures this removal is saved in the datastore.
     """
     global user_list
+    dateFormat = helper.getDateFormat()
     chat_id = message.chat.id
     delete_history_text = ""
     user_list = helper.read_json()
-    if str(chat_id) in user_list:
-        helper.write_json(deleteHistory(chat_id))
-        delete_history_text = "History has been deleted!"
-    else:
-        delete_history_text = "No records there to be deleted. Start adding your expenses to keep track of your spendings!"
-    bot.send_message(chat_id, delete_history_text)
-
+    try:
+        if str(chat_id) in user_list and helper.getUserHistory(chat_id) is not None:
+            curr_day = datetime.now()
+            prompt = "Enter the corresponding date in the given format or Enter All to delete the entire history\n"
+            prompt += f"\n\tExample day: {curr_day.strftime(dateFormat)}\n"
+            reply_message = bot.reply_to(message, prompt)
+            bot.register_next_step_handler(reply_message, process_delete_argument, bot)
+        else:
+            delete_history_text = "No records there to be deleted. Start adding your expenses to keep track of your spendings!"
+            bot.send_message(chat_id, delete_history_text)
+    
+    except Exception as ex:
+        print("Exception occurred : ")
+        logging.error(str(ex), exc_info=True)
+        bot.reply_to(message, "Processing Failed - \nError : " + str(ex))
+    
 # function to delete a record
 def deleteHistory(chat_id):
     """
