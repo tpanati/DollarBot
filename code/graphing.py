@@ -7,18 +7,39 @@ matplotlib.use("Agg")
 # === Documentation of graphing.py ===
 
 def viewBudget(data):
-    sorted_data = {}
+    # sorted_data = {}
+    # sorted_data = {k: v for k, v in sorted(data.items(), key=lambda item: item[1])}
+    # values = []
+    # labels = []
+    # for k, v in sorted_data.items():
+    #     values.append(v)
+    #     labels.append(k)
+    # plt.pie(values, labels=values, counterclock=False, shadow=True)
+    # plt.title("Category Wise Budget")
+    # plt.legend(labels, loc="center")
+    # plt.savefig("budget.png", bbox_inches="tight")
+    # plt.close()
+
     sorted_data = {k: v for k, v in sorted(data.items(), key=lambda item: item[1])}
-    values = []
-    labels = []
-    for k, v in sorted_data.items():
-        values.append(v)
-        labels.append(k)
-    plt.pie(values, labels=values, counterclock=False, shadow=True)
-    plt.title("Category Wise Budget")
-    plt.legend(labels, loc="center")
-    plt.savefig("budget.png", bbox_inches="tight")
-    plt.close()
+    values = [float(v) for v in sorted_data.values()]  # Convert values to float
+    labels = list(sorted_data.keys())
+    print(values,"values")
+    print(labels,"labels")
+    check = False
+    for value in values:
+        if int(value) != 0:
+            check = True
+            break
+    
+    if check:
+        plt.pie(values, labels=labels, counterclock=False, shadow=True)
+        plt.title("Category Wise Budget")
+        plt.legend(labels, loc="center")
+        plt.savefig("budget.png", bbox_inches="tight")
+        plt.close()
+        return True
+    else:
+        return False
 
 def addlabels(x, y):
     """
