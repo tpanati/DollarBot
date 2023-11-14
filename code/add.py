@@ -21,7 +21,7 @@ def run(message, bot):
     message = bot.send_message(chat_id, "Select date")
     calendar, step = DetailedTelegramCalendar().build()
     bot.send_message(chat_id, f"Select {LSTEP[step]}", reply_markup=calendar)
-    date = datetime.today()
+
     @bot.callback_query_handler(func=DetailedTelegramCalendar.func())
     def cal(c):
         chat_id = c.message.chat.id
@@ -46,27 +46,13 @@ def category_selection(msg,bot,date):
         # print(date)
         markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
         markup.row_width = 2
+        chat_id = msg.chat.id
         for c in helper.getSpendCategories():
             markup.add(c)
-        markup.add("Add new category")
         msg = bot.reply_to(msg, "Select Category", reply_markup=markup)
         bot.register_next_step_handler(msg, post_category_selection, bot, date)
     except:
         print(Exception)
-
-def post_append_spend(message, bot):
-    markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
-    markup.row_width = 2
-    selected_category = message.text
-    chat_id = message.chat.id
-    allocated_categories = helper.getCategoryBudget(chat_id)
-    if selected_category not in allocated_categories.keys():
-        helper.updateBudgetCategory(chat_id,selected_category)
-    helper.spend_categories.insert(0,selected_category)
-    for c in helper.getSpendCategories():
-        markup.add(c)
-    msg = bot.reply_to(message, "Select Category", reply_markup=markup)
-    bot.register_next_step_handler(msg, post_category_selection, bot)
 
 def post_category_selection(message, bot, date):
     """
@@ -79,27 +65,23 @@ def post_category_selection(message, bot, date):
     try:
         chat_id = message.chat.id
         selected_category = message.text
-        if selected_category == "Add new category":
-            message1 = bot.send_message(chat_id, "Please enter your category")
-            bot.register_next_step_handler(message1, post_append_spend, bot)
-        else:
-            if selected_category not in helper.getSpendCategories():
-                bot.send_message(
-                    chat_id, "Invalid", reply_markup=types.ReplyKeyboardRemove()
-                )
-                raise Exception(
-                    'Sorry, I don\'t recognise this category "{}"!'.format(selected_category)
-                )
-            option[chat_id] = selected_category
-            message = bot.send_message(
-                chat_id, "How much did you spend on {}? \n(Numeric values only)".format(str(option[chat_id])),)
-            bot.register_next_step_handler(message, post_amount_input, bot, selected_category, date)
+        if selected_category not in helper.getSpendCategories():
+            bot.send_message(
+                chat_id, "Invalid", reply_markup=types.ReplyKeyboardRemove()
+            )
+            raise Exception(
+                'Sorry, I don\'t recognise this category "{}"!'.format(selected_category)
+            )
+        option[chat_id] = selected_category
+        message = bot.send_message(
+            chat_id, "How much did you spend on {}? \n(Numeric values only)".format(str(option[chat_id])),)
+        bot.register_next_step_handler(message, post_amount_input, bot, selected_category, date)
     except Exception as e:
         logging.exception(str(e))
         bot.reply_to(message, "Oh no! " + str(e))
         display_text = ""
         commands = helper.getCommands()
-        for c in commands:  
+        for c in commands:
             # generate help text out of the commands dictionary defined at the top
             display_text += "/" + c + ": "
             display_text += commands[c] + "\n"
