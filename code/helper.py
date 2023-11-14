@@ -18,8 +18,8 @@ spend_estimate_option = ["Next day", "Next month"]
 update_options = {"continue": "Continue", "exit": "Exit"}
 budget_options = {"update": "Add/Update", "view": "View", "delete": "Delete"}
 budget_types = {"overall": "Overall Budget", "category": "Category-Wise Budget"}
-data_format = {"data": [], "budget": {"overall": None, "category": None}}
-analytics_options = {"overall": "Overall budget split", "spend": "Split of current spend", "remaining": "Remaining value", "history": "Time series graph of spend history"}
+data_format = {"data": [], "budget": {"overall": "0", "category": None}}
+analytics_options = {"overall": "Overall budget split by Category", "spend": "Split of current month expenditure", "remaining": "Remaining value", "history": "Time series graph of spend history"}
 
 # set of implemented commands and their description
 commands = {
@@ -188,7 +188,7 @@ def isCategoryBudgetAvailable(chatId):
 
 def isCategoryBudgetByCategoryAvailable(chatId, cat):
     data = getCategoryBudget(chatId)
-    if data is None or data == {}:
+    if data is None or data == {} or data == '0':
         return False
     return cat in data.keys()
 
@@ -262,6 +262,9 @@ def calculateRemainingCateogryBudgetPercent(chat_id, cat):
     history = getUserHistory(chat_id)
     query = datetime.now().today().strftime(getMonthFormat())
     queryResult = [value for _, value in enumerate(history) if str(query) in value]
+    if budget == '0':
+        print("budget is zero")
+        return None
     return (calculate_total_spendings_for_category(queryResult, cat)/float(budget))*100
 
 def calculate_total_spendings_for_category(queryResult, cat):
@@ -275,6 +278,7 @@ def calculate_total_spendings_for_category(queryResult, cat):
 def calculate_total_spendings_for_cateogory_chat_id(chat_id, cat):
     history = getUserHistory(chat_id)
     query = datetime.now().today().strftime(getMonthFormat())
+    print(query)
     queryResult = [value for _, value in enumerate(history) if str(query) in value]
     return calculate_total_spendings_for_category(queryResult, cat)
 
