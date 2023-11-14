@@ -121,6 +121,14 @@ def getUserHistoryByCategory(chat_id, category):
             previous_expenses.append(record)
     return previous_expenses
 
+def getUserHistoryByDate(chat_id, date):
+    data = getUserHistory(chat_id)
+    previous_expenses = []
+    for record in data:
+        if f"{date}," in record:
+            previous_expenses.append(record)
+    return previous_expenses
+
 def getUserHistoryDateExpense(chat_id):
     data = getUserHistory(chat_id)
     cat_spend_dict = {}
