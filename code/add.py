@@ -46,7 +46,6 @@ def category_selection(msg,bot,date):
         # print(date)
         markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
         markup.row_width = 2
-        chat_id = msg.chat.id
         for c in helper.getSpendCategories():
             markup.add(c)
         msg = bot.reply_to(msg, "Select Category", reply_markup=markup)
