@@ -285,6 +285,11 @@ def updateBudgetCategory(chatId, category):
     user_list[str(chatId)]["budget"]["category"][category] = str(0)
     write_json(user_list)
 
+def deleteBudgetCategory(chatId, category):
+    user_list = read_json()
+    user_list[str(chatId)]["budget"]["category"].pop(category, None)
+    write_json(user_list)
+
 def getAvailableCategories(history):
     available_categories = set()
     for record in history:
