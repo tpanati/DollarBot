@@ -14,7 +14,7 @@ import add
 import budget
 import analytics
 import predict
-#import weekly
+import weekly
 import monthly
 import add_recurring
 from datetime import datetime
@@ -149,7 +149,7 @@ def command_weekly(message):
     the user along with the chat ID of the user chat. It then calls weekly.py to run to execute
     the weekly analysis functionality. Commands used to run this: commands=['weekly']
     """
-#    weekly.run(message, bot)
+    weekly.run(message, bot)
 
 # defines how the /monthly command has to be handled/processed
 @bot.message_handler(commands=["monthly"])
