@@ -43,6 +43,10 @@ commands = {
         \n 1. The Add/update category is to set the new budget or update the existing budget \
         \n 2. The view category gives the detail if budget is exceeding or in limit with the difference amount \
         \n 3. The delete category allows to delete the budget and start afresh!  ",
+    "updateCategory": "This option is to add/delete/edit the categories. \
+        \n 1. The Add Category option is to add a new category which dosen't already exist \
+        \n 2. The Delete Category option is to delete an existing category \
+        \n 3. The Edit Category option is to edit an existing category. ",
 }
 
 dateFormat = "%d-%b-%Y"

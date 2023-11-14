@@ -14,9 +14,11 @@ import add
 import budget
 import analytics
 import predict
+import updateCategory
 import add_recurring
 from datetime import datetime
 from jproperties import Properties
+
 
 configs = Properties()
 
@@ -153,6 +155,16 @@ def command_pdf(message):
     the add functionality. Commands used to run this: commands=['pdf']
     """
     pdf.run(message, bot)
+
+#handles updateCategory command
+@bot.message_handler(commands=["updateCategory"])
+def command_updateCategory(message):
+    """
+    command_updateCategory(message): Takes 1 argument message which contains the message from
+    the user along with the chat ID of the user chat. It then calls updateCategory.py to run to execute
+    the updateCategory functionality. Commands used to run this: commands=['updateCategory']
+    """
+    updateCategory.run(message, bot)
 
 # function to fetch expenditure history of the user
 @bot.message_handler(commands=["history"])
