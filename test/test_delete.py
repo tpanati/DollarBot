@@ -1,7 +1,7 @@
 import os
 import json
 from code import delete
-from mock import patch
+from mock import MagicMock, patch
 from telebot import types
 
 
@@ -36,3 +36,58 @@ def test_delete_with_no_data(mock_telebot, mocker):
     delete.run(MOCK_Message_data, mc)
     if delete.helper.write_json.called is False:
         assert True
+
+@patch("telebot.telebot")
+def test_process_delete_argument_all_records(mock_telebot, mocker):
+    mocker.patch.object(delete, "helper")
+    mocker.patch.object(delete, "deleteHistory")
+    
+    # Create a mock message with "all" as the text
+    MOCK_Message_data = create_message("all")
+    
+    # Call the function being tested
+    delete.process_delete_argument(MOCK_Message_data, MagicMock())
+    
+    # Assert that the expected functions were called
+    delete.deleteHistory.assert_called_with(MOCK_Message_data.chat.id)
+    MOCK_Message_data.reply_to.assert_called_with(MOCK_Message_data, "History has been deleted!")
+
+@patch("telebot.telebot")
+def test_process_delete_argument_with_valid_date(mock_telebot, mocker):
+    mocker.patch.object(delete, "helper")
+    mocker.patch.object(delete, "is_valid_date", return_value=True)
+    mocker.patch.object(delete, "types")
+    
+    # Mock the necessary functions and data
+    mocker.patch.object(delete.helper, "getUserHistoryByDate", return_value=["record1", "record2"])
+    
+    # Create a mock message with a specified date
+    date_to_delete = "2023-01-15"
+    MOCK_Message_data = create_message(date_to_delete)
+    
+    # Call the function being tested
+    delete.process_delete_argument(MOCK_Message_data, MagicMock())
+    
+    # Assert that the expected functions were called
+    delete.helper.getUserHistoryByDate.assert_called_with(MOCK_Message_data.chat.id, date_to_delete)
+    # Assert that the bot replied with a confirmation message
+    delete.types.ReplyKeyboardMarkup.assert_called_once()
+    MOCK_Message_data.reply_to.assert_called_with(MOCK_Message_data, mocker.ANY, reply_markup=mocker.ANY)
+    MOCK_Message_data.register_next_step_handler.assert_called_once()
+
+@patch("telebot.telebot")
+def test_process_delete_argument_with_invalid_date(mock_telebot, mocker):
+    mocker.patch.object(delete, "helper")
+    mocker.patch.object(delete, "is_valid_date", return_value=False)
+    
+    # Create a mock message with an invalid date
+    invalid_date = "invalid_date"
+    MOCK_Message_data = create_message(invalid_date)
+    
+    # Call the function being tested
+    delete.process_delete_argument(MOCK_Message_data, MagicMock())
+    
+    # Assert that the expected functions were called
+    delete.is_valid_date.assert_called_with(invalid_date)
+    # Assert that the bot replied with an error message
+    MOCK_Message_data.reply_to.assert_called_with(MOCK_Message_data, "Invalid date format. Please enter a valid date.")
