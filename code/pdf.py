@@ -52,13 +52,15 @@ def run(message, bot):
         if helper.isOverallBudgetAvailable(chat_id) and helper.isCategoryBudgetByCategoryNotZero(chat_id):
             if helper.isCategoryBudgetAvailable(chat_id):
                 category_budget = {}
-                for cat in helper.spend_categories:
+                categories = helper.getSpendCategories()
+                for cat in categories:
                     if helper.isCategoryBudgetByCategoryAvailable(chat_id, cat):
                         category_budget[cat] = helper.getCategoryBudgetByCategory(chat_id, cat)
                 graphing.overall_split(category_budget)
 
             category_spend = {}
-            for cat in helper.spend_categories:
+            categories = helper.getSpendCategories()
+            for cat in categories:
                 spend = helper.calculate_total_spendings_for_cateogory_chat_id(chat_id,cat)
                 if spend != 0:
                     category_spend[cat] = spend
@@ -67,7 +69,8 @@ def run(message, bot):
 
             if helper.isCategoryBudgetAvailable(chat_id):
                 category_spend_percent = {}
-                for cat in helper.spend_categories:
+                categories = helper.getSpendCategories()
+                for cat in categories:
                     if helper.isCategoryBudgetByCategoryAvailable(chat_id, cat):
                         percent = helper.calculateRemainingCateogryBudgetPercent(chat_id, cat)
                         category_spend_percent[cat] = percent
