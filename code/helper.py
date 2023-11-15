@@ -204,21 +204,17 @@ def get_uncategorized_amount(chatId, amount):
     return str(round(uncategorized_budget,2))
 
 def display_remaining_budget(message, bot, cat):
-    print("inside")
-    chat_id = message.chat.id
-    display_remaining_category_budget(message, bot, cat)
     display_remaining_overall_budget(message, bot)
 
 def display_remaining_overall_budget(message, bot):
-    print("here")
     chat_id = message.chat.id
     remaining_budget = calculateRemainingOverallBudget(chat_id)
-    print("here", remaining_budget)
-    if remaining_budget >= 0:
-        msg = "\nRemaining Overall Budget is $" + str(remaining_budget)
+    current_amount = int(message.text)
+    if (remaining_budget - current_amount) >= 0:
+        msg = "\nRemaining Overall Budget is $" + str(remaining_budget - current_amount)
     else:
         msg = (
-            "\nBudget Exceded!\nExpenditure exceeds the budget by $" + str(remaining_budget)[1:]
+            "\nBudget Exceded!\nExpenditure exceeds the budget by $" + str(remaining_budget - current_amount)[1:]
         )
     bot.send_message(chat_id, msg)
 
@@ -227,6 +223,8 @@ def calculateRemainingOverallBudget(chat_id):
     history = getUserHistory(chat_id)
     query = datetime.now().today().strftime(getMonthFormat())
     queryResult = [value for _, value in enumerate(history) if str(query) in value]
+    if budget == None:
+        return -calculate_total_spendings(queryResult)
     return float(budget) - calculate_total_spendings(queryResult)
 
 def calculate_total_spendings(queryResult):
