@@ -52,12 +52,15 @@ def test_process_delete_argument_all_records(mock_telebot, mocker):
     mock_bot = MagicMock()
     MOCK_Message_data.bot = mock_bot
 
+    # Debugging information
+    print("Method calls:", mock_bot.method_calls)
+
     # Call the function being tested
     delete.process_delete_argument(MOCK_Message_data, MagicMock())
     
     # Assert that the expected functions were called
     delete.deleteHistory.assert_called_with(MOCK_Message_data.chat.id)
-    mock_bot.reply_to.assert_called_with(MOCK_Message_data, "History has been deleted!")
+    mock_bot.send_message.assert_called_with(MOCK_Message_data, "History has been deleted!")
 
 @patch("telebot.telebot")
 def test_process_delete_argument_with_valid_date(mock_telebot, mocker):
