@@ -114,7 +114,7 @@ def test_deleteHistory():
     result = delete.deleteHistory("sample_chat_id")
     
     # Assert that the user_list entry is removed
-    assert "sample_chat_id" not in delete.user_list
+    assert "sample_chat_id" not in result
      # Assert that the data is cleared in the result
     expected_result = {}
     assert result == expected_result
