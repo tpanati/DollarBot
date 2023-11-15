@@ -139,7 +139,7 @@ def test_handle_confirmation_yes(mock_telebot, mocker):
     delete.handle_confirmation(MOCK_Message_data, mock_bot, ["record1", "record2"])
 
     # Reload delete.user_list from the file to synchronize it with the changes made during handle_confirmation
-    delete.user_list = delete.helper.read_json()
+    #delete.user_list = delete.helper.read_json()
 
     # Assert that delete.helper.write_json was called with the correct arguments
     delete.helper.write_json.assert_called_with(delete.user_list)
