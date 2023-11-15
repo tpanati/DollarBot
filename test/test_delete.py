@@ -45,13 +45,19 @@ def test_process_delete_argument_all_records(mock_telebot, mocker):
     # Create a mock message with "all" as the text
     MOCK_Message_data = create_message("all")
     MOCK_Message_data.text = "all"  # Set the text attribute explicitly
+
+    print(MOCK_Message_data.text)
     
+    # Create a MagicMock for the bot instance
+    mock_bot = MagicMock()
+    MOCK_Message_data.bot = mock_bot
+
     # Call the function being tested
     delete.process_delete_argument(MOCK_Message_data, MagicMock())
     
     # Assert that the expected functions were called
     delete.deleteHistory.assert_called_with(MOCK_Message_data.chat.id)
-    MOCK_Message_data.reply_text.assert_called_with("History has been deleted!")
+    mock_bot.reply_to.assert_called_with(MOCK_Message_data, "History has been deleted!")
 
 @patch("telebot.telebot")
 def test_process_delete_argument_with_valid_date(mock_telebot, mocker):
@@ -64,6 +70,7 @@ def test_process_delete_argument_with_valid_date(mock_telebot, mocker):
     # Create a mock message with a specified date
     date_to_delete = "2023-01-15"
     MOCK_Message_data = create_message(date_to_delete)
+    print(MOCK_Message_data.text)
     
     # Call the function being tested
     delete.process_delete_argument(MOCK_Message_data, MagicMock())
