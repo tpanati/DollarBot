@@ -133,22 +133,20 @@ def test_handle_confirmation_yes(mock_telebot, mocker):
     MOCK_Message_data.bot = mock_bot
 
     # Use mocker.patch to replace delete.helper.write_json with a MagicMock
-    mock_write_json = mocker.patch.object(delete.helper, "write_json")
+    mocker.patch.object(delete.helper, "write_json")
 
     # Call the function being tested
     delete.handle_confirmation(MOCK_Message_data, mock_bot, ["record1", "record2"])
 
     # Reload delete.user_list from the file to synchronize it with the changes made during handle_confirmation
     delete.user_list = delete.helper.read_json()
-    
+
     # Assert that delete.helper.write_json was called with the correct arguments
-    mock_write_json.assert_called_with(delete.user_list)
+    delete.helper.write_json.assert_called_with(delete.user_list)
 
     # Assert that the user_list is updated
     expected_user_list = {"sample_chat_id": {"data": [], "budget": {"overall": "100", "category": {"food": "50"}}}}
     assert delete.user_list == expected_user_list
-
-
 
     # Assert that the bot sends the correct success message
     mock_bot.send_message.assert_called_with(MOCK_Message_data.chat.id, "Successfully deleted records")
