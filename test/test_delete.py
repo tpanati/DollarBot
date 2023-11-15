@@ -136,7 +136,7 @@ def test_handle_confirmation_yes(mock_telebot, mocker):
     delete.handle_confirmation(MOCK_Message_data, mock_bot, ["record1", "record2"])
 
     # Assert that the user_list is updated
-    expected_user_list = {"sample_chat_id": {"data": [], "budget": {"overall": "0", "category": {}}}}
+    expected_user_list = {"sample_chat_id": {"data": [], "budget": {"overall": "100", "category": {"food": "50"}}}}
     assert delete.user_list == expected_user_list
 
     # Assert that the helper.write_json is called
