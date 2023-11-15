@@ -115,6 +115,6 @@ def test_deleteHistory():
     
     # Assert that the user_list entry is removed
     assert "sample_chat_id" not in result
-     # Assert that the data is cleared in the result
-    expected_result = {}
+    # Assert that the data is cleared in the result
+    expected_result = {"sample_chat_id": {"data": [], "budget": {"overall": "0", "category": {}}}}
     assert result == expected_result
