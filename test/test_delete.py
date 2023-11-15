@@ -105,3 +105,16 @@ def test_process_delete_argument_with_invalid_date(mock_telebot, mocker):
     delete.helper.getUserHistoryByDate.assert_called_with(MOCK_Message_data.chat.id, invalid_date)
     # Assert that the bot replied with an error message
     mock_bot.reply_to.assert_called_with(MOCK_Message_data, "No transactions within invalid_date")
+
+def test_deleteHistory():
+    # Mock user_list
+    global user_list
+    user_list = {"sample_chat_id": {"data": ["record1", "record2"], "budget": {"overall": "100", "category": {"food": "50"}}}}
+    
+    # Call deleteHistory function
+    result = delete.deleteHistory("sample_chat_id")
+    
+    # Assert that the user_list entry is removed
+    assert "sample_chat_id" not in user_list
+    # Assert the result is the updated user_list
+    assert result == user_list
