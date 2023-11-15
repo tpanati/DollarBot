@@ -45,15 +45,10 @@ def test_process_delete_argument_all_records(mock_telebot, mocker):
     # Create a mock message with "all" as the text
     MOCK_Message_data = create_message("all")
     MOCK_Message_data.text = "all"  # Set the text attribute explicitly
-
-    print(MOCK_Message_data.text)
     
     # Create a MagicMock for the bot instance
     mock_bot = mock_telebot.return_value
     MOCK_Message_data.bot = mock_bot
-
-    # Debugging information
-    print("Method calls:", mock_bot.method_calls)
 
     # Call the function being tested
     delete.process_delete_argument(MOCK_Message_data, mock_bot)
@@ -73,17 +68,22 @@ def test_process_delete_argument_with_valid_date(mock_telebot, mocker):
     # Create a mock message with a specified date
     date_to_delete = "2023-01-15"
     MOCK_Message_data = create_message(date_to_delete)
+    MOCK_Message_data.text = "2023-01-15"
     print(MOCK_Message_data.text)
     
+    # Create a MagicMock for the bot instance
+    mock_bot = mock_telebot.return_value
+    MOCK_Message_data.bot = mock_bot
+    
     # Call the function being tested
-    delete.process_delete_argument(MOCK_Message_data, MagicMock())
+    delete.process_delete_argument(MOCK_Message_data, mock_bot)
     
     # Assert that the expected functions were called
     delete.helper.getUserHistoryByDate.assert_called_with(MOCK_Message_data.chat.id, date_to_delete)
     # Assert that the bot replied with a confirmation message
     delete.types.ReplyKeyboardMarkup.assert_called_once()
-    MOCK_Message_data.reply_to.assert_called_with(MOCK_Message_data, mocker.ANY, reply_markup=mocker.ANY)
-    MOCK_Message_data.register_next_step_handler.assert_called_once()
+    mock_bot.reply_to.assert_called_with(MOCK_Message_data, mocker.ANY, reply_markup=mocker.ANY)
+    mock_bot.register_next_step_handler.assert_called_once()
 
 @patch("telebot.telebot")
 def test_process_delete_argument_with_invalid_date(mock_telebot, mocker):
