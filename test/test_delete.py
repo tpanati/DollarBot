@@ -145,6 +145,7 @@ def test_handle_confirmation_yes(mock_telebot, mocker):
     delete.helper.write_json.assert_called_with(delete.user_list)
 
     print("Object ID:", id(delete.user_list))
+    print(delete.user.list)
 
     # Assert that the user_list is updated
     expected_user_list = {"sample_chat_id": {"data": [], "budget": {"overall": "100", "category": {"food": "50"}}}}

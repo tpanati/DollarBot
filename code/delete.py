@@ -84,6 +84,7 @@ def handle_confirmation(message, bot, records_to_delete):
     """
 
     chat_id = str(message.chat.id)
+    print("Before modification:", user_list)
     if message.text.lower() == "yes":
         if str(chat_id) in user_list:
             # Get the user's data
@@ -93,6 +94,7 @@ def handle_confirmation(message, bot, records_to_delete):
             # Update the userlist with the modified data
             user_list[str(chat_id)]['data'] = user_data
         helper.write_json(user_list)
+        print("After modification:", user_list)
         bot.send_message(message.chat.id, "Successfully deleted records")
     else:
         bot.send_message(message.chat.id, "No records deleted")
