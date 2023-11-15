@@ -1,6 +1,7 @@
 import helper
 import logging
 from tabulate import tabulate
+from datetime import datetime
 
 # === Documentation of history.py ===
 
@@ -27,7 +28,12 @@ def run(message, bot):
                 values = rec.split(',')
                 # Store each value in separate variables
                 date, category, amount = values
-                table.append([date, category, "$ " + amount])
+
+                date = datetime.strptime(date, '%d-%b-%Y')
+                current_date = datetime.now()
+
+                if(date <= current_date):
+                    table.append([date, category, "$ " + amount])
             spend_total_str="<pre>"+ tabulate(table, headers='firstrow')+"</pre>"
             bot.send_message(chat_id, spend_total_str, parse_mode="HTML")
     except Exception as e:
