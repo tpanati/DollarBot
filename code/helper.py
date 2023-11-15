@@ -48,6 +48,8 @@ commands = {
         \n 1. The Add/update category is to set the new budget or update the existing budget \
         \n 2. The view category gives the detail if budget is exceeding or in limit with the difference amount \
         \n 3. The delete category allows to delete the budget and start afresh!  ",
+    "weekly": "This option is to get the weekly analysis report of the expenditure",
+    "monthly": "This option is to get the monthly analysis report of the expenditure",
     "sendEmail": "Send an email with an attachment showing your history",
 }
 
@@ -291,6 +293,11 @@ def calculate_total_spendings_for_cateogory_chat_id(chat_id, cat):
 def updateBudgetCategory(chatId, category):
     user_list = read_json()
     user_list[str(chatId)]["budget"]["category"][category] = str(0)
+    write_json(user_list)
+
+def deleteBudgetCategory(chatId, category):
+    user_list = read_json()
+    user_list[str(chatId)]["budget"]["category"].pop(category, None)
     write_json(user_list)
 
 def getAvailableCategories(history):

@@ -14,6 +14,8 @@ import add
 import budget
 import analytics
 import predict
+import weekly
+import monthly
 import sendEmail
 import add_recurring
 from datetime import datetime
@@ -139,6 +141,26 @@ def command_add(message):
     the add functionality. Commands used to run this: commands=['add']
     """
     add.run(message, bot)
+
+# defines how the /weekly command has to be handled/processed
+@bot.message_handler(commands=["weekly"])
+def command_weekly(message):
+    """
+    command_weekly(message) Takes 1 argument message which contains the message from
+    the user along with the chat ID of the user chat. It then calls weekly.py to run to execute
+    the weekly analysis functionality. Commands used to run this: commands=['weekly']
+    """
+    weekly.run(message, bot)
+
+# defines how the /monthly command has to be handled/processed
+@bot.message_handler(commands=["monthly"])
+def command_monthly(message):
+    """
+    command_monthly(message) Takes 1 argument message which contains the message from
+    the user along with the chat ID of the user chat. It then calls monthly.py to run to execute
+    the monthly analysis functionality. Commands used to run this: commands=['monthly']
+    """
+    monthly.run(message, bot)
 
 #handles add_recurring command
 @bot.message_handler(commands=['add_recurring'])

@@ -21,7 +21,7 @@ def run(message, bot):
     message = bot.send_message(chat_id, "Select date")
     calendar, step = DetailedTelegramCalendar().build()
     bot.send_message(chat_id, f"Select {LSTEP[step]}", reply_markup=calendar)
-    date = datetime.today()
+
     @bot.callback_query_handler(func=DetailedTelegramCalendar.func())
     def cal(c):
         chat_id = c.message.chat.id
@@ -48,6 +48,8 @@ def category_selection(msg,bot,date):
         for c in helper.getSpendCategories():
             markup.add(c)
         markup.add("Add new category")
+        markup.add("Edit category")
+        markup.add("Delete category")
         msg = bot.reply_to(msg, "Select Category", reply_markup=markup)
         bot.register_next_step_handler(msg, post_category_selection, bot, date)
     except:
