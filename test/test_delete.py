@@ -136,8 +136,7 @@ def test_handle_confirmation_yes(mock_telebot, mocker):
     mock_write_json = mocker.patch.object(delete.helper, "write_json")
 
         # Use mocker.patch to replace delete.helper.read_json with a MagicMock
-    mock_read_json = mocker.patch.object(delete.helper, "read_json")
-    mock_read_json.return_value = delete.user_list
+    mock_read_json = mocker.patch.object(delete.helper, "read_json", side_effect=lambda: expected_user_list)
     
     # Call the function being tested
     delete.handle_confirmation(MOCK_Message_data, mock_bot, ["record1", "record2"])
@@ -151,7 +150,7 @@ def test_handle_confirmation_yes(mock_telebot, mocker):
     mock_write_json.assert_called_with(delete.user_list)
     
     # Reload delete.user_list from the file to synchronize it with the changes made during handle_confirmation
-    delete.user_list = mock_read_json.return_value
+    delete.user_list = mock_read_json()
 
     # Debugging: Print the values after reloading
     print("delete.user_list (after reload):", delete.user_list)
