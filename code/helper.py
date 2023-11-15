@@ -4,14 +4,14 @@ import os
 from datetime import datetime
 from notify import notify
 
-spend_categories = []
-spend_categories.append("Food")
-spend_categories.append("Groceries")
-spend_categories.append("Utilities")
-spend_categories.append("Transport")
-spend_categories.append("Shopping")
-spend_categories.append("Miscellaneous")
-
+spend_categories = [
+    "Food",
+    "Groceries",
+    "Utilities",
+    "Transport",
+    "Shopping",
+    "Miscellaneous",
+]
 choices = ["Date", "Category", "Cost"]
 spend_display_option = ["Day", "Month"]
 spend_estimate_option = ["Next day", "Next month"]
