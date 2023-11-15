@@ -36,7 +36,8 @@ def viewRemaining(chat_id, bot):
         bot.send_message(chat_id, "No category budget available", reply_markup=types.ReplyKeyboardRemove())
         return
     category_spend_percent = {}
-    for cat in helper.spend_categories:
+    categories = helper.getSpendCategories()
+    for cat in categories:
         if helper.isCategoryBudgetByCategoryAvailable(chat_id, cat):
             percent = helper.calculateRemainingCateogryBudgetPercent(chat_id, cat)
             category_spend_percent[cat] = percent

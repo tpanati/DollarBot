@@ -167,7 +167,7 @@ def add_new_category(message,bot):
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
     markup.row_width = 2
     new_category = message.text
-    helper.spend_categories.append(new_category)
+    helper.addSpendCategories(new_category)
     for c in helper.getSpendCategories():
         markup.add(c)
     msg = bot.reply_to(message, "Select Category", reply_markup=markup)
