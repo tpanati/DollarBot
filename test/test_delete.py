@@ -69,7 +69,6 @@ def test_process_delete_argument_with_valid_date(mock_telebot, mocker):
     date_to_delete = "2023-01-15"
     MOCK_Message_data = create_message(date_to_delete)
     MOCK_Message_data.text = "2023-01-15"
-    print(MOCK_Message_data.text)
     
     # Create a MagicMock for the bot instance
     mock_bot = mock_telebot.return_value
@@ -92,12 +91,17 @@ def test_process_delete_argument_with_invalid_date(mock_telebot, mocker):
     # Create a mock message with an invalid date
     invalid_date = "invalid_date"
     MOCK_Message_data = create_message(invalid_date)
+    MOCK_Message_data.text = "invalid_date"
+
+    # Create a MagicMock for the bot instance
+    mock_bot = mock_telebot.return_value
+    MOCK_Message_data.bot = mock_bot
     
     # Call the function being tested
-    delete.process_delete_argument(MOCK_Message_data, MagicMock())
+    delete.process_delete_argument(MOCK_Message_data, mock_bot)
     
     # Assert that the expected functions were called
     # Note: Since there's no date validation, the function should proceed with invalid dates
     delete.helper.getUserHistoryByDate.assert_called_with(MOCK_Message_data.chat.id, invalid_date)
     # Assert that the bot replied with an error message
-    MOCK_Message_data.reply_to.assert_called_with(MOCK_Message_data, "No transactions within invalid_date")
+    mock_bot.reply_to.assert_called_with(MOCK_Message_data, "No transactions within invalid_date")
