@@ -45,7 +45,6 @@ def run(message, bot):
 def category_selection(msg,bot,date):
 
     try:
-        # print(date)
         markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
         markup.row_width = 2
         categories = helper.getSpendCategories()
@@ -111,7 +110,6 @@ def post_amount_input(message, bot, selected_category, date):
             raise Exception("Spent amount has to be a non-zero number.")
 
         date_of_entry = date.strftime(helper.getDateFormat())
-        print(date_of_entry,"date after")
         date_str, category_str, amount_str = (
             str(date_of_entry),
             str(option[chat_id]),
@@ -144,5 +142,4 @@ def add_user_record(chat_id, record_to_be_added):
         user_list[str(chat_id)] = helper.createNewUserRecord()
 
     user_list[str(chat_id)]["data"].append(record_to_be_added)
-    print(user_list)
     return user_list
