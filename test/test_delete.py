@@ -21,8 +21,9 @@ def test_read_json():
 
 
 def create_message(text):
+    params = {"messagebody": text}
     chat = types.User("894127939", False, "test")
-    return types.Message(1, None, None, chat, "text", text, "")
+    return types.Message(1, None, None, chat, "text", params, "")
 
 @patch("telebot.telebot")
 def test_delete_with_no_data(mock_telebot, mocker):
@@ -43,6 +44,7 @@ def test_process_delete_argument_all_records(mock_telebot, mocker):
     
     # Create a mock message with "all" as the text
     MOCK_Message_data = create_message("all")
+    MOCK_Message_data.text = "all"  # Set the text attribute explicitly
     
     # Call the function being tested
     delete.process_delete_argument(MOCK_Message_data, MagicMock())
