@@ -361,6 +361,7 @@ def getSpendCategories():
     if category_list is None:
         return None
     spend_categories = category_list["categories"].split(',')
+    spend_categories = [category.strip() for category in spend_categories if category.strip()]
 
     return spend_categories
 
@@ -382,7 +383,6 @@ def addSpendCategories(category):
     spend_categories = category_list["categories"].split(',')
     spend_categories.append(category)
     spend_categories = [category.strip() for category in spend_categories if category.strip()]
-    print(spend_categories)
     result = ','.join(spend_categories)
     category_list["categories"] = result
     write_category_json(category_list)

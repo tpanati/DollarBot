@@ -42,16 +42,21 @@ def run(message, bot):
                 category_selection(message,bot,result)
 
 def category_selection(msg,bot,date):
+
     try:
         # print(date)
         markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
         markup.row_width = 2
-        for c in helper.getSpendCategories():
-            markup.add(c)
-        msg = bot.reply_to(msg, "Select Category", reply_markup=markup)
-        bot.register_next_step_handler(msg, post_category_selection, bot, date)
-    except:
-        print(Exception)
+        categories = helper.getSpendCategories()
+        if not categories:
+            bot.reply_to(msg, "You don't have any categories. Please add a category!!")
+        else:
+            for c in categories:
+                markup.add(c)
+            msg = bot.reply_to(msg, "Select Category", reply_markup=markup)
+            bot.register_next_step_handler(msg, post_category_selection, bot, date)
+    except Exception as e:
+        print(e)
 
 def post_category_selection(message, bot, date):
     """
