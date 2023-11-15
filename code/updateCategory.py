@@ -40,8 +40,9 @@ def post_add_category(message, bot):
     selected_category = message.text
     chat_id = message.chat.id
     allocated_categories = helper.getCategoryBudget(chat_id)
-    if selected_category not in allocated_categories.keys():
-        helper.updateBudgetCategory(chat_id,selected_category)
+    if allocated_categories != None:
+        if selected_category not in allocated_categories.keys():
+            helper.updateBudgetCategory(chat_id,selected_category)
     helper.addSpendCategories(selected_category)
     bot.send_message(chat_id, "Category successfully added!")
 
@@ -49,8 +50,9 @@ def post_delete_category(message, bot):
     selected_category = message.text
     chat_id = message.chat.id
     allocated_categories = helper.getCategoryBudget(chat_id)
-    if selected_category in allocated_categories.keys():
-        helper.deleteBudgetCategory(chat_id, selected_category)
+    if allocated_categories != None:
+        if selected_category in allocated_categories.keys():
+            helper.deleteBudgetCategory(chat_id, selected_category)
     categories = helper.getSpendCategories()
     if selected_category in categories:
         helper.deleteSpendCategories(selected_category)
@@ -60,8 +62,9 @@ def post_edit_category(message, bot):
     selected_category = message.text
     chat_id = message.chat.id
     allocated_categories = helper.getCategoryBudget(chat_id)
-    if selected_category in allocated_categories.keys():
-        helper.deleteBudgetCategory(chat_id, selected_category)
+    if allocated_categories != None:
+        if selected_category in allocated_categories.keys():
+            helper.deleteBudgetCategory(chat_id, selected_category)
     categories = helper.getSpendCategories()
     if selected_category in categories:
         helper.deleteSpendCategories(selected_category)
