@@ -45,6 +45,8 @@ commands = {
         \n 1. The Add Category option is to add a new category which dosen't already exist \
         \n 2. The Delete Category option is to delete an existing category \
         \n 3. The Edit Category option is to edit an existing category. ",
+    "weekly": "This option is to get the weekly analysis report of the expenditure",
+    "monthly": "This option is to get the monthly analysis report of the expenditure",
     "sendEmail": "Send an email with an attachment showing your history",
 }
 

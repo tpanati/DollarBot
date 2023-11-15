@@ -58,6 +58,7 @@ def category_selection(msg,bot,date):
     except Exception as e:
         print(e)
 
+
 def post_category_selection(message, bot, date):
     """
     post_category_selection(message, bot): It takes 2 arguments for processing -
