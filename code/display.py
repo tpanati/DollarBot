@@ -1,4 +1,5 @@
 import time
+from tabulate import tabulate
 import helper
 import graphing
 import logging
@@ -72,7 +73,7 @@ def display_total(message, bot):
             queryResult = [
                 value for index, value in enumerate(history) if str(query) in value
             ]
-        total_text = calculate_spendings(queryResult)
+        total_text, total_dict = calculate_spendings(queryResult)
         monthly_budget = helper.getCategoryBudget(chat_id)
         print("Print Total Spending", total_text)
         print("Print monthly budget", monthly_budget)
@@ -82,9 +83,13 @@ def display_total(message, bot):
             spending_text = "You have no spendings for {}!".format(DayWeekMonth)
             bot.send_message(chat_id, spending_text)
         else:
-            spending_text = "Here are your total spendings {}:\nCATEGORIES,AMOUNT \n----------------------\n{}".format(
-                DayWeekMonth.lower(), total_text
-            )
+            table = [["Category", "Amount"]]
+            spending_text = "Here are your total spendings {}".format(DayWeekMonth.lower())
+            for category, amount in total_dict.items():
+                table.append([str(category), "$ " + str(amount)])
+            spend_total_str="<pre>"+ tabulate(table, headers='firstrow')+"</pre>"
+            bot.send_message(chat_id, spending_text)
+            bot.send_message(chat_id, spend_total_str, parse_mode="HTML")
             graphing.visualize(total_text, monthly_budget)
             bot.send_photo(chat_id, photo=open("expenditure.png", "rb"))
     except Exception as e:
@@ -112,4 +117,4 @@ def calculate_spendings(queryResult):
     total_text = ""
     for key, value in total_dict.items():
         total_text += str(key) + " $" + str(value) + "\n"
-    return total_text
+    return total_text, total_dict
