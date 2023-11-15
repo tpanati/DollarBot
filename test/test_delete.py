@@ -108,13 +108,13 @@ def test_process_delete_argument_with_invalid_date(mock_telebot, mocker):
 
 def test_deleteHistory():
     # Mock user_list
-    user_list = {"sample_chat_id": {"data": ["record1", "record2"], "budget": {"overall": "100", "category": {"food": "50"}}}}
+    delete.user_list = {"sample_chat_id": {"data": ["record1", "record2"], "budget": {"overall": "100", "category": {"food": "50"}}}}
     
     # Call deleteHistory function
     result = delete.deleteHistory("sample_chat_id")
     
     # Assert that the user_list entry is removed
-    assert "sample_chat_id" not in result
+    assert "sample_chat_id" not in delete.user_list
     # Assert that the data is cleared in the result
     expected_result = {"sample_chat_id": {"data": [], "budget": {"overall": "0", "category": {}}}}
     assert result == expected_result
