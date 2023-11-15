@@ -51,7 +51,7 @@ def test_process_delete_argument_all_records(mock_telebot, mocker):
     
     # Assert that the expected functions were called
     delete.deleteHistory.assert_called_with(MOCK_Message_data.chat.id)
-    MOCK_Message_data.reply_to.assert_called_with(MOCK_Message_data, "History has been deleted!")
+    MOCK_Message_data.reply_text.assert_called_with("History has been deleted!")
 
 @patch("telebot.telebot")
 def test_process_delete_argument_with_valid_date(mock_telebot, mocker):
