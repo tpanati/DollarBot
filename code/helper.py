@@ -4,14 +4,7 @@ import os
 from datetime import datetime
 from notify import notify
 
-spend_categories = [
-    "Food",
-    "Groceries",
-    "Utilities",
-    "Transport",
-    "Shopping",
-    "Miscellaneous",
-]
+spend_categories = []
 choices = ["Date", "Category", "Cost"]
 spend_display_option = ["Day", "Month"]
 spend_estimate_option = ["Next day", "Next month"]
@@ -80,6 +73,33 @@ def write_json(user_list):
     try:
         with open("expense_record.json", "w") as json_file:
             json.dump(user_list, json_file, ensure_ascii=False, indent=4)
+    except FileNotFoundError:
+        print("Sorry, the data file could not be found.")
+
+def read_category_json():
+    """
+    read_json(): Function to load .json expense record data
+    """
+    try:
+        if not os.path.exists("categories.json"):
+            with open("categories.json", "w") as json_file:
+                json_file.write("{ \"categories\" : \"\" }")
+            return json.dumps("{ \"categories\" : \"\" }")
+        elif os.stat("categories.json").st_size != 0:
+            with open("categories.json") as category_record:
+                category_record_data = json.load(category_record)
+            return category_record_data
+
+    except FileNotFoundError:
+        print("---------NO CATEGORIES FOUND---------")
+
+def write_category_json(category_list):
+    """
+    write_json(category_list): Stores data into the datastore of the bot.
+    """
+    try:
+        with open("categories.json", "w") as json_file:
+            json.dump(category_list, json_file, ensure_ascii=False, indent=4)
     except FileNotFoundError:
         print("Sorry, the data file could not be found.")
 
@@ -321,12 +341,39 @@ def getFormattedPredictions(category_predictions):
     predicted_budget += category_budgets
     return predicted_budget
 
-#getters
 def getSpendCategories():
     """
     getSpendCategories(): This functions returns the spend categories used in the bot. These are defined the same file.
     """
+    category_list = read_category_json()
+    if category_list is None:
+        return None
+    spend_categories = category_list["categories"].split(',')
+
     return spend_categories
+
+def deleteSpendCategories(category):
+    category_list = read_category_json()
+    if category_list is None:
+        return None
+    spend_categories = category_list["categories"].split(',')
+    spend_categories.remove(category)
+
+    result = ','.join(spend_categories)
+    category_list["categories"] = result
+    write_category_json(category_list)
+
+def addSpendCategories(category):
+    category_list = read_category_json()
+    if category_list is None:
+        return None
+    spend_categories = category_list["categories"].split(',')
+    spend_categories.append(category)
+    spend_categories = [category.strip() for category in spend_categories if category.strip()]
+    print(spend_categories)
+    result = ','.join(spend_categories)
+    category_list["categories"] = result
+    write_category_json(category_list)
 
 def getSpendDisplayOptions():
     """

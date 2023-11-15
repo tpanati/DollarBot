@@ -3,6 +3,7 @@ import telebot
 
 def run(message, bot):
 
+    helper.read_category_json()
     chat_id = message.chat.id
 
     markup = telebot.types.ReplyKeyboardMarkup(one_time_keyboard=True)
@@ -41,7 +42,7 @@ def post_add_category(message, bot):
     allocated_categories = helper.getCategoryBudget(chat_id)
     if selected_category not in allocated_categories.keys():
         helper.updateBudgetCategory(chat_id,selected_category)
-    helper.spend_categories.insert(0,selected_category)
+    helper.addSpendCategories(selected_category)
     bot.send_message(chat_id, "Category successfully added!")
 
 def post_delete_category(message, bot):
@@ -50,8 +51,9 @@ def post_delete_category(message, bot):
     allocated_categories = helper.getCategoryBudget(chat_id)
     if selected_category in allocated_categories.keys():
         helper.deleteBudgetCategory(chat_id, selected_category)
-    if selected_category in helper.spend_categories:
-        helper.spend_categories.remove(selected_category)
+    categories = helper.getSpendCategories()
+    if selected_category in categories:
+        helper.deleteSpendCategories(selected_category)
     bot.send_message(chat_id, "Category successfully deleted!")
 
 def post_edit_category(message, bot):
@@ -60,7 +62,8 @@ def post_edit_category(message, bot):
     allocated_categories = helper.getCategoryBudget(chat_id)
     if selected_category in allocated_categories.keys():
         helper.deleteBudgetCategory(chat_id, selected_category)
-    if selected_category in helper.spend_categories:
-        helper.spend_categories.remove(selected_category)
+    categories = helper.getSpendCategories()
+    if selected_category in categories:
+        helper.deleteSpendCategories(selected_category)
     message1 = bot.send_message(chat_id, "Please enter the new name for the category you want to edit")
     bot.register_next_step_handler(message1, post_add_category, bot)
