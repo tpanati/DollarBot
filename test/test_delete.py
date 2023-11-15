@@ -116,3 +116,31 @@ def test_deleteHistory():
     # Assert that the data is cleared in the result
     expected_result = {"sample_chat_id": {"data": [], "budget": {"overall": "0", "category": {}}}}
     assert result == expected_result
+
+@patch("telebot.telebot")
+def test_handle_confirmation_yes(mock_telebot, mocker):
+    mocker.patch.object(delete, "helper")
+    
+    # Create a mock message with "yes" as the text
+    MOCK_Message_data = create_message("yes")
+    MOCK_Message_data.text = "yes"  # Set the text attribute explicitly
+
+    # Mock the user_list
+    delete.user_list = {"sample_chat_id": {"data": ["record1", "record2"], "budget": {"overall": "100", "category": {"food": "50"}}}}
+
+    # Mock the bot instance
+    mock_bot = mock_telebot.return_value
+    MOCK_Message_data.bot = mock_bot
+
+    # Call the function being tested
+    delete.handle_confirmation(MOCK_Message_data, mock_bot, ["record1", "record2"])
+
+    # Assert that the user_list is updated
+    expected_user_list = {"sample_chat_id": {"data": [], "budget": {"overall": "0", "category": {}}}}
+    assert delete.user_list == expected_user_list
+
+    # Assert that the helper.write_json is called
+    delete.helper.write_json.assert_called_with(expected_user_list)
+
+    # Assert that the bot sends the correct success message
+    mock_bot.send_message.assert_called_with(MOCK_Message_data.chat.id, "Successfully deleted records")
