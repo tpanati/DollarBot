@@ -21,9 +21,8 @@ def test_read_json():
 
 
 def create_message(text):
-    params = {"messagebody": text}
     chat = types.User("894127939", False, "test")
-    return types.Message(1, None, None, chat, "text", params, "")
+    return types.Message(1, None, None, chat, "text", text, "")
 
 @patch("telebot.telebot")
 def test_delete_with_no_data(mock_telebot, mocker):
