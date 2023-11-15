@@ -15,6 +15,7 @@ import budget
 import analytics
 import predict
 import updateCategory
+import sendEmail
 import add_recurring
 from datetime import datetime
 from jproperties import Properties
@@ -175,6 +176,16 @@ def command_history(message):
     the add functionality. Commands used to run this: commands=['history']
     """
     history.run(message, bot)
+
+# function to fetch expenditure history of the user
+@bot.message_handler(commands=["sendEmail"])
+def command_sendEmail(message):
+    """
+    command_history(message): Takes 1 argument message which contains the message from
+    the user along with the chat ID of the user chat. It then calls sendEmail.py to run to execute
+    the sending an email of the expense history. Commands used to run this: commands=['sendEmail']
+    """
+    sendEmail.run(message, bot)
 
 # function to edit date, category or cost of a transaction
 @bot.message_handler(commands=["edit"])
