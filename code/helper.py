@@ -25,7 +25,11 @@ analytics_options = {"overall": "Overall budget split", "spend": "Split of curre
 commands = {
     "menu": "Display commands with their descriptions.",
     "help": "Display the list of commands.",
-    "pdf": "Save history as PDF.",
+    "pdf": "Provides expense history as PDF. It contains the following expense charts - \
+       \n 1. Budget split - total budget and budget for various categories as a pie chart \
+       \n 2. Category wise spend split - Distribution of expenses for each category as a pie chart \
+       \n 3. Category wise budget command - Split of used and remaining percentage of the budget amount for every category  \
+       \n 4. Time series of the expense - Time Vs Expense in $",
     "add": "This option is for adding your expenses \
        \n 1. It will give you the list of categories to choose from. \
        \n 2. You will be prompted to enter the amount corresponding to your spending \
@@ -35,7 +39,8 @@ commands = {
         \n You will get an option to choose the type of data you want to see.",
     "predict": "This option analyzes your recorded spendings and gives you a budget that will accommodate for them.",
     "history": "This option is to give you the detailed summary of your expenditure with Date, time ,category and amount. A quick lookup into your spendings",
-    "delete": "This option is to Clear/Erase all your records",
+    "delete": "This option is to Clear/Erase specific records or all your records based on your Choice",
+    "display": "This option is to display your records for the current month or for the current day as per the user's choice.",
     "edit": "This option helps you to go back and correct/update the missing details \
         \n 1. It will give you the list of your expenses you wish to edit \
         \n 2. It will let you change the specific field based on your requirements like amount/date/category",
@@ -45,6 +50,7 @@ commands = {
         \n 3. The delete category allows to delete the budget and start afresh!  ",
     "weekly": "This option is to get the weekly analysis report of the expenditure",
     "monthly": "This option is to get the monthly analysis report of the expenditure",
+    "sendEmail": "Send an email with an attachment showing your history",
 }
 
 dateFormat = "%d-%b-%Y"
@@ -193,6 +199,12 @@ def isCategoryBudgetByCategoryAvailable(chatId, cat):
     if data is None or data == {}:
         return False
     return cat in data.keys()
+
+def isCategoryBudgetByCategoryNotZero(chatId):
+    for cat in spend_categories:
+        if getCategoryBudgetByCategory(chatId, cat) == '0':
+                return False
+    return True
 
 def get_uncategorized_amount(chatId, amount):
     overall_budget = float(amount)
