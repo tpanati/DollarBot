@@ -138,6 +138,7 @@ def test_handle_confirmation_yes(mock_telebot, mocker):
     # Call the function being tested
     delete.handle_confirmation(MOCK_Message_data, mock_bot, ["record1", "record2"])
 
+    expected_user_list = {"sample_chat_id": {"data": [], "budget": {"overall": "100", "category": {"food": "50"}}}}
         # Debugging: Print the values for investigation
     print("delete.user_list:", delete.user_list)
     print("expected_user_list:", expected_user_list)
@@ -152,5 +153,5 @@ def test_handle_confirmation_yes(mock_telebot, mocker):
     print("delete.user_list (after reload):", delete.user_list)
     
     # Assert that delete.user_list is updated
-    expected_user_list = {"sample_chat_id": {"data": [], "budget": {"overall": "100", "category": {"food": "50"}}}}
+    
     assert delete.user_list == expected_user_list
