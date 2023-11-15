@@ -89,7 +89,7 @@ def read_category_json():
     try:
         if not os.path.exists("categories.json"):
             with open("categories.json", "w") as json_file:
-                json_file.write("{ \"categories\" : \"\" }")
+                json_file.write("{ \"categories\" : \"Food,Groceries,Utilities,Transport,Shopping,Miscellaneous\" }")
             return json.dumps("{ \"categories\" : \"\" }")
         elif os.stat("categories.json").st_size != 0:
             with open("categories.json") as category_record:

@@ -11,6 +11,7 @@ def run(message, bot):
     It takes 2 arguments for processing - message which is the message from the user, and bot which
     is the telegram bot object from the main code.py function.
     """
+    helper.read_category_json()
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
     options = helper.getBudgetTypes()
     markup.row_width = 2

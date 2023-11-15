@@ -4,6 +4,8 @@ from telebot import types
 import os
 
 def viewOverallBudget(chat_id, bot):
+    helper.read_category_json()
+
     if not helper.isCategoryBudgetAvailable(chat_id):
         bot.send_message(chat_id, "No category budget available", reply_markup=types.ReplyKeyboardRemove())
         return

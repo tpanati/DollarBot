@@ -17,6 +17,7 @@ def run(message, bot):
     and bot which is the telegram bot object from the main code.py function.
     """
     helper.read_json()
+    helper.read_category_json()
     chat_id = message.chat.id
     message = bot.send_message(chat_id, "Select date")
     calendar, step = DetailedTelegramCalendar().build()
