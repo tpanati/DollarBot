@@ -103,7 +103,6 @@ def post_amount_input(message, bot, selected_category, date):
     calls add_user_record to store it.
     """
     try:
-        print("---------------------------------------------------")
         chat_id = message.chat.id
         amount_entered = message.text
         amount_value = helper.validate_entered_amount(amount_entered)  # validate

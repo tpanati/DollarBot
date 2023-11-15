@@ -16,7 +16,7 @@ def test_run(mock_telebot, mocker):
     mc = mock_telebot.return_value
     mc.reply_to.return_value = True
     message = create_message("hello from test run!")
-    add.run(message, mc)
+    myadd.run(message, mc)
     assert mc.reply_to.called
 
 
