@@ -1,8 +1,6 @@
 import time
 import helper
 import logging
-from sklearn.linear_model import LinearRegression
-import numpy as np
 from datetime import datetime
 
 # === Documentation of predict.py ===
@@ -72,19 +70,12 @@ def predict_category_spending(category_history):
         total_spent += float(record.split(',')[2])
         date = datetime.strptime(record.split(',')[0].split(' ')[0], helper.getDateFormat())
         recorded_days.append(date)
-
-    recorded_days = np.array([(day - min(recorded_days)).days for day in recorded_days]).reshape(-1, 1)
-    total_spent_array = np.array([float(record.split(',')[2]) for record in category_history]).reshape(-1, 1)
-
-    model = LinearRegression()
-    model.fit(recorded_days, total_spent_array)
-
-    last_recorded_day = max(recorded_days)
-    future_days = np.arange(last_recorded_day + 1, last_recorded_day + 31).reshape(-1, 1)
-
-    predicted_spending = model.predict(future_days)
-
-    return float(round(predicted_spending.sum() / len(predicted_spending), 2))
+    first = min(recorded_days)
+    last = max(recorded_days)
+    day_difference = abs(int((last - first).days)) + 1
+    avg_per_day = total_spent/day_difference
+    predicted_spending = avg_per_day * 30
+    return round(predicted_spending,2)
 
 def predict_overall_spending(chat_id, category_wise_spending):
     """
