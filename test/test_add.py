@@ -23,7 +23,7 @@ def test_run(mock_telebot, mocker):
 
 
 @patch("telebot.telebot")
-def test_post_category_selection_working(mock_telebot, mocker, date):
+def test_post_category_selection_working(mock_telebot, mocker):
     mc = mock_telebot.return_value
     mc.send_message.return_value = True
 
