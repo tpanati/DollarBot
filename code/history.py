@@ -17,7 +17,6 @@ def run(message, bot):
         helper.read_json()
         chat_id = message.chat.id
         user_history = helper.getUserHistory(chat_id)
-        spend_total_str = ""
         table = [["Date", "Category", "Amount"]]
         if user_history is None:
             raise Exception("Sorry! No spending records found!")
@@ -29,10 +28,10 @@ def run(message, bot):
                 # Store each value in separate variables
                 date, category, amount = values
 
-                date = datetime.strptime(date, '%d-%b-%Y')
+                date_time = datetime.strptime(date, '%d-%b-%Y')
                 current_date = datetime.now()
 
-                if(date <= current_date):
+                if(date_time <= current_date):
                     table.append([date, category, "$ " + amount])
             spend_total_str="<pre>"+ tabulate(table, headers='firstrow')+"</pre>"
             bot.send_message(chat_id, spend_total_str, parse_mode="HTML")
