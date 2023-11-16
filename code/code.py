@@ -14,10 +14,14 @@ import add
 import budget
 import analytics
 import predict
+import updateCategory
+import weekly
+import monthly
 import sendEmail
 import add_recurring
 from datetime import datetime
 from jproperties import Properties
+
 
 configs = Properties()
 
@@ -140,6 +144,26 @@ def command_add(message):
     """
     add.run(message, bot)
 
+# defines how the /weekly command has to be handled/processed
+@bot.message_handler(commands=["weekly"])
+def command_weekly(message):
+    """
+    command_weekly(message) Takes 1 argument message which contains the message from
+    the user along with the chat ID of the user chat. It then calls weekly.py to run to execute
+    the weekly analysis functionality. Commands used to run this: commands=['weekly']
+    """
+    weekly.run(message, bot)
+
+# defines how the /monthly command has to be handled/processed
+@bot.message_handler(commands=["monthly"])
+def command_monthly(message):
+    """
+    command_monthly(message) Takes 1 argument message which contains the message from
+    the user along with the chat ID of the user chat. It then calls monthly.py to run to execute
+    the monthly analysis functionality. Commands used to run this: commands=['monthly']
+    """
+    monthly.run(message, bot)
+
 #handles add_recurring command
 @bot.message_handler(commands=['add_recurring'])
 def command_add_recurring(message):
@@ -154,6 +178,16 @@ def command_pdf(message):
     the add functionality. Commands used to run this: commands=['pdf']
     """
     pdf.run(message, bot)
+
+#handles updateCategory command
+@bot.message_handler(commands=["updateCategory"])
+def command_updateCategory(message):
+    """
+    command_updateCategory(message): Takes 1 argument message which contains the message from
+    the user along with the chat ID of the user chat. It then calls updateCategory.py to run to execute
+    the updateCategory functionality. Commands used to run this: commands=['updateCategory']
+    """
+    updateCategory.run(message, bot)
 
 # function to fetch expenditure history of the user
 @bot.message_handler(commands=["history"])

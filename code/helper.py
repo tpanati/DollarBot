@@ -4,22 +4,15 @@ import os
 from datetime import datetime
 from notify import notify
 
-spend_categories = [
-    "Food",
-    "Groceries",
-    "Utilities",
-    "Transport",
-    "Shopping",
-    "Miscellaneous",
-]
+spend_categories = []
 choices = ["Date", "Category", "Cost"]
 spend_display_option = ["Day", "Month"]
 spend_estimate_option = ["Next day", "Next month"]
 update_options = {"continue": "Continue", "exit": "Exit"}
 budget_options = {"update": "Add/Update", "view": "View", "delete": "Delete"}
 budget_types = {"overall": "Overall Budget", "category": "Category-Wise Budget"}
-data_format = {"data": [], "budget": {"overall": None, "category": None}}
-analytics_options = {"overall": "Overall budget split", "spend": "Split of current spend", "remaining": "Remaining value", "history": "Time series graph of spend history"}
+data_format = {"data": [], "budget": {"overall": "0", "category": None}}
+analytics_options = {"overall": "Overall budget split by Category", "spend": "Split of current month expenditure", "remaining": "Remaining value", "history": "Time series graph of spend history"}
 
 # set of implemented commands and their description
 commands = {
@@ -48,6 +41,12 @@ commands = {
         \n 1. The Add/update category is to set the new budget or update the existing budget \
         \n 2. The view category gives the detail if budget is exceeding or in limit with the difference amount \
         \n 3. The delete category allows to delete the budget and start afresh!  ",
+    "updateCategory": "This option is to add/delete/edit the categories. \
+        \n 1. The Add Category option is to add a new category which dosen't already exist \
+        \n 2. The Delete Category option is to delete an existing category \
+        \n 3. The Edit Category option is to edit an existing category. ",
+    "weekly": "This option is to get the weekly analysis report of the expenditure",
+    "monthly": "This option is to get the monthly analysis report of the expenditure",
     "sendEmail": "Send an email with an attachment showing your history",
 }
 
@@ -82,6 +81,33 @@ def write_json(user_list):
     try:
         with open("expense_record.json", "w") as json_file:
             json.dump(user_list, json_file, ensure_ascii=False, indent=4)
+    except FileNotFoundError:
+        print("Sorry, the data file could not be found.")
+
+def read_category_json():
+    """
+    read_json(): Function to load .json expense record data
+    """
+    try:
+        if not os.path.exists("categories.json"):
+            with open("categories.json", "w") as json_file:
+                json_file.write("{ \"categories\" : \"Food,Groceries,Utilities,Transport,Shopping,Miscellaneous\" }")
+            return json.dumps("{ \"categories\" : \"\" }")
+        elif os.stat("categories.json").st_size != 0:
+            with open("categories.json") as category_record:
+                category_record_data = json.load(category_record)
+            return category_record_data
+
+    except FileNotFoundError:
+        print("---------NO CATEGORIES FOUND---------")
+
+def write_category_json(category_list):
+    """
+    write_json(category_list): Stores data into the datastore of the bot.
+    """
+    try:
+        with open("categories.json", "w") as json_file:
+            json.dump(category_list, json_file, ensure_ascii=False, indent=4)
     except FileNotFoundError:
         print("Sorry, the data file could not be found.")
 
@@ -194,7 +220,7 @@ def isCategoryBudgetAvailable(chatId):
 
 def isCategoryBudgetByCategoryAvailable(chatId, cat):
     data = getCategoryBudget(chatId)
-    if data is None or data == {}:
+    if data is None or data == {} or data == '0':
         return False
     return cat in data.keys()
 
@@ -216,21 +242,17 @@ def get_uncategorized_amount(chatId, amount):
     return str(round(uncategorized_budget,2))
 
 def display_remaining_budget(message, bot, cat):
-    print("inside")
-    chat_id = message.chat.id
-    display_remaining_category_budget(message, bot, cat)
     display_remaining_overall_budget(message, bot)
 
 def display_remaining_overall_budget(message, bot):
-    print("here")
     chat_id = message.chat.id
     remaining_budget = calculateRemainingOverallBudget(chat_id)
-    print("here", remaining_budget)
-    if remaining_budget >= 0:
-        msg = "\nRemaining Overall Budget is $" + str(remaining_budget)
+    current_amount = int(message.text)
+    if (remaining_budget - current_amount) >= 0:
+        msg = "\nRemaining Overall Budget is $" + str(remaining_budget - current_amount)
     else:
         msg = (
-            "\nBudget Exceded!\nExpenditure exceeds the budget by $" + str(remaining_budget)[1:]
+            "\nBudget Exceded!\nExpenditure exceeds the budget by $" + str(remaining_budget - current_amount)[1:]
         )
     bot.send_message(chat_id, msg)
 
@@ -239,6 +261,8 @@ def calculateRemainingOverallBudget(chat_id):
     history = getUserHistory(chat_id)
     query = datetime.now().today().strftime(getMonthFormat())
     queryResult = [value for _, value in enumerate(history) if str(query) in value]
+    if budget == None:
+        return -calculate_total_spendings(queryResult)
     return float(budget) - calculate_total_spendings(queryResult)
 
 def calculate_total_spendings(queryResult):
@@ -274,6 +298,9 @@ def calculateRemainingCateogryBudgetPercent(chat_id, cat):
     history = getUserHistory(chat_id)
     query = datetime.now().today().strftime(getMonthFormat())
     queryResult = [value for _, value in enumerate(history) if str(query) in value]
+    if budget == '0':
+        print("budget is zero")
+        return None
     return (calculate_total_spendings_for_category(queryResult, cat)/float(budget))*100
 
 def calculate_total_spendings_for_category(queryResult, cat):
@@ -287,12 +314,18 @@ def calculate_total_spendings_for_category(queryResult, cat):
 def calculate_total_spendings_for_cateogory_chat_id(chat_id, cat):
     history = getUserHistory(chat_id)
     query = datetime.now().today().strftime(getMonthFormat())
+    print(query)
     queryResult = [value for _, value in enumerate(history) if str(query) in value]
     return calculate_total_spendings_for_category(queryResult, cat)
 
 def updateBudgetCategory(chatId, category):
     user_list = read_json()
     user_list[str(chatId)]["budget"]["category"][category] = str(0)
+    write_json(user_list)
+
+def deleteBudgetCategory(chatId, category):
+    user_list = read_json()
+    user_list[str(chatId)]["budget"]["category"].pop(category, None)
     write_json(user_list)
 
 def getAvailableCategories(history):
@@ -324,12 +357,39 @@ def getFormattedPredictions(category_predictions):
     predicted_budget += category_budgets
     return predicted_budget
 
-#getters
 def getSpendCategories():
     """
     getSpendCategories(): This functions returns the spend categories used in the bot. These are defined the same file.
     """
+    category_list = read_category_json()
+    if category_list is None:
+        return None
+    spend_categories = category_list["categories"].split(',')
+    spend_categories = [category.strip() for category in spend_categories if category.strip()]
+
     return spend_categories
+
+def deleteSpendCategories(category):
+    category_list = read_category_json()
+    if category_list is None:
+        return None
+    spend_categories = category_list["categories"].split(',')
+    spend_categories.remove(category)
+
+    result = ','.join(spend_categories)
+    category_list["categories"] = result
+    write_category_json(category_list)
+
+def addSpendCategories(category):
+    category_list = read_category_json()
+    if category_list is None:
+        return None
+    spend_categories = category_list["categories"].split(',')
+    spend_categories.append(category)
+    spend_categories = [category.strip() for category in spend_categories if category.strip()]
+    result = ','.join(spend_categories)
+    category_list["categories"] = result
+    write_category_json(category_list)
 
 def getSpendDisplayOptions():
     """
