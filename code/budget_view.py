@@ -50,8 +50,11 @@ def display_category_budget(message, bot):
     chat_id = message.chat.id
     if helper.isCategoryBudgetAvailable(chat_id):
         data = helper.getCategoryBudget(chat_id)
-        graphing.viewBudget(data)
-        bot.send_photo(chat_id, photo=open("budget.png", "rb"))
-        os.remove("budget.png")
+        print(data,"data")
+        if graphing.viewBudget(data):
+            bot.send_photo(chat_id, photo=open("budget.png", "rb"))
+            os.remove("budget.png")
+        else:
+            bot.send_message(chat_id, "You are yet to set your budget for different categories.")
     else:
         bot.send_message(chat_id, "You are yet to set your budget for different categories.")
