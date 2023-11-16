@@ -11,6 +11,7 @@ def run(message, bot):
     It takes 2 arguments for processing - message which is the message from the user, and bot which
     is the telegram bot object from the main code.py function.
     """
+    helper.read_category_json()
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
     options = helper.getBudgetTypes()
     markup.row_width = 2
@@ -167,7 +168,7 @@ def add_new_category(message,bot):
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
     markup.row_width = 2
     new_category = message.text
-    helper.spend_categories.append(new_category)
+    helper.addSpendCategories(new_category)
     for c in helper.getSpendCategories():
         markup.add(c)
     msg = bot.reply_to(message, "Select Category", reply_markup=markup)
