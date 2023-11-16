@@ -17,6 +17,9 @@ MOCK_USER_DATA = {
         "budget": {"overall": None, "category": None},
     },
 }
+MOCK_CATEGORY_DATA = {
+    "categories": "Food,Groceries,Utilities,Transport,Shopping,Miscellaneous"
+}
 
 
 def test_validate_entered_amount_none():
@@ -165,9 +168,11 @@ def test_getUserHistory_with_none(mocker):
         assert False, "Result is not None when the file does not exist"
 
 
-def test_getSpendCategories():
+def test_getSpendCategories(mocker):
+    mocker.patch.object(helper, "read_category_json")
+    helper.read_category_json.return_value = MOCK_CATEGORY_DATA
     result = helper.getSpendCategories()
-    if result == helper.spend_categories:
+    if result == MOCK_CATEGORY_DATA["categories"].split(','):
         assert True
     else:
         assert False, "expected spend categories are not returned"

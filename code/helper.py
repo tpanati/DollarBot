@@ -247,12 +247,11 @@ def display_remaining_budget(message, bot, cat):
 def display_remaining_overall_budget(message, bot):
     chat_id = message.chat.id
     remaining_budget = calculateRemainingOverallBudget(chat_id)
-    current_amount = int(message.text)
-    if (remaining_budget - current_amount) >= 0:
-        msg = "\nRemaining Overall Budget is $" + str(remaining_budget - current_amount)
+    if remaining_budget >= 0:
+        msg = "\nRemaining Overall Budget is $" + str(remaining_budget)
     else:
         msg = (
-            "\nBudget Exceded!\nExpenditure exceeds the budget by $" + str(remaining_budget - current_amount)[1:]
+            "\nBudget Exceded!\nExpenditure exceeds the budget by $" + str(remaining_budget)[1:]
         )
     bot.send_message(chat_id, msg)
 
