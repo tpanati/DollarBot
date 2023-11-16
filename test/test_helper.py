@@ -354,19 +354,6 @@ def test_display_remaining_overall_budget_exceeding_case(mock_telebot, mocker):
         11, "\nBudget Exceded!\nExpenditure exceeds the budget by $10"
     )
 
-@patch("telebot.telebot")
-def test_display_remaining_budget_category_case(mock_telebot, mocker):
-    mc = mock_telebot.return_value
-    message = create_message("hello from testing")
-
-    helper.isOverallBudgetAvailable = mock.Mock(return_value=False)
-    helper.isCategoryBudgetByCategoryAvailable = mock.Mock(return_value=True)
-    helper.display_remaining_category_budget = mock.Mock(return_value=True)
-
-    helper.display_remaining_budget(message, mc, "Food")
-    helper.display_remaining_category_budget.assert_called_with(message, mc, "Food")
-
-
 def test_getBudgetTypes():
     testresult = helper.getBudgetTypes()
     localBudgetTypes = {"overall": "Overall Budget", "category": "Category-Wise Budget"}

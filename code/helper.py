@@ -271,19 +271,6 @@ def calculate_total_spendings(queryResult):
         total = total + float(s[2])
     return total
 
-def display_remaining_category_budget(message, bot, cat):
-    chat_id = message.chat.id
-    if not getCategoryBudgetByCategory(chat_id,cat):
-        updateBudgetCategory(chat_id, cat)
-    remaining_budget = calculateRemainingCategoryBudget(chat_id, cat)
-    if remaining_budget >= 0:
-        msg = "\nRemaining Budget for " + cat + " is $" + str(remaining_budget)
-    else:
-        rem_amount = ""
-        rem_amount = str(abs(remaining_budget))
-        notify(chat_id, cat, rem_amount)
-        msg = "\nRemaining Budget for " + cat + " is $" + str(remaining_budget)
-    bot.send_message(chat_id, msg)
 
 def calculateRemainingCategoryBudget(chat_id, cat):
     budget = getCategoryBudgetByCategory(chat_id, cat)
