@@ -195,8 +195,8 @@ def post_category_amount_input(message, bot, category):
             chat_id, "Budget for " + category + " is now: $" + amount_value
         )
         if helper.isCategoryBudgetByCategoryAvailable(chat_id, category):
-                currentBudget = helper.getCategoryBudgetByCategory(chat_id, category)
-                amount_value = str(float(amount_value) - float(currentBudget))
+            currentBudget = helper.getCategoryBudgetByCategory(chat_id, category)
+            amount_value = str(float(amount_value) - float(currentBudget))
         if(user_list[str(chat_id)]["budget"]["overall"]) and user_list[str(chat_id)]["budget"]["overall"] != '0':
             if 'uncategorized' in user_list[str(chat_id)]["budget"]["category"].keys():
                 if round(float(user_list[str(chat_id)]["budget"]["category"]["uncategorized"]) - float(amount_value),2) > 0:

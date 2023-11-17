@@ -2,7 +2,7 @@ import helper
 import logging
 from telebot import types
 from telegram_bot_calendar import DetailedTelegramCalendar, LSTEP
-from datetime import datetime,date
+from datetime import datetime
 
 option = {}
 
