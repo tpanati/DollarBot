@@ -130,7 +130,7 @@ def post_amount_input(message, bot, selected_category, date):
         helper.display_remaining_budget(message, bot, selected_category)
     except Exception as e:
         logging.exception(str(e))
-        bot.reply_to(message, "Oh no. " + str(e))
+        bot.send_message(chat_id, "Oh no. " + str(e))
 
 def add_user_record(chat_id, record_to_be_added):
     """
