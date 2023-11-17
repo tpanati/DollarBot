@@ -265,7 +265,7 @@ def command_predict(message):
     predict.run(message, bot)
 
 def addUserHistory(chat_id, user_record):
-    global user_list
+    #global user_list
     if not (str(chat_id) in user_list):
         user_list[str(chat_id)] = []
     user_list[str(chat_id)].append(user_record)
