@@ -118,3 +118,45 @@ def test_deleteHistory():
     # Assert that the data is cleared in the result
     expected_result = {"sample_chat_id": {"data": [], "budget": {"overall": "0", "category": {}}}}
     assert result == expected_result
+
+@patch("telebot.telebot")
+def test_handle_confirmation_yes(mock_telebot, mocker):
+    mocker.patch.object(delete, "helper")
+
+    # Create a mock message with "yes" as the text
+    MOCK_Message_data = create_message("yes")
+    MOCK_Message_data.text = "yes"  # Set the text attribute explicitly
+
+    # Mock the user_list
+    delete.user_list = {"sample_chat_id": {"data": ["record1", "record2"], "budget": {"overall": "100", "category": {"food": "50"}}}}
+
+    # Mock the bot instance
+    mock_bot = mock_telebot.return_value
+    MOCK_Message_data.bot = mock_bot
+
+    # Use mocker.patch to replace delete.helper.write_json with a MagicMock
+    mock_write_json = mocker.patch.object(delete.helper, "write_json")
+
+        # Use mocker.patch to replace delete.helper.read_json with a MagicMock
+    mock_read_json = mocker.patch.object(delete.helper, "read_json", side_effect=lambda: expected_user_list)
+
+    # Call the function being tested
+    delete.handle_confirmation(MOCK_Message_data, mock_bot, ["record1", "record2"])
+
+    expected_user_list = {"sample_chat_id": {"data": [], "budget": {"overall": "100", "category": {"food": "50"}}}}
+        # Debugging: Print the values for investigation
+    print("delete.user_list:", delete.user_list)
+    print("expected_user_list:", expected_user_list)
+
+    # Assert that delete.helper.write_json was called with the correct arguments
+    mock_write_json.assert_called_with(delete.user_list)
+
+    # Reload delete.user_list from the file to synchronize it with the changes made during handle_confirmation
+    delete.user_list = mock_read_json()
+
+    # Debugging: Print the values after reloading
+    print("delete.user_list (after reload):", delete.user_list)
+
+    # Assert that delete.user_list is updated
+
+    assert delete.user_list == expected_user_list
