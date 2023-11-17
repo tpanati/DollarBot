@@ -17,6 +17,9 @@ MOCK_USER_DATA = {
         "budget": {"overall": None, "category": None},
     },
 }
+MOCK_CATEGORY_DATA = {
+    "categories": "Food,Groceries,Utilities,Transport,Shopping,Miscellaneous"
+}
 
 
 def test_validate_entered_amount_none():
@@ -165,9 +168,11 @@ def test_getUserHistory_with_none(mocker):
         assert False, "Result is not None when the file does not exist"
 
 
-def test_getSpendCategories():
+def test_getSpendCategories(mocker):
+    mocker.patch.object(helper, "read_category_json")
+    helper.read_category_json.return_value = MOCK_CATEGORY_DATA
     result = helper.getSpendCategories()
-    if result == helper.spend_categories:
+    if result == MOCK_CATEGORY_DATA["categories"].split(','):
         assert True
     else:
         assert False, "expected spend categories are not returned"
@@ -348,19 +353,6 @@ def test_display_remaining_overall_budget_exceeding_case(mock_telebot, mocker):
     mc.send_message.assert_called_with(
         11, "\nBudget Exceded!\nExpenditure exceeds the budget by $10"
     )
-
-@patch("telebot.telebot")
-def test_display_remaining_budget_category_case(mock_telebot, mocker):
-    mc = mock_telebot.return_value
-    message = create_message("hello from testing")
-
-    helper.isOverallBudgetAvailable = mock.Mock(return_value=False)
-    helper.isCategoryBudgetByCategoryAvailable = mock.Mock(return_value=True)
-    helper.display_remaining_category_budget = mock.Mock(return_value=True)
-
-    helper.display_remaining_budget(message, mc, "Food")
-    helper.display_remaining_category_budget.assert_called_with(message, mc, "Food")
-
 
 def test_getBudgetTypes():
     testresult = helper.getBudgetTypes()

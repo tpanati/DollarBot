@@ -83,7 +83,7 @@ def test_post_amount_input_nonworking(mock_telebot, mocker):
     add.helper.validate_entered_amount.return_value = 0
     message = create_message("hello from testing!")
     add.post_amount_input(message, mc, "Food",date)
-    assert mc.reply_to.called
+    assert mc.send_message.called
 
 
 @patch("telebot.telebot")
