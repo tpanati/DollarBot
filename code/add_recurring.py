@@ -9,6 +9,14 @@ option = {}
 
 
 def run(message, bot):
+    """
+    run(message, bot): Initializes the expense recording process by presenting the user with a list of spend categories.
+    
+    Parameters:
+    - message (telegram.Message): The message object received from the user.
+    - bot (telegram.Bot): The Telegram bot object.
+    """
+
     helper.read_json()
     chat_id = message.chat.id
     option.pop(chat_id, None)  # remove temp choice
@@ -21,6 +29,18 @@ def run(message, bot):
 
 
 def post_category_selection(message, bot):
+
+    """
+    post_category_selection(message, bot): Processes the user's selected expense category and prompts for the expense amount.
+
+    Parameters:
+    - message (telegram.Message): The message object received from the user.
+    - bot (telegram.Bot): The Telegram bot object.
+
+    Raises:
+    - Exception: If the selected category is not recognized.
+    """
+
     try:
         chat_id = message.chat.id
         selected_category = message.text
@@ -44,6 +64,17 @@ def post_category_selection(message, bot):
 
 
 def post_amount_input(message, bot, selected_category):
+    """
+    post_amount_input(message, bot, selected_category): Processes the user's entered expense amount and prompts for the duration.
+
+    Parameters:
+    - message (telegram.Message): The message object received from the user.
+    - bot (telegram.Bot): The Telegram bot object.
+    - selected_category (str): The selected expense category.
+
+    Raises:
+    - Exception: If the entered amount is invalid or $0.
+    """
     try:
         chat_id = message.chat.id
         amount_entered = message.text
@@ -59,6 +90,20 @@ def post_amount_input(message, bot, selected_category):
 
 
 def post_duration_input(message, bot, selected_category, amount_value):
+    
+    """
+    post_duration_input(message, bot, selected_category, amount_value): Processes the user's entered duration and records the expense.
+
+    Parameters:
+    - message (telegram.Message): The message object received from the user.
+    - bot (telegram.Bot): The Telegram bot object.
+    - selected_category (str): The selected expense category.
+    - amount_value (float): The entered expense amount.
+
+    Raises:
+    - Exception: If the entered duration is invalid or 0.
+    """
+
     try:
         chat_id = message.chat.id
         duration_entered = message.text
@@ -78,6 +123,18 @@ def post_duration_input(message, bot, selected_category, amount_value):
         bot.reply_to(message, 'Oh no. ' + str(e))
 
 def add_user_record(chat_id, record_to_be_added):
+
+    """
+    add_user_record(chat_id, record_to_be_added): Adds a new expense record to the user's data.
+
+    Parameters:
+    - chat_id (int): The user's chat ID.
+    - record_to_be_added (str): The expense record to be added in CSV format.
+
+    Returns:
+    dict: Updated user data dictionary.
+    """
+
     user_list = helper.read_json()
     if str(chat_id) not in user_list:
         user_list[str(chat_id)] = helper.createNewUserRecord()

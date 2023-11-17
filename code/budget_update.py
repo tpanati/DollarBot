@@ -64,7 +64,7 @@ def update_overall_budget(chat_id, bot):
 
 def post_overall_amount_input(message, bot):
     """
-    update_overall_budget(message, bot): It takes 2 arguments for processing -
+    post_overall_budget(message, bot): It takes 2 arguments for processing -
     message which is the message from the user, and bot which is the telegram bot object.
     This function is called when the user wants to either create a new overall budget or
     update an existing one. It checks if there is an existing budget through the helper module's
@@ -165,6 +165,18 @@ def post_category_selection(message, bot):
         helper.throw_exception(e, message, bot, logging)
 
 def add_new_category(message,bot):
+
+    """
+    add_new_category(message, bot): Adds a new spending category based on the user's input.
+
+    Parameters:
+    - message (telegram.Message): The message object received from the user.
+    - bot (telegram.Bot): The Telegram bot object.
+
+    This function adds the new spending category provided by the user, updates the available categories, and
+    prompts the user to select a category from the updated list.
+    """
+
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
     markup.row_width = 2
     new_category = message.text

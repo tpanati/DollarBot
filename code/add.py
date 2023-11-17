@@ -43,7 +43,19 @@ def run(message, bot):
                 category_selection(message,bot,result)
 
 def category_selection(msg,bot,date):
+    """
+    category_selection(msg, bot, date): Handles the selection of expense categories.
 
+    Parameters:
+    - msg (telegram.Message): The message object received from the user.
+    - bot (telegram.Bot): The Telegram bot object.
+    - date (datetime.datetime): The date associated with the expense.
+
+    This function generates a keyboard with available expense categories, prompts the user to select a category,
+    and registers the next step handler to handle the amount input. If no categories are available, it informs
+    the user to add a category first.
+    """
+    
     try:
         markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
         markup.row_width = 2
@@ -61,7 +73,7 @@ def category_selection(msg,bot,date):
 
 def post_category_selection(message, bot, date):
     """
-    post_category_selection(message, bot): It takes 2 arguments for processing -
+    post_category_selection(message, bot): It takes 3 arguments for processing -
     message which is the message from the user, and bot which is the telegram bot object
     from the run(message, bot): function in the add.py file. It requests the user to enter the amount
     they have spent on the expense category chosen and then passes control to

@@ -232,6 +232,11 @@ def command_display(message):
 # function to estimate future expenditure
 @bot.message_handler(commands=["estimate"])
 def command_estimate(message):
+    """
+    command_estimate(message): Takes 1 argument message which contains the message from the user
+    along with the chat ID of the user chat. It then calls delete.py to run to execute the add functionality.
+    Commands used to run this: commands=['estimate']
+    """
     estimate.run(message, bot)
 
 # handles "/delete" command
