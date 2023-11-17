@@ -20,7 +20,7 @@ Are you a developer? <a href="https://github.com/aditikilledar/dollar_bot_SE23/b
 [![Platform](https://img.shields.io/badge/Platform-Telegram-blue)](https://desktop.telegram.org/)
 ![GitHub](https://img.shields.io/badge/Language-Python-blue.svg)
 [![GitHub contributors](https://img.shields.io/github/contributors/aditikilledar/dollar_bot_SE23)](https://github.com/aditikilledar/dollar_bot_SE23/graphs/contributors)
-[![DOI](https://zenodo.org/badge/691334031.svg)](https://zenodo.org/doi/10.5281/zenodo.10023639)
+[![DOI](https://zenodo.org/badge/715323572.svg)](https://zenodo.org/doi/10.5281/zenodo.10146708)
 [![Build Status](https://app.travis-ci.com/usmanwardag/dollar_bot.svg?branch=main)](https://app.travis-ci.com/usmanwardag/dollar_bot)
 [![codecov](https://codecov.io/gh/tpanati/DollarBot/graph/badge.svg?token=23RW1XPB3P)](https://codecov.io/gh/tpanati/DollarBot)
 [![GitHub closed issues](https://img.shields.io/github/issues-closed/aditikilledar/dollar_bot_SE23)](https://github.com/aditikilledar/dollar_bot_SE23/issues?q=is%3Aissue+is%3Aclosed)
