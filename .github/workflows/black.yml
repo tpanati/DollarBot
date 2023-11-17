@@ -1,3 +1,4 @@
+# This workflow will install Black code formatter and formats the code on every pull request or push to main branch
 name: Format code
 
 # Controls when the workflow will run
