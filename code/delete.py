@@ -5,6 +5,7 @@ from telebot import types
 
 # === Documentation of delete.py ===
 
+user_list = {}
 def run(message, bot):
     """
     run(message, bot): This is the main function used to implement the delete feature.
@@ -14,7 +15,6 @@ def run(message, bot):
     data saved in myDollarBot i.e their chat ID has been logged before, run calls the deleteHistory(chat_id):
     to remove it. Then it ensures this removal is saved in the datastore.
     """
-    global user_list
     dateFormat = helper.getDateFormat()
     chat_id = message.chat.id
     delete_history_text = ""
@@ -103,7 +103,6 @@ def deleteHistory(chat_id):
     deleteHistory(chat_id): It takes 1 argument for processing - chat_id which is the
     chat_id of the user whose data is to deleted from the user list. It removes this entry from the user list.
     """
-    global user_list
     if str(chat_id) in user_list:
         user_list[str(chat_id)]["data"] = []
         user_list[str(chat_id)]["budget"]["overall"] = str(0)
