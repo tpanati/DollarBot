@@ -18,9 +18,9 @@ def run(message, bot):
     dateFormat = helper.getDateFormat()
     chat_id = message.chat.id
     delete_history_text = ""
-    user_list = helper.read_json()
+    user_list2 = helper.read_json()
     try:
-        if str(chat_id) in user_list and helper.getUserHistory(chat_id) is not None:
+        if str(chat_id) in user_list2 and helper.getUserHistory(chat_id) is not None:
             curr_day = datetime.now()
             prompt = "Enter the corresponding date in the given format or Enter All to delete the entire history\n"
             prompt += f"\n\tExample day: {curr_day.strftime(dateFormat)}\n"
