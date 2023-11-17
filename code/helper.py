@@ -352,7 +352,7 @@ def getSpendCategories():
     spend_cat = category_list["categories"].split(',')
     spend_cat = [category.strip() for category in spend_cat if category.strip()]
 
-    return spend_categories
+    return spend_cat
 
 def deleteSpendCategories(category):
     category_list = read_category_json()
