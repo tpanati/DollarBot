@@ -127,7 +127,7 @@ def post_amount_input(message, bot, selected_category, date):
                 amount_str, category_str, date_str
             ),
         )
-        helper.display_remaining_budget(message, bot, selected_category)
+        helper.display_remaining_budget(message, bot)
     except Exception as e:
         logging.exception(str(e))
         bot.send_message(chat_id, "Oh no. " + str(e))
