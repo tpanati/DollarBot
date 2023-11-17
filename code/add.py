@@ -2,7 +2,7 @@ import helper
 import logging
 from telebot import types
 from telegram_bot_calendar import DetailedTelegramCalendar, LSTEP
-from datetime import datetime,date
+from datetime import datetime
 
 option = {}
 
@@ -113,7 +113,7 @@ def post_amount_input(message, bot, selected_category, date):
         date_of_entry = date.strftime(helper.getDateFormat())
         date_str, category_str, amount_str = (
             str(date_of_entry),
-            str(option[chat_id]),
+            str(selected_category),
             str(amount_value),
         )
         helper.write_json(
@@ -127,7 +127,7 @@ def post_amount_input(message, bot, selected_category, date):
                 amount_str, category_str, date_str
             ),
         )
-        helper.display_remaining_budget(message, bot, selected_category)
+        helper.display_remaining_budget(message, bot)
     except Exception as e:
         logging.exception(str(e))
         bot.send_message(chat_id, "Oh no. " + str(e))
