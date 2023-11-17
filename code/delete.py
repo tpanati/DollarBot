@@ -15,7 +15,6 @@ def run(message, bot):
     data saved in myDollarBot i.e their chat ID has been logged before, run calls the deleteHistory(chat_id):
     to remove it. Then it ensures this removal is saved in the datastore.
     """
-    global user_list
     dateFormat = helper.getDateFormat()
     chat_id = message.chat.id
     delete_history_text = ""
