@@ -113,7 +113,7 @@ def post_amount_input(message, bot, selected_category, date):
         date_of_entry = date.strftime(helper.getDateFormat())
         date_str, category_str, amount_str = (
             str(date_of_entry),
-            str(option[chat_id]),
+            str(selected_category),
             str(amount_value),
         )
         helper.write_json(
