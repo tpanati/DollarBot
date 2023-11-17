@@ -35,7 +35,7 @@ bot = telebot.TeleBot(api_token)
 telebot.logger.setLevel(logging.INFO)
 
 option = {}
-user_list = []
+user_list = {}
 
 # === Documentation of code.py ===
 

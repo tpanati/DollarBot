@@ -3,19 +3,15 @@ import helper
 import logging
 from datetime import datetime
 
-"""
-=== Documentation of predict.py ===
-average expenses by max no. of days between expenes, extrapolate to one month
-minimum 2 expenses in category to predict category wise
-minimum 2 expenses overall to predict overall budget
-factor in savings after extrapolation
-"""
-
 def run(message, bot):
     """
     run(message, bot): This is the main function used to implement the predict feature.
     It takes 2 arguments for processing - message which is the message from the user, and
     bot which is the telegram bot object from the main code.py function.
+    average expenses by max no. of days between expenes, extrapolate to one month
+    minimum 2 expenses in category to predict category wise
+    minimum 2 expenses overall to predict overall budget
+    factor in savings after extrapolation
     """
     helper.read_json()
     chat_id = message.chat.id
