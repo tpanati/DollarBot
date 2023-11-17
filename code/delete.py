@@ -4,7 +4,7 @@ import helper
 from telebot import types
 
 # === Documentation of delete.py ===
-
+# pylint: disable=W0601
 def run(message, bot):
     """
     run(message, bot): This is the main function used to implement the delete feature.
