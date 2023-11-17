@@ -5,6 +5,7 @@ from telebot import types
 
 # === Documentation of delete.py ===
 
+user_list = []
 def run(message, bot):
     """
     run(message, bot): This is the main function used to implement the delete feature.

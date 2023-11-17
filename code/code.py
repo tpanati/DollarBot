@@ -35,6 +35,7 @@ bot = telebot.TeleBot(api_token)
 telebot.logger.setLevel(logging.INFO)
 
 option = {}
+user_list = []
 
 # === Documentation of code.py ===
 
@@ -63,7 +64,6 @@ def listener(user_requests):
 
     try:
         helper.read_json()
-        global user_list
         chat_id = user_requests[0].chat.id
 
         if user_requests[0].text[0] != "/":
@@ -74,10 +74,9 @@ def listener(user_requests):
 bot.set_update_listener(listener)
 
 @bot.message_handler(commands=["help"])
-def help(m):
+def show_help(m):
 
     helper.read_json()
-    global user_list
     chat_id = m.chat.id
 
     message = "Here are the commands you can use: \n"
@@ -91,7 +90,6 @@ def help(m):
 def faq(m):
 
     helper.read_json()
-    global user_list
     chat_id = m.chat.id
 
     faq_message = (
@@ -117,7 +115,6 @@ def start_and_menu_command(m):
     Commands used to run this: commands=['start', 'menu']
     """
     helper.read_json()
-    global user_list
     chat_id = m.chat.id
 
     text_intro = (

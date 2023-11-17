@@ -55,7 +55,7 @@ def acceptEmailId(message, bot):
                     date, category, amount = values
                     table.append([date, category, "$ " + amount])
 
-                with open('history.csv', 'w', newline = '') as file:
+                with open('history.csv', 'w', newline = '', encoding="utf-8") as file:
                     writer = csv.writer(file)
                     writer.writerows(table)
 

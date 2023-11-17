@@ -3,8 +3,8 @@ import helper
 import logging
 from datetime import datetime
 
-# === Documentation of predict.py ===
 """
+=== Documentation of predict.py ===
 average expenses by max no. of days between expenes, extrapolate to one month
 minimum 2 expenses in category to predict category wise
 minimum 2 expenses overall to predict overall budget
