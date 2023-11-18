@@ -6,7 +6,18 @@
 [![Build Status](https://app.travis-ci.com/usmanwardag/dollar_bot.svg?branch=main)](https://app.travis-ci.com/usmanwardag/dollar_bot)
 [![codecov](https://codecov.io/gh/tpanati/DollarBot/graph/badge.svg?token=23RW1XPB3P)](https://codecov.io/gh/tpanati/DollarBot)
 [![GitHub closed issues](https://img.shields.io/github/issues-closed/aditikilledar/dollar_bot_SE23)](https://github.com/aditikilledar/dollar_bot_SE23/issues?q=is%3Aissue+is%3Aclosed)
-<!-- [![GitHub closed issues](https://img.shields.io/github/issues-closed/sak007/MyDollarBot-BOTGo)](https://github.com/sak007/MyDollarBot-BOTGo/issues?q=is%3Aissue+is%3Aclosed) -->
+Hi
+![MIT license](https://img.shields.io/badge/License-MIT-green.svg)
+![GitHub](https://img.shields.io/github/languages/top/tpanati/DollarBot?color=red&label=Python&logo=Python&logoColor=yellow)
+![GitHub contributors](https://img.shields.io/github/contributors/tpanati/DollarBot)
+[![DOI](https://zenodo.org/badge/691334031.svg)](https://zenodo.org/doi/10.5281/zenodo.10023639)
+[![Platform](https://img.shields.io/badge/Platform-Telegram-blue)](https://desktop.telegram.org/)
+[![codecov](https://codecov.io/gh/tpanati/DollarBot/graph/badge.svg?token=23RW1XPB3P)](https://codecov.io/gh/tpanati/DollarBot)
+![github workflow](https://github.com/tpanati/DollarBot/.github/workflows/python-app.yml/badge.svg)
+![Lines of code](https://tokei.rs/b1/github/tpanati/DollarBot)
+![Version](https://img.shields.io/github/v/release/tpanati/DollarBot?color=ff69b4&label=Version)
+![GitHub issues](https://img.shields.io/github/issues-raw/tpanati/DollarBot)
+![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/tpanati/DollarBot)
 
 # 💰 Dollar Bot 💰
 
@@ -14,9 +25,9 @@
 
 # DollarBot - Because your financial future deserves the best!
 
-You wake up, brew a fresh cup of coffee, and start your day. You're excited because today is the day you take control of your finances like never before. How? Say hello to FinBot, your ultimate financial companion. With simple commands, it transforms your financial story into one of motivation, empowerment, and control. 
+You wake up, brew a fresh cup of coffee, and start your day. You're excited because today is the day you take control of your finances like never before. How? Say hello to DollarBot, your ultimate financial companion. With simple commands, it transforms your financial story into one of motivation, empowerment, and control. 
 
-And the best part? FinBot is your multi-platform financial sidekick, available on both Discord and Telegram. That means no matter where you are, it's there to assist you in recording your expenses seamlessly.
+And the best part? DollarBot is your financial sidekick, available exclusively on Telegram. That means no matter where you are, it's there to assist you in recording your expenses seamlessly.
 <hr>
 <p align="center">
 <a><img width=500 
