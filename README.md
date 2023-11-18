@@ -1,5 +1,19 @@
 # 💰 Dollar Bot 💰
 
+<hr>
+
+# FinBot - Because your financial future deserves the best!
+
+You wake up, brew a fresh cup of coffee, and start your day. You're excited because today is the day you take control of your finances like never before. How? Say hello to FinBot, your ultimate financial companion. With simple commands, it transforms your financial story into one of motivation, empowerment, and control. 
+
+And the best part? FinBot is your multi-platform financial sidekick, available on both Discord and Telegram. That means no matter where you are, it's there to assist you in recording your expenses seamlessly.
+<hr>
+<p align="center">
+<a><img width=500 
+  src="https://png.pngtree.com/png-clipart/20230824/original/pngtree-chatbot-messenger-banking-services-isometric-composition-with-personal-financial-manager-providing-budget-expenses-solutions-vector-illustration-picture-image_8372509.png" ></a>
+</p>
+<hr>
+
 <!-- TABLE OF CONTENTS -->
 <b><h3>Table of Contents</h3></b>
   <ol>
