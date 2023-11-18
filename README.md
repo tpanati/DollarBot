@@ -170,17 +170,17 @@ It can be invoked by using `/pdf` command.
 This option is for adding your expenses.
 
 <p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
-1. It will give you the list of categories to choose from.        
-2. You will be prompted to enter the amount corresponding to your spending        
-3. The message will be prompted to notify the addition of your expense with the amount,date, time and category 
-4. It can be invoked by using `/add` command.
+1.It will give you the list of categories to choose from.        
+2.You will be prompted to enter the amount corresponding to your spending        
+3.The message will be prompted to notify the addition of your expense with the amount,date, time and category 
+4.It can be invoked by using `/add` command.
 
 ### Analysis
 This option gives user a graphical representation of their expenditures.
 
 <p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
-1. You will get an option to choose the type of data you want to see.
-2. It can be invoked by using `/amalysis` command.
+1.You will get an option to choose the type of data you want to see.
+2.It can be invoked by using `/analysis` command.
 
 ### Predict
 This option analyzes your recorded spendings and gives you a budget that will accommodate for them.
@@ -204,18 +204,18 @@ It can be invoked by using `/delete` command.
 This option helps you to go back and correct/update the missing details    
 
 <p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
-1. It will give you the list of your expenses you wish to edit         
-2. It will let you change the specific field based on your requirements like amount/date/category
-3. It can be invoked by using `/edit` command.
+1.It will give you the list of your expenses you wish to edit         
+2.It will let you change the specific field based on your requirements like amount/date/category
+3.It can be invoked by using `/edit` command.
 
 ### Budget
 This option is to set/update/delete the budget.     
 
 <p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
-1. The Add/update category is to set the new budget or update the existing budget         
-2. The view category gives the detail if budget is exceeding or in limit with the difference amount         
-3. The delete category allows to delete the budget and start afresh!
-4. It can be invoked by using `/budget` command.
+1.The Add/update category is to set the new budget or update the existing budget         
+2.The view category gives the detail if budget is exceeding or in limit with the difference amount         
+3.The delete category allows to delete the budget and start afresh!
+4.It can be invoked by using `/budget` command.
 
 ### SendEmail
 This option is to send you a email with you expenditures
@@ -233,10 +233,10 @@ It can be invoked by using `/add_recurring` command.
 This option is to add/delete/edit the categories.         
 
 <p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
-1. The Add Category option is to add a new category which dosen't already exist         
-2. The Delete Category option is to delete an existing category         
-3. The Edit Category option is to edit an existing category. 
-4. It can be invoked by using `/updateCategory` command.
+1.The Add Category option is to add a new category which dosen't already exist         
+2.The Delete Category option is to delete an existing category         
+3.The Edit Category option is to edit an existing category. 
+4.It can be invoked by using `/updateCategory` command.
 
 ### Weekly
 This option is to get the weekly analysis report of the expenditure
@@ -245,7 +245,7 @@ This option is to get the weekly analysis report of the expenditure
 It can be invoked by using `/weekly` command.
 
 ### Monthly
-This option is to get the weekly analysis report of the expenditure
+This option is to get the monthly analysis report of the expenditure
 
 <p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
 It can be invoked by using `/monthly` command.
