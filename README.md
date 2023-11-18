@@ -144,38 +144,111 @@ A successful run will generate a message on your terminal that says "TeleBot: St
 To run the script automatically at startup / reboot, simply add the `.run_forever.sh` script to your `.bashrc` file, which executes whenever you reboot your system.
 <a href="https://stackoverflow.com/questions/49083789/how-to-add-new-line-in-bashrc-file-in-ubuntu">Click here for help adding to .bashrc files.</a>
 
-## Usecases
+# :information_desk_person: Use Cases
 
 Here's a quick overview of how each of the commands work. Simply enter /<command_name> into the Telegram chat and watch as the magic happens! 
 
-#### /menu: Display commands with their descriptions.
+### Menu
+View all the commands Finbot offers to manage your expenses
 
-#### /help: Display the list of commands.
+<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+It can be invoked by using `/menu` command.
 
-#### /pdf: Save history as PDF.
+### Help
+Display the list of commands.
 
-#### /add: This option is for adding your expenses        
- 1. It will give you the list of categories to choose from.        
- 2. You will be prompted to enter the amount corresponding to your spending        
- 3.The message will be prompted to notify the addition of your expense with the amount,date, time and category 
+<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+It can be invoked by using `/help` command.
 
-#### /analytics: This option gives user a graphical representation of their expenditures         
- You will get an option to choose the type of data you want to see.
+### Pdf
+Save history as PDF.
 
-#### /predict: This option analyzes your recorded spendings and gives you a budget that will accommodate for them.
+<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+It can be invoked by using `/pdf` command.
 
-#### /history: This option is to give you the detailed summary of your expenditure with Date, time ,category and amount. A quick lookup into your spendings
+### Add
+This option is for adding your expenses.
 
-#### /delete: This option is to Clear/Erase all your records
+<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+1. It will give you the list of categories to choose from.        
+2. You will be prompted to enter the amount corresponding to your spending        
+3. The message will be prompted to notify the addition of your expense with the amount,date, time and category 
+4. It can be invoked by using `/add` command.
 
-#### /edit: This option helps you to go back and correct/update the missing details         
- 1. It will give you the list of your expenses you wish to edit         
- 2. It will let you change the specific field based on your requirements like amount/date/category
+### Analysis
+This option gives user a graphical representation of their expenditures.
 
-#### /budget: This option is to set/update/delete the budget.         
- 1. The Add/update category is to set the new budget or update the existing budget         
- 2. The view category gives the detail if budget is exceeding or in limit with the difference amount         
- 3. The delete category allows to delete the budget and start afresh!
+<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+1. You will get an option to choose the type of data you want to see.
+2. It can be invoked by using `/amalysis` command.
+
+### Predict
+This option analyzes your recorded spendings and gives you a budget that will accommodate for them.
+
+<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+It can be invoked by using `/predict` command.
+
+### History
+This option is to give you the detailed summary of your expenditure with Date, time ,category and amount. A quick lookup into your spendings.
+
+<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+It can be invoked by using `/history` command.
+
+### Delete
+This option is to Clear/Erase all your records
+
+<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+It can be invoked by using `/delete` command.
+
+### Edit
+This option helps you to go back and correct/update the missing details    
+
+<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+1. It will give you the list of your expenses you wish to edit         
+2. It will let you change the specific field based on your requirements like amount/date/category
+3. It can be invoked by using `/edit` command.
+
+### Budget
+This option is to set/update/delete the budget.     
+
+<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+1. The Add/update category is to set the new budget or update the existing budget         
+2. The view category gives the detail if budget is exceeding or in limit with the difference amount         
+3. The delete category allows to delete the budget and start afresh!
+4. It can be invoked by using `/budget` command.
+
+### SendEmail
+This option is to send you a email with you expenditures
+
+<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+It can be invoked by using `/sendEmail` command.
+
+### Add Recurring
+This option is to add a recurring expense for future months.
+
+<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+It can be invoked by using `/add_recurring` command.
+
+### Update Category
+This option is to add/delete/edit the categories.         
+
+<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+1. The Add Category option is to add a new category which dosen't already exist         
+2. The Delete Category option is to delete an existing category         
+3. The Edit Category option is to edit an existing category. 
+4. It can be invoked by using `/updateCategory` command.
+
+### Weekly
+This option is to get the weekly analysis report of the expenditure
+
+<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+It can be invoked by using `/weekly` command.
+
+### Monthly
+This option is to get the weekly analysis report of the expenditure
+
+<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+It can be invoked by using `/monthly` command.
 
 ## Contributors
 <table>
