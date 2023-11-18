@@ -26,14 +26,9 @@ And the best part? FinBot is your multi-platform financial sidekick, available o
 
 ## Demo Video
 
-## :money_with_wings: About FinBot
+## :money_with_wings: About DollarBot
 
-FinBot is a user-friendly Telegram and Discord bot designed to simplify your daily expense recording on a local system effortlessly. By offering the bot on two popular messaging platforms, we tap into a larger and diverse user base, increasing the potential reach of the service and enhancing user experience. 
-<p align="center">
-<a><img width=500 
-  src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/262018288/original/8676cd7fe4b730618bfd1ca4886465ca5d148708/do-telegram-or-discord-bot-for-you.jpg" ></a>
-</p>
-
+DollarBot is a user-friendly Telegram bot designed to simplify your daily expense recording on a local system effortlessly.
 
 With simple commands, this bot allows you to:
 
