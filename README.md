@@ -1,8 +1,18 @@
+![MIT license](https://img.shields.io/badge/License-MIT-green.svg)
+[![Platform](https://img.shields.io/badge/Platform-Telegram-blue)](https://desktop.telegram.org/)
+![GitHub](https://img.shields.io/badge/Language-Python-blue.svg)
+[![GitHub contributors](https://img.shields.io/github/contributors/aditikilledar/dollar_bot_SE23)](https://github.com/aditikilledar/dollar_bot_SE23/graphs/contributors)
+[![DOI](https://zenodo.org/badge/691334031.svg)](https://zenodo.org/doi/10.5281/zenodo.10023639)
+[![Build Status](https://app.travis-ci.com/usmanwardag/dollar_bot.svg?branch=main)](https://app.travis-ci.com/usmanwardag/dollar_bot)
+[![codecov](https://codecov.io/gh/tpanati/DollarBot/graph/badge.svg?token=23RW1XPB3P)](https://codecov.io/gh/tpanati/DollarBot)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed/aditikilledar/dollar_bot_SE23)](https://github.com/aditikilledar/dollar_bot_SE23/issues?q=is%3Aissue+is%3Aclosed)
+<!-- [![GitHub closed issues](https://img.shields.io/github/issues-closed/sak007/MyDollarBot-BOTGo)](https://github.com/sak007/MyDollarBot-BOTGo/issues?q=is%3Aissue+is%3Aclosed) -->
+
 # 💰 Dollar Bot 💰
 
 <hr>
 
-# FinBot - Because your financial future deserves the best!
+# DollarBot - Because your financial future deserves the best!
 
 You wake up, brew a fresh cup of coffee, and start your day. You're excited because today is the day you take control of your finances like never before. How? Say hello to FinBot, your ultimate financial companion. With simple commands, it transforms your financial story into one of motivation, empowerment, and control. 
 
@@ -14,69 +24,43 @@ And the best part? FinBot is your multi-platform financial sidekick, available o
 </p>
 <hr>
 
-<!-- TABLE OF CONTENTS -->
-<b><h3>Table of Contents</h3></b>
-  <ol>
-    <li><a href="#whats-dollarbot">What's DollarBot?
-    <li><a href="#why-use-dollarbot">Why use DollarBot?</a></li>
-    <li><a href="#demo">Demo</a></li>
-    <li><a href="#whats-new">What's new in this version?</a></li>
-    <li><a href="#installation-and-setup">Installation and Setup</a></li>
-   <li><a href="#how-to-use">How to use?</a></li>
-   <li><a href="#contributors">Contributors</a></li>
-   <li><a href="#future-work">Future Work</a></li>
-   <li><a href="#acknowledgements">Acknowledgements</a></li>
-  </ol>
+## Demo Video
 
-Are you a developer? <a href="https://github.com/aditikilledar/dollar_bot_SE23/blob/main/Developer_ReadMe.md">Click here: For Developers and Future Contributors</a>
+## :money_with_wings: About FinBot
 
-![MIT license](https://img.shields.io/badge/License-MIT-green.svg)
-[![Platform](https://img.shields.io/badge/Platform-Telegram-blue)](https://desktop.telegram.org/)
-![GitHub](https://img.shields.io/badge/Language-Python-blue.svg)
-[![GitHub contributors](https://img.shields.io/github/contributors/aditikilledar/dollar_bot_SE23)](https://github.com/aditikilledar/dollar_bot_SE23/graphs/contributors)
-[![DOI](https://zenodo.org/badge/691334031.svg)](https://zenodo.org/doi/10.5281/zenodo.10023639)
-[![Build Status](https://app.travis-ci.com/usmanwardag/dollar_bot.svg?branch=main)](https://app.travis-ci.com/usmanwardag/dollar_bot)
-[![codecov](https://codecov.io/gh/tpanati/DollarBot/graph/badge.svg?token=23RW1XPB3P)](https://codecov.io/gh/tpanati/DollarBot)
-[![GitHub closed issues](https://img.shields.io/github/issues-closed/aditikilledar/dollar_bot_SE23)](https://github.com/aditikilledar/dollar_bot_SE23/issues?q=is%3Aissue+is%3Aclosed)
-<!-- [![GitHub closed issues](https://img.shields.io/github/issues-closed/sak007/MyDollarBot-BOTGo)](https://github.com/sak007/MyDollarBot-BOTGo/issues?q=is%3Aissue+is%3Aclosed) -->
+FinBot is a user-friendly Telegram and Discord bot designed to simplify your daily expense recording on a local system effortlessly. By offering the bot on two popular messaging platforms, we tap into a larger and diverse user base, increasing the potential reach of the service and enhancing user experience. 
+<p align="center">
+<a><img width=500 
+  src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/262018288/original/8676cd7fe4b730618bfd1ca4886465ca5d148708/do-telegram-or-discord-bot-for-you.jpg" ></a>
+</p>
 
-<hr>
 
-## What's DollarBot?
+With simple commands, this bot allows you to:
 
-DollarBot is a handy little bot built on top of Telegram, to help you with daily expense tracking and analytics on your past spends. 
+📝 **Add/Record a new spending:** As you sip that morning coffee, effortlessly log your expenses, no matter how small or significant. Every expense adds up, and FinBot ensures you don't miss a thing.
 
-It's easy to setup, run and use on a daily basis!
+💡 **Display your expenditure for the current day/month:** With FinBot, you're never in the dark about your spending. Get real-time insights on your daily and monthly expenses, motivating you to stay on budget and crush your financial goals.
 
-<a href="https://www.canva.com/design/DAFxwU4ABIg/LqMkLeGUBhC__JmWmdkFiQ/watch?utm_content=DAFxwU4ABIg&utm_campaign=designshare&utm_medium=link&utm_source=editor">Click here for a video overview!!</a>
+🔍 **Show your spending history:** Ever wondered where your money disappears to? FinBot provides a detailed spending history that tells a story of your financial habits. It's a tale of lessons and opportunities for improvement.
 
-## Why use DollarBot?
+🗑️ **Delete/Erase all your records:** Made an error or just want to start afresh? It's as simple as a command, a chance to correct your narrative without any hassle.
 
-With simple in-chat commands, this bot helps you:
-- Set your own customized budget
-- Add/Record new spendings
-- Display your spending trends through engaging graphs
-- Predict your next month's budget based on your current expenditure
-- Display your spending history
-- Clear/Erase all your records
-- Edit/Change any spending details if you wish to
-- View Analytics and export as a pdf
+🔧 **Edit/Change any spending details:** Life is full of surprises, and sometimes expenses change. FinBot adapts with you, offering easy editing options to keep your story accurate.
 
-## Demo
+📊 Set Your Budget: Take full control of your finances by defining and tracking your budget with FinBot. It's the proactive step that puts you firmly in the driver's seat of your financial journey.
 
-Demo Video -> [https://www.youtube.com/watch?v=XlndmRhr9Lc]
+📈 **Visualize your spending:** Numbers can be daunting, but FinBot transforms them into a captivating visual experience. Use the '/chart' option to see your spending as graphs and pie charts. This punchline to your story helps you spot trends and make smarter financial choices.
 
-## What's new?
+📈 **Predict future expenses:** Predict your next month's budget based on your current expenditure
 
-We've considerably extended this project to make using DollarBot easy and engaging.\
-1. Expressive Graphs
-2. Budget prediction
-3. Clearer and more informative PDF Reports
-4. Ability to add recurring expenses
-5. Budget Creation Updated
-6. Clearer wording in the documentation
+# :star: What's New?
 
-Check [this documentation out](https://github.com/aditikilledar/dollar_bot_SE23/blob/main/docs/whats-new.md) for an in-depth depiction of our changes. :)
+- **Multi-Platform Functionality:** With our latest update, FinBot is no longer limited to Telegram; we've extended its capabilities to Discord as well, providing you with a seamless multi-platform experience.
+- **Unified User Experience:** Whether you prefer Telegram or Discord, you can now enjoy the same user-friendly experience for recording your daily expenses, managing your budget, and more.
+- **Cross-Platform Expense Recording:** You can now add/record new spending, view your expenditure for the day/month, display your spending history, and edit/change spending details on both Telegram and Discord.
+- **Data Visualization:** Our data visualization feature is now available on both platforms. Use the '/chart' (Telegram) or '#chart' (Discord) option to visualize your expenses in the form of graphs and pie charts, gaining deeper insights into your spending habits. Further in Discord, the bot supports the start and end dates within which the visuals can be viewed enabling customization.
+
+Are you a developer? <a href="https://github.com/tpanati/DollarBot/blob/main/README.md">Click here: For Developers and Future Contributors</a>
 
 ## Installation and Setup
 
