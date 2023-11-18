@@ -10,7 +10,7 @@
 ![Version](https://img.shields.io/github/v/release/tpanati/DollarBot?color=ff69b4&label=Version)
 ![GitHub issues](https://img.shields.io/github/issues-raw/tpanati/DollarBot)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/tpanati/DollarBot)
-[![Build Status](https://app.travis-ci.com/tpanati/DollarBot.svg?branch=main)](https://app.travis-ci.com/tpanati/DollarBot)
+[![Build Status](https://app.travis-ci.com/usmanwardag/dollar_bot.svg?branch=main)](https://app.travis-ci.com/usmanwardag/dollar_bot)
 
 # 💰 Dollar Bot 💰
 
