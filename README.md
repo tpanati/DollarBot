@@ -170,17 +170,17 @@ It can be invoked by using `/pdf` command.
 This option is for adding your expenses.
 
 <p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
-1.It will give you the list of categories to choose from. <br> 
-2.You will be prompted to enter the amount corresponding to your spending <br>      
-3.The message will be prompted to notify the addition of your expense with the amount,date, time and category <br> 
-4.It can be invoked by using `/add` command. 
+1. It will give you the list of categories to choose from. <br> 
+2. You will be prompted to enter the amount corresponding to your spending <br>      
+3. The message will be prompted to notify the addition of your expense with the amount,date, time and category <br> 
+4. It can be invoked by using `/add` command. 
 
 ### Analysis
 This option gives user a graphical representation of their expenditures.
 
 <p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
-1.You will get an option to choose the type of data you want to see. <br> 
-2.It can be invoked by using `/analysis` command.
+1. You will get an option to choose the type of data you want to see. <br> 
+2. It can be invoked by using `/analysis` command.
 
 ### Predict
 This option analyzes your recorded spendings and gives you a budget that will accommodate for them.
@@ -204,18 +204,18 @@ It can be invoked by using `/delete` command.
 This option helps you to go back and correct/update the missing details    
 
 <p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
-1.It will give you the list of your expenses you wish to edit <br> 
-2.It will let you change the specific field based on your requirements like amount/date/category <br> 
-3.It can be invoked by using `/edit` command.
+1. It will give you the list of your expenses you wish to edit <br> 
+2. It will let you change the specific field based on your requirements like amount/date/category <br> 
+3. It can be invoked by using `/edit` command.
 
 ### Budget
 This option is to set/update/delete the budget.     
 
 <p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
-1.The Add/update category is to set the new budget or update the existing budget <br>      
-2.The view category gives the detail if budget is exceeding or in limit with the difference amount  <br>        
-3.The delete category allows to delete the budget and start afresh! <br> 
-4.It can be invoked by using `/budget` command.
+1. The Add/update category is to set the new budget or update the existing budget <br>      
+2. The view category gives the detail if budget is exceeding or in limit with the difference amount  <br>        
+3. The delete category allows to delete the budget and start afresh! <br> 
+4. It can be invoked by using `/budget` command.
 
 ### SendEmail
 This option is to send you a email with you expenditures
@@ -233,10 +233,10 @@ It can be invoked by using `/add_recurring` command.
 This option is to add/delete/edit the categories.         
 
 <p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
-1.The Add Category option is to add a new category which dosen't already exist  <br>       
-2.The Delete Category option is to delete an existing category  <br> 
-3.The Edit Category option is to edit an existing category. <br> 
-4.It can be invoked by using `/updateCategory` command.
+1. The Add Category option is to add a new category which dosen't already exist  <br>       
+2. The Delete Category option is to delete an existing category  <br> 
+3. The Edit Category option is to edit an existing category. <br> 
+4. It can be invoked by using `/updateCategory` command.
 
 ### Weekly
 This option is to get the weekly analysis report of the expenditure
@@ -250,27 +250,35 @@ This option is to get the monthly analysis report of the expenditure
 <p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
 It can be invoked by using `/monthly` command.
 
+# :construction: Road Map
+
+Our implementation has been tracked in a project board which can be viewed here -
+[DollarBot Developer board](https://github.com/users/tpanati/projects/2)
+
+Some possible future enhancements are as follows:
+1.	Generative AI integration with this software
+2.	Sharing expenses
+3.	Windows specific setup scripts
+4.	Making DollarBot respond to casual conversation like 'Hi' and 'Bye'
+
+:heart: Acknowledgements
+---
+We would like to thank Dr. Timothy Menzies for helping us understand the process of building a good Software Engineering project. We would also like to thank the teaching assistants San Gilson, Andre Lustosa, Xueqi (Sherry) Yang, Yasitha Rajapaksha, and Rahul Yedida for their support throughout the project.
+
+
+:page_facing_up: License
+---
+This project is licensed under the terms of the MIT license. Please check [LICENSE](https://github.com/tpanati/DollarBot/blob/main/LICENSE) for more details.
+
 ## Contributors
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/aditikilledar"><img src="https://avatars.githubusercontent.com/u/73051765?v=4" width="75px;" alt=""/><br /><sub><b>Aditi Killedar</b></sub></a></td>
-    <td align="center"><a href="https://github.com/shashank-madan"><img src="https://avatars.githubusercontent.com/u/52149707?s=80&v=4" width="75px;" alt=""/><br /><sub><b>Shashank Madan</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/srina1h"><img src="https://avatars.githubusercontent.com/u/47570142?v=4" width="75px;" alt=""/><br /><sub><b> Srinath Srinivasan</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/aiyer786"><img src="https://avatars.githubusercontent.com/u/52149707?s=80&v=4" width="75px;" alt=""/><br /><sub><b>Aditya Iyer</b></sub></a><br /></td>
+    <td align="center"><img src="https://avatars.githubusercontent.com/u/114872378?v=4" width="75px;" alt=""/><br /><sub><b>Harshavardhan Bandaru</b></sub></a></td>
+    <td align="center"><img src="https://avatars.githubusercontent.com/u/35067896?v=4" width="75px;" alt=""/><br /><sub><b>Vyshnavi Adusumeli</b></sub></a><br /></td>
+    <td align="center"><img src="https://avatars.githubusercontent.com/u/144171816?s=400&u=e9fb80d2e9acb2fc438881017b49e6d26720a50d&v=4" width="75px;" alt=""/><br /><sub><b>Tejaswini Panati</b></sub></a><br /></td>
   </tr>
 </table>
 
-## Future Work
+# :calling: Support
 
-- Sharing expenses
-- Windows specific setup scripts
-- Adding notes section while recording expenses
-- Incorporating Machine Learning insights into the Analytics Feature
-- Making DollarBot respond to casual conversation like 'Hi' and 'Bye'
-
-## Acknowledgements
-
-- We would like to express our gratitude 🙏🏻 and a big thank you 😇 to Prof. Dr. Timothy Menzie for giving us the opportunity to get into the shoes of software building and learning new skills and development process throught the project building.
-- A big thank you 😊 to the Teaching Assistants for their support.
-- Thank you to the previous team 😊 for a thorough ReadMe and deatiled documentation.[MyDollarBot](https://github.com/sak007/MyDollarBot-BOTGo)
-- Thank you to the ⭐️[Telegram bot](https://github.com/python-telegram-bot/python-telegram-bot)
+For any support, email us at `vadusum@ncsu.edu`
