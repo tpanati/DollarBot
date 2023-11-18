@@ -68,9 +68,9 @@ With simple commands, this bot allows you to:
 
 Are you a developer? <a href="https://github.com/tpanati/DollarBot/blob/main/README.md">Click here: For Developers and Future Contributors</a>
 
-## Installation and Setup
+# :rocket: Installation and Setup
 
-### Pre-requisite: The Telegram Desktop App
+## Pre-requisite: The Telegram Desktop App
 
 Since DollarBot is built on top of Telegram, you'll first need:
 1. Download the Telegram Desktop Application <a href="https://desktop.telegram.org/">here.</a>
@@ -123,11 +123,11 @@ Once you've executed setup.sh, and all dependencies have been installed, you can
 
 (b) execute the run.sh bash script to start DollarBot
    
-###### MacOS / Unix
+#### MacOS / Unix
 ```
    bash run.sh
 ```
-###### Windows
+#### Windows
 ```
    ./run.sh
 ```
