@@ -1,23 +1,16 @@
-![MIT license](https://img.shields.io/badge/License-MIT-green.svg)
-[![Platform](https://img.shields.io/badge/Platform-Telegram-blue)](https://desktop.telegram.org/)
-![GitHub](https://img.shields.io/badge/Language-Python-blue.svg)
-[![GitHub contributors](https://img.shields.io/github/contributors/aditikilledar/dollar_bot_SE23)](https://github.com/aditikilledar/dollar_bot_SE23/graphs/contributors)
-[![DOI](https://zenodo.org/badge/691334031.svg)](https://zenodo.org/doi/10.5281/zenodo.10023639)
-[![Build Status](https://app.travis-ci.com/usmanwardag/dollar_bot.svg?branch=main)](https://app.travis-ci.com/usmanwardag/dollar_bot)
-[![codecov](https://codecov.io/gh/tpanati/DollarBot/graph/badge.svg?token=23RW1XPB3P)](https://codecov.io/gh/tpanati/DollarBot)
-[![GitHub closed issues](https://img.shields.io/github/issues-closed/aditikilledar/dollar_bot_SE23)](https://github.com/aditikilledar/dollar_bot_SE23/issues?q=is%3Aissue+is%3Aclosed)
-Hi
+
 ![MIT license](https://img.shields.io/badge/License-MIT-green.svg)
 ![GitHub](https://img.shields.io/github/languages/top/tpanati/DollarBot?color=red&label=Python&logo=Python&logoColor=yellow)
+![GitHub](https://img.shields.io/badge/Language-Python-blue.svg)
 ![GitHub contributors](https://img.shields.io/github/contributors/tpanati/DollarBot)
 [![DOI](https://zenodo.org/badge/691334031.svg)](https://zenodo.org/doi/10.5281/zenodo.10023639)
 [![Platform](https://img.shields.io/badge/Platform-Telegram-blue)](https://desktop.telegram.org/)
 [![codecov](https://codecov.io/gh/tpanati/DollarBot/graph/badge.svg?token=23RW1XPB3P)](https://codecov.io/gh/tpanati/DollarBot)
-![github workflow](https://github.com/tpanati/DollarBot/.github/workflows/python-app.yml/badge.svg)
 ![Lines of code](https://tokei.rs/b1/github/tpanati/DollarBot)
 ![Version](https://img.shields.io/github/v/release/tpanati/DollarBot?color=ff69b4&label=Version)
 ![GitHub issues](https://img.shields.io/github/issues-raw/tpanati/DollarBot)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/tpanati/DollarBot)
+[![Build Status](https://app.travis-ci.com/tpanati/DollarBot.svg?branch=main)](https://app.travis-ci.com/tpanati/DollarBot)
 
 # 💰 Dollar Bot 💰
 
