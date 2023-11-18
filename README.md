@@ -170,16 +170,16 @@ It can be invoked by using `/pdf` command.
 This option is for adding your expenses.
 
 <p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
-1.It will give you the list of categories to choose from.        
-2.You will be prompted to enter the amount corresponding to your spending        
-3.The message will be prompted to notify the addition of your expense with the amount,date, time and category 
-4.It can be invoked by using `/add` command.
+1.It will give you the list of categories to choose from. <br> 
+2.You will be prompted to enter the amount corresponding to your spending <br>      
+3.The message will be prompted to notify the addition of your expense with the amount,date, time and category <br> 
+4.It can be invoked by using `/add` command. 
 
 ### Analysis
 This option gives user a graphical representation of their expenditures.
 
 <p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
-1.You will get an option to choose the type of data you want to see.
+1.You will get an option to choose the type of data you want to see. <br> 
 2.It can be invoked by using `/analysis` command.
 
 ### Predict
@@ -204,17 +204,17 @@ It can be invoked by using `/delete` command.
 This option helps you to go back and correct/update the missing details    
 
 <p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
-1.It will give you the list of your expenses you wish to edit         
-2.It will let you change the specific field based on your requirements like amount/date/category
+1.It will give you the list of your expenses you wish to edit <br> 
+2.It will let you change the specific field based on your requirements like amount/date/category <br> 
 3.It can be invoked by using `/edit` command.
 
 ### Budget
 This option is to set/update/delete the budget.     
 
 <p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
-1.The Add/update category is to set the new budget or update the existing budget         
-2.The view category gives the detail if budget is exceeding or in limit with the difference amount         
-3.The delete category allows to delete the budget and start afresh!
+1.The Add/update category is to set the new budget or update the existing budget <br>      
+2.The view category gives the detail if budget is exceeding or in limit with the difference amount  <br>        
+3.The delete category allows to delete the budget and start afresh! <br> 
 4.It can be invoked by using `/budget` command.
 
 ### SendEmail
@@ -233,9 +233,9 @@ It can be invoked by using `/add_recurring` command.
 This option is to add/delete/edit the categories.         
 
 <p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
-1.The Add Category option is to add a new category which dosen't already exist         
-2.The Delete Category option is to delete an existing category         
-3.The Edit Category option is to edit an existing category. 
+1.The Add Category option is to add a new category which dosen't already exist  <br>       
+2.The Delete Category option is to delete an existing category  <br> 
+3.The Edit Category option is to edit an existing category. <br> 
 4.It can be invoked by using `/updateCategory` command.
 
 ### Weekly
