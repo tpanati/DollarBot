@@ -1,10 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="655f610e-fff0-4f55-8e3c-77b4f8655864" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_edit.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_edit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user.properties" beforeDir="false" afterPath="$PROJECT_DIR$/user.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/add.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/add.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/add_recurring.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/add_recurring.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/analytics.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/analytics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/budget.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/budget.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/budget_delete.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/budget_delete.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/budget_update.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/budget_update.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/budget_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/budget_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/code.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/code.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/delete.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/delete.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/display.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/display.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/edit.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/edit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/estimate.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/estimate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/get_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/get_analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/graphing.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/graphing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/history.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/history.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/monthly.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/monthly.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/notifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/notifier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/notify.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/notify.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/pdf.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/pdf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/predict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/sendEmail.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/sendEmail.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/updateCategory.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/updateCategory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/weekly.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/weekly.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,19 +40,67 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="1zm6YJzGU7vJcq5z2MHrnh3XMxa" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  }
+}</component>
   <component name="RunManager" selected="Python tests.Python tests for test_edit.test_run">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="DollarBot" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="DollarBot" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="DollarBot" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <module name="DollarBot" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <method v="2" />
+    </configuration>
     <configuration name="Python tests for test_edit.test_run" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="MyDollarBot" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -55,6 +129,38 @@
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;$PROJECT_DIR$/code/edit.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Autodetect">
+      <module name="DollarBot" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <module name="DollarBot" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
       <method v="2" />
     </configuration>
     <list>
@@ -102,20 +208,5 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/code/add.py</url>
-          <line>25</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MyDollarBot$.coverage" NAME=" Coverage Results" MODIFIED="1636064661492" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
   </component>
 </project>

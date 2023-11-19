@@ -1,5 +1,5 @@
 """
-File: code.py
+File: __init__.py
 Author: Vyshnavi Adusumelli, Tejaswini Panati, Harshavardhan Bandaru
 Date: October 01, 2023
 Description: File contains Telegram bot message handlers and their associated functions.
