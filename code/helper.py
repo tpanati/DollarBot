@@ -2,7 +2,6 @@ import re
 import json
 import os
 from datetime import datetime
-from notify import notify
 
 spend_categories = []
 choices = ["Date", "Category", "Cost"]
@@ -63,11 +62,11 @@ def read_json():
     """
     try:
         if not os.path.exists("expense_record.json"):
-            with open("expense_record.json", "w") as json_file:
+            with open("expense_record.json", "w", encoding="utf-8") as json_file:
                 json_file.write("{}")
             return json.dumps("{}")
         elif os.stat("expense_record.json").st_size != 0:
-            with open("expense_record.json") as expense_record:
+            with open("expense_record.json", encoding="utf-8") as expense_record:
                 expense_record_data = json.load(expense_record)
             return expense_record_data
 
@@ -79,7 +78,7 @@ def write_json(user_list):
     write_json(user_list): Stores data into the datastore of the bot.
     """
     try:
-        with open("expense_record.json", "w") as json_file:
+        with open("expense_record.json", "w", encoding="utf-8") as json_file:
             json.dump(user_list, json_file, ensure_ascii=False, indent=4)
     except FileNotFoundError:
         print("Sorry, the data file could not be found.")
@@ -90,11 +89,11 @@ def read_category_json():
     """
     try:
         if not os.path.exists("categories.json"):
-            with open("categories.json", "w") as json_file:
+            with open("categories.json", "w", encoding="utf-8") as json_file:
                 json_file.write("{ \"categories\" : \"Food,Groceries,Utilities,Transport,Shopping,Miscellaneous\" }")
             return json.dumps("{ \"categories\" : \"\" }")
         elif os.stat("categories.json").st_size != 0:
-            with open("categories.json") as category_record:
+            with open("categories.json", encoding="utf-8") as category_record:
                 category_record_data = json.load(category_record)
             return category_record_data
 
@@ -106,7 +105,7 @@ def write_category_json(category_list):
     write_json(category_list): Stores data into the datastore of the bot.
     """
     try:
-        with open("categories.json", "w") as json_file:
+        with open("categories.json", "w", encoding="utf-8") as json_file:
             json.dump(category_list, json_file, ensure_ascii=False, indent=4)
     except FileNotFoundError:
         print("Sorry, the data file could not be found.")
@@ -227,7 +226,7 @@ def isCategoryBudgetByCategoryAvailable(chatId, cat):
 def isCategoryBudgetByCategoryNotZero(chatId):
     for cat in spend_categories:
         if getCategoryBudgetByCategory(chatId, cat) == '0':
-                return False
+            return False
     return True
 
 def get_uncategorized_amount(chatId, amount):
@@ -241,7 +240,7 @@ def get_uncategorized_amount(chatId, amount):
     uncategorized_budget = overall_budget - category_budget
     return str(round(uncategorized_budget,2))
 
-def display_remaining_budget(message, bot, cat):
+def display_remaining_budget(message, bot):
     display_remaining_overall_budget(message, bot)
 
 def display_remaining_overall_budget(message, bot):
@@ -350,19 +349,19 @@ def getSpendCategories():
     category_list = read_category_json()
     if category_list is None:
         return None
-    spend_categories = category_list["categories"].split(',')
-    spend_categories = [category.strip() for category in spend_categories if category.strip()]
+    spend_cat = category_list["categories"].split(',')
+    spend_cat = [category.strip() for category in spend_cat if category.strip()]
 
-    return spend_categories
+    return spend_cat
 
 def deleteSpendCategories(category):
     category_list = read_category_json()
     if category_list is None:
         return None
-    spend_categories = category_list["categories"].split(',')
-    spend_categories.remove(category)
+    spend_cat = category_list["categories"].split(',')
+    spend_cat.remove(category)
 
-    result = ','.join(spend_categories)
+    result = ','.join(spend_cat)
     category_list["categories"] = result
     write_category_json(category_list)
 
@@ -370,10 +369,10 @@ def addSpendCategories(category):
     category_list = read_category_json()
     if category_list is None:
         return None
-    spend_categories = category_list["categories"].split(',')
-    spend_categories.append(category)
-    spend_categories = [category.strip() for category in spend_categories if category.strip()]
-    result = ','.join(spend_categories)
+    spend_cat = category_list["categories"].split(',')
+    spend_cat.append(category)
+    spend_cat = [category.strip() for category in spend_cat if category.strip()]
+    result = ','.join(spend_cat)
     category_list["categories"] = result
     write_category_json(category_list)
 

@@ -82,7 +82,7 @@ def post_amount_input(message, bot, selected_category):
         if amount_value == 0:  # cannot be $0 spending
             raise Exception("Spent amount has to be a non-zero number.")
 
-        message = bot.send_message(chat_id, 'For how many months in the future will the expense be there? \n(Enter integer values only)'.format(str(option[chat_id])))
+        message = bot.send_message(chat_id, 'For how many months in the future will the expense be there? \n(Enter integer values only)')
         bot.register_next_step_handler(message, post_duration_input, bot, selected_category, amount_value)
     except Exception as e:
         logging.exception(str(e))
@@ -103,7 +103,6 @@ def post_duration_input(message, bot, selected_category, amount_value):
     Raises:
     - Exception: If the entered duration is invalid or 0.
     """
-
     try:
         chat_id = message.chat.id
         duration_entered = message.text
