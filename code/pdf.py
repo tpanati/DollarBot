@@ -99,7 +99,7 @@ def run(message, bot):
                 categories = helper.getSpendCategories()
                 for cat in categories:
                     if helper.isCategoryBudgetByCategoryAvailable(chat_id, cat):
-                        percent = helper.calculateRemainingCateogryBudgetPercent(chat_id, cat)
+                        percent = helper.calculateRemainingCategoryBudgetPercent(chat_id, cat)
                         category_spend_percent[cat] = percent
                 graphing.remaining(category_spend_percent)
 
@@ -107,7 +107,7 @@ def run(message, bot):
                 cat_spend_dict = helper.getUserHistoryDateExpense(chat_id)
                 graphing.time_series(cat_spend_dict)
             
-            list_of_images = ["overall_split.png","spend_wise.png","remaining.png","time_series.png"]
+            list_of_images = ["overall_split.png","remaining.png","time_series.png"]
             pdf = FPDF()
             pdf.add_page()
             x_coord = 20
