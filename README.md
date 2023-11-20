@@ -2,8 +2,8 @@
 ![MIT license](https://img.shields.io/badge/License-MIT-green.svg)
 ![GitHub](https://img.shields.io/github/languages/top/tpanati/DollarBot?color=red&label=Python&logo=Python&logoColor=yellow)
 ![GitHub](https://img.shields.io/badge/Language-Python-blue.svg)
+[![DOI](https://zenodo.org/badge/715323572.svg)](https://zenodo.org/doi/10.5281/zenodo.10146708)
 ![GitHub contributors](https://img.shields.io/github/contributors/tpanati/DollarBot)
-[![DOI](https://zenodo.org/badge/691334031.svg)](https://zenodo.org/doi/10.5281/zenodo.10023639)
 [![Platform](https://img.shields.io/badge/Platform-Telegram-blue)](https://desktop.telegram.org/)
 [![codecov](https://codecov.io/gh/tpanati/DollarBot/graph/badge.svg?token=23RW1XPB3P)](https://codecov.io/gh/tpanati/DollarBot)
 ![Lines of code](https://tokei.rs/b1/github/tpanati/DollarBot)
@@ -256,10 +256,15 @@ Our implementation has been tracked in a project board which can be viewed here 
 [DollarBot Developer board](https://github.com/users/tpanati/projects/2)
 
 Some possible future enhancements are as follows:
-1.	Generative AI integration with this software
-2.	Sharing expenses
-3.	Windows specific setup scripts
-4.	Making DollarBot respond to casual conversation like 'Hi' and 'Bye'
+1.	**AI-Driven Financial Insights:** Integrate advanced generative AI algorithms to provide personalized financial insights and recommendations. Leverage machine learning to analyze spending patterns and offer proactive suggestions for optimizing expenses.
+2.	**Expense Sharing and Splitting:** Enable users to share expenses effortlessly with friends, family, or colleagues. Implement a feature that allows users to split bills and track shared expenses, making group financial management seamless.
+3.	**Cross-Platform Compatibility:** Develop setup scripts specifically for Windows users to ensure a smooth and hassle-free installation process on this platform. Expand DollarBot's accessibility to a broader user base by optimizing its performance on Windows operating systems.
+4.	**Natural Language Processing (NLP) Integration:** Enhance DollarBot's user experience by implementing Natural Language Processing (NLP) capabilities. Enable the bot to respond to casual conversation, making interactions more intuitive and user-friendly. Users can engage with DollarBot in a more conversational manner, improving overall usability.
+5.  **Integration with Financial APIs:** Integrate with popular financial APIs to fetch real-time transaction data from bank accounts and credit cards. This enhancement provides users with up-to-the-minute financial information, ensuring accuracy and completeness in their spending records.
+6.  **Multi-Currency Support:** Extend DollarBot's functionality to support multiple currencies, catering to users with diverse financial portfolios. This enhancement ensures accurate tracking and reporting for users dealing with expenses in different currencies.
+7.  **Smart Notifications and Alerts:** Implement intelligent notification features to alert users about budget limits, unusual spending patterns, or upcoming bills. These proactive notifications will empower users to make informed financial decisions in real-time.
+8.  **Secure Cloud Sync and Backup:** Implement a secure cloud sync and backup feature to ensure users' data is protected and accessible across devices. This enhancement provides users with peace of mind, knowing that their financial data is safely stored and can be easily recovered if needed.
+
 
 :heart: Acknowledgements
 ---
