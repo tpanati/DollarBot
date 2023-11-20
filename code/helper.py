@@ -323,7 +323,7 @@ def calculate_total_spendings_for_category(queryResult, cat):
             total = total + float(s[2])
     return total
 
-def calculate_total_spendings_for_cateogory_chat_id(chat_id, cat):
+def calculate_total_spendings_for_category_chat_id(chat_id, cat):
     history = getUserHistory(chat_id)
     query = datetime.now().today().strftime(getMonthFormat())
     print(query)
