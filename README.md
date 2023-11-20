@@ -175,12 +175,12 @@ This option is for adding your expenses.
 3. The message will be prompted to notify the addition of your expense with the amount,date, time and category <br> 
 4. It can be invoked by using `/add` command. 
 
-### Analysis
+### Analytics
 This option gives user a graphical representation of their expenditures.
 
 <p align="center"><img width="700" src="./docs/workflows/analytics.gif"></p>
 1. You will get an option to choose the type of data you want to see. <br> 
-2. It can be invoked by using `/analysis` command.
+2. It can be invoked by using `/analytics` command.
 
 ### Predict
 This option analyzes your recorded spendings and gives you a budget that will accommodate for them.
