@@ -21,6 +21,9 @@
 You wake up, brew a fresh cup of coffee, and start your day. You're excited because today is the day you take control of your finances like never before. How? Say hello to DollarBot, your ultimate financial companion. With simple commands, it transforms your financial story into one of motivation, empowerment, and control. 
 
 And the best part? DollarBot is your financial sidekick, available exclusively on Telegram. That means no matter where you are, it's there to assist you in recording your expenses seamlessly.
+
+<a href="https://www.canva.com/design/DAFxwU4ABIg/LqMkLeGUBhC__JmWmdkFiQ/watch?utm_content=DAFxwU4ABIg&utm_campaign=designshare&utm_medium=link&utm_source=editor">Click here for a video overview!!</a>
+
 <hr>
 <p align="center">
 <a><img width=500 
@@ -220,19 +223,19 @@ This option is to set/update/delete the budget.
 ### SendEmail
 This option is to send you a email with you expenditures
 
-<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+<p align="center"><img width="700" src="./docs/workflows/send_mail.gif"></p>
 It can be invoked by using `/sendEmail` command.
 
 ### Add Recurring
 This option is to add a recurring expense for future months.
 
-<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+<p align="center"><img width="700" src="./docs/workflows/add_recurring.gif"></p>
 It can be invoked by using `/add_recurring` command.
 
 ### Update Category
 This option is to add/delete/edit the categories.         
 
-<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+<p align="center"><img width="700" src="./docs/workflows/update_category.gif"></p>
 1. The Add Category option is to add a new category which dosen't already exist  <br>       
 2. The Delete Category option is to delete an existing category  <br> 
 3. The Edit Category option is to edit an existing category. <br> 
@@ -241,13 +244,13 @@ This option is to add/delete/edit the categories.
 ### Weekly
 This option is to get the weekly analysis report of the expenditure
 
-<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+<p align="center"><img width="700" src="./docs/workflows/weekly.gif"></p>
 It can be invoked by using `/weekly` command.
 
 ### Monthly
 This option is to get the monthly analysis report of the expenditure
 
-<p align="center"><img width="700" src="./docs/workflows/menu_discord.gif"></p>
+<p align="center"><img width="700" src="./docs/workflows/monthly.gif"></p>
 It can be invoked by using `/monthly` command.
 
 # :construction: Road Map
