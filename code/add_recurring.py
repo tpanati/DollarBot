@@ -116,7 +116,7 @@ def post_amount_input(message, bot, selected_category):
         bot.reply_to(message, 'Oh no. ' + str(e))
 
 
-def post_duration_input(message, bot, selected_category, amount_value):
+def post_duration_input(message, bot, amount_value):
     
     """
     post_duration_input(message, bot, selected_category, amount_value): Processes the user's entered duration and records the expense.

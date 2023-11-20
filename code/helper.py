@@ -305,7 +305,7 @@ def calculateRemainingCategoryBudget(chat_id, cat):
     queryResult = [value for _, value in enumerate(history) if str(query) in value]
     return float(budget) - calculate_total_spendings_for_category(queryResult, cat)
 
-def calculateRemainingCateogryBudgetPercent(chat_id, cat):
+def calculateRemainingCategoryBudgetPercent(chat_id, cat):
     budget = getCategoryBudgetByCategory(chat_id, cat)
     history = getUserHistory(chat_id)
     query = datetime.now().today().strftime(getMonthFormat())
@@ -323,7 +323,7 @@ def calculate_total_spendings_for_category(queryResult, cat):
             total = total + float(s[2])
     return total
 
-def calculate_total_spendings_for_cateogory_chat_id(chat_id, cat):
+def calculate_total_spendings_for_category_chat_id(chat_id, cat):
     history = getUserHistory(chat_id)
     query = datetime.now().today().strftime(getMonthFormat())
     print(query)
