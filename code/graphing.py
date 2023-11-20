@@ -34,18 +34,6 @@ matplotlib.use("Agg")
 # === Documentation of graphing.py ===
 
 def viewBudget(data):
-    # sorted_data = {}
-    # sorted_data = {k: v for k, v in sorted(data.items(), key=lambda item: item[1])}
-    # values = []
-    # labels = []
-    # for k, v in sorted_data.items():
-    #     values.append(v)
-    #     labels.append(k)
-    # plt.pie(values, labels=values, counterclock=False, shadow=True)
-    # plt.title("Category Wise Budget")
-    # plt.legend(labels, loc="center")
-    # plt.savefig("budget.png", bbox_inches="tight")
-    # plt.close()
 
     sorted_data = {k: v for k, v in sorted(data.items(), key=lambda item: item[1])}
     values = [float(v) for v in sorted_data.values()]  # Convert values to float
@@ -133,6 +121,15 @@ def overall_split(category_budget):
     plt.close()
 
 def spend_wise_split(category_spend):
+    """
+    Generates a pie chart representing the distribution of spending across different categories.
+
+    Parameters:
+    - category_spend (dict): A dictionary containing category names as keys and corresponding spending values.
+
+    This function creates a pie chart using Matplotlib to visualize the spending distribution
+    across different spending categories and saves the chart as an image file.
+    """
     _, ax = plt.subplots()
     ax.pie(category_spend.values(), labels=category_spend.keys(), autopct='%1.1f%%')
     ax.set_title("Category-wise spend")
@@ -141,6 +138,15 @@ def spend_wise_split(category_spend):
     plt.close()
 
 def remaining(category_spend_percent):
+    """
+    Generates a stacked bar chart representing the remaining budget percentage for different categories.
+
+    Parameters:
+    - category_spend_percent (dict): A dictionary containing category names as keys and corresponding budget percentages.
+
+    This function creates a stacked bar chart using Matplotlib to visualize the remaining budget percentages
+    for different spending categories and saves the chart as an image file.
+    """
     labels = tuple(category_spend_percent.keys())
     remaining_val_list = [100 - x for x in list(category_spend_percent.values())]
 
@@ -153,7 +159,6 @@ def remaining(category_spend_percent):
     bottom = np.zeros(len(list(category_spend_percent.values())))
 
     for boolean, weight_count in weight_counts.items():
-        print(boolean, weight_count)
         ax.bar(labels, weight_count, width, label=boolean, bottom=bottom)
         bottom += weight_count
 
@@ -167,6 +172,15 @@ def remaining(category_spend_percent):
     plt.close()
 
 def time_series(cat_spend_dict):
+    """
+    Generates a time-series plot representing the user's spending history.
+
+    Parameters:
+    - cat_spend_dict (dict): A dictionary containing dates as keys and corresponding expense values.
+
+    This function creates a time-series plot using Matplotlib to visualize the user's spending history
+    over time and saves the plot as an image file.
+    """
     plt.plot(cat_spend_dict.keys(), cat_spend_dict.values(), marker='o')
     plt.title("Time-series of expenses")
     plt.xlabel("Time")

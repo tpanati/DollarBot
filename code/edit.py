@@ -56,6 +56,18 @@ def run(m, bot):
     bot.register_next_step_handler(info, select_category_to_be_updated, bot)
 
 def select_category_to_be_updated(m, bot):
+
+    """
+    select_category_to_be_updated(m, bot): Handles the user's selection of expense categories for updating.
+
+    Parameters:
+    - m (telegram.Message): The message object received from the user.
+    - bot (telegram.Bot): The Telegram bot object.
+
+    This function processes the user's selected expense categories, presents options for updating,
+    and registers the next step handler for further processing.
+    """
+
     info = m.text
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
     markup.row_width = 2
@@ -67,6 +79,20 @@ def select_category_to_be_updated(m, bot):
     bot.register_next_step_handler(choice, enter_updated_data, bot, selected_data, updated)
 
 def enter_updated_data(m, bot, selected_data, updated):
+
+    """
+    enter_updated_data(m, bot, selected_data, updated): Handles the user's input for updating expense information.
+
+    Parameters:
+    - m (telegram.Message): The message object received from the user.
+    - bot (telegram.Bot): The Telegram bot object.
+    - selected_data (list): List of selected expense information.
+    - updated (list): List of updated categories.
+
+    This function processes the user's choice for updating expense details and registers the next step handlers
+    accordingly (date, category, amount).
+    """
+
     choice1 = "" if m.text is None else m.text
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
     markup.row_width = 2
@@ -112,6 +138,19 @@ def enter_updated_data(m, bot, selected_data, updated):
         bot.register_next_step_handler(new_cost, edit_cost, bot, selected_data, updated)
 
 def update_different_category(m, bot, selected_data, updated):
+
+    """
+    update_different_category(m, bot, selected_data, updated): Handles user's choice to update another category.
+
+    Parameters:
+    - m (telegram.Message): The message object received from the user.
+    - bot (telegram.Bot): The Telegram bot object.
+    - selected_data (list): List of selected expense information.
+    - updated (list): List of updated categories.
+
+    This function processes the user's choice to update another category and registers the next step handlers accordingly.
+    """
+
     response = m.text
     if response == "Y" or response == "y":
         markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)

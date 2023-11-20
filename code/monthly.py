@@ -55,6 +55,20 @@ def run(message, bot):
             bot.reply_to(message, "Oops! Could not create monthly analysis chart")
 
 def create_chart_for_monthly_analysis(user_history, userid):
+    """
+    Generates line charts for monthly expense analysis and category-wise analysis.
+
+    Parameters:
+    - user_history (list): List of strings representing user expense history.
+    - userid (str): User identifier for creating unique filenames.
+
+    Returns:
+    - result (list): List containing filenames of the generated charts.
+
+    This function processes the user's expense history, creates line charts for total expenses over time
+    and category-wise expenses over time, and saves the charts as image files. The filenames are based on the
+    provided userid, and the function returns a list of filenames.
+    """
     result = []
 
     user_history_split = [item.split(',') for item in user_history]
