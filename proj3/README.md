@@ -2,7 +2,7 @@
 
 ## Video
 
-[DollarBot](https://www.youtube.com/watch?v=LkZGFGU5B6I)
+[DollarBot](https://youtu.be/bAio20DZ_-I)
 
 ## Scorecard
 
