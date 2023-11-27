@@ -33,7 +33,7 @@ And the best part? DollarBot is your financial sidekick, available exclusively o
 
 ## Demo Video
 
-<a href="https://youtu.be/bAio20DZ_-I">Click here for a Demo video !</a>
+<a href="https://youtu.be/bAio20DZ_-I">https://youtu.be/bAio20DZ_-I</a>
 
 
 ## :money_with_wings: About DollarBot
