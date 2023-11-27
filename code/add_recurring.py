@@ -116,7 +116,7 @@ def post_amount_input(message, bot, selected_category):
         bot.reply_to(message, 'Oh no. ' + str(e))
 
 
-def post_duration_input(message, bot, amount_value):
+def post_duration_input(message, bot, selected_category, amount_value):
     
     """
     post_duration_input(message, bot, selected_category, amount_value): Processes the user's entered duration and records the expense.
@@ -139,7 +139,7 @@ def post_duration_input(message, bot, amount_value):
                 
         for i in range(int(duration_value)):
             date_of_entry = (datetime.today().date() + relativedelta(months=+i)).strftime(helper.getDateFormat())
-            date_str, category_str, amount_str = str(date_of_entry), str(option[chat_id]), str(amount_value)
+            date_str, category_str, amount_str = str(date_of_entry), str(selected_category), str(amount_value)
             helper.write_json(add_user_record(chat_id, "{},{},{}".format(date_str, category_str, amount_str)))
         
         bot.send_message(chat_id, 'The following expenditure has been recorded: You have spent ${} for {} for the next {} months'.format(amount_str, category_str, duration_value))
