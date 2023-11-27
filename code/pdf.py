@@ -88,7 +88,7 @@ def run(message, bot):
             category_spend = {}
             categories = helper.getSpendCategories()
             for cat in categories:
-                spend = helper.calculate_total_spendings_for_cateogory_chat_id(chat_id,cat)
+                spend = helper.calculate_total_spendings_for_category_chat_id(chat_id,cat)
                 if spend != 0:
                     category_spend[cat] = spend
             if category_spend != {}:
