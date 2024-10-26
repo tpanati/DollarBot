@@ -170,7 +170,6 @@ def callback_query(call):
     Handles button clicks and executes the corresponding command actions.
     """
     command = call.data  # The command from the button clicked
-    response_text = ""  # Initialize response_text to avoid UnboundLocalError
 
     # Check which command was clicked and perform the corresponding action
     if command == "help":
@@ -205,18 +204,13 @@ def callback_query(call):
         command_monthly(call.message)
     elif command == "sendEmail":
         command_sendEmail(call.message)
-    elif command == "faq":
-        faq(call.message)
     else:
         response_text = "Command not recognized."
 
     # Acknowledge the button press
     # Acknowledge the button press
     bot.answer_callback_query(call.id)
-
-    # Send the response message only if response_text is set
-    if response_text:
-        bot.send_message(call.message.chat.id, response_text, parse_mode='Markdown')
+    bot.send_message(call.message.chat.id, response_text, parse_mode='Markdown')
 
 # defines how the /add command has to be handled/processed
 @bot.message_handler(commands=["add"])
