@@ -205,6 +205,8 @@ def callback_query(call):
         command_monthly(call.message)
     elif command == "sendEmail":
         command_sendEmail(call.message)
+    elif command == "faq":
+        faq(call.message)
     else:
         response_text = "Command not recognized."
 
