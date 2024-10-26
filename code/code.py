@@ -145,26 +145,23 @@ def faq(m):
 # defines how the /start and /help commands have to be handled/processed
 @bot.message_handler(commands=["start", "menu"])
 def start_and_menu_command(m):
-    """
-    start_and_menu_command(m): Prints out the the main menu displaying the features that the
-    bot offers and the corresponding commands to be run from the Telegram UI to use these features.
-    Commands used to run this: commands=['start', 'menu']
-    """
     helper.read_json()
     chat_id = m.chat.id
-
     text_intro = (
-        ("Welcome to the Dollar Bot! \n"
-         "DollarBot can track all your expenses with simple and easy to use commands :) \n"
-         "Here is the complete menu. \n\n")
+        "*Welcome to the Dollar Bot!* \n"
+        "DollarBot can track all your expenses with simple and easy-to-use commands :) \n"
+        "Here is the complete menu:\n\n"
     )
 
     commands = helper.getCommands()
-    for c in commands:  
-        # generate help text out of the commands dictionary defined at the top
-        text_intro += "/" + c + ": "
-        text_intro += commands[c] + "\n\n"
-    bot.send_message(chat_id, text_intro)
+    keyboard = types.InlineKeyboardMarkup()
+
+    for command, description in commands.items():
+        button_text = f"/{command}"
+        keyboard.add(types.InlineKeyboardButton(text=button_text, callback_data=command))
+
+    text_intro += "_Click a command button to use it._"
+    bot.send_message(chat_id, text_intro, reply_markup=keyboard, parse_mode='Markdown')
     return True
 
 # defines how the /add command has to be handled/processed
