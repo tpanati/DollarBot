@@ -205,6 +205,7 @@ def handle_voice(message):
         audio_data = recognizer.record(source)
         try:
             text = recognizer.recognize_google(audio_data)
+            bot.send_message(message.chat.id, f"I heard: \"{text}\"")
             process_command(text, message)
         except sr.UnknownValueError:
             bot.reply_to(message, "Sorry, I could not understand the audio.")
@@ -222,6 +223,16 @@ def process_command(text, message):
         command_history(message)  # Call the existing history command
     elif "budget" in text:
         command_budget(message)  # Call the existing budget command
+    elif "menu" in text:
+        start_and_menu_command(message)
+    elif "help" in text:
+        show_help(message)
+    elif "weekly" in text:
+        command_weekly(message)
+    elif "monthly" in text:
+        command_monthly(message)
+    elif "predict" in text:
+        command_predict(message)
     else:
         bot.send_message(message.chat.id, "I didn't recognize that command.")
         
