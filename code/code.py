@@ -53,6 +53,7 @@ import speech_recognition as sr
 from datetime import datetime
 from jproperties import Properties
 from pydub import AudioSegment
+from telebot import types
 
 
 configs = Properties()
@@ -107,16 +108,19 @@ bot.set_update_listener(listener)
 
 @bot.message_handler(commands=["help"])
 def show_help(m):
-
-    helper.read_json()
     chat_id = m.chat.id
+    message = (
+        "*Here are the commands you can use:*\n"
+        "/add - Add a new expense 💵\n"
+        "/history - View your expense history 📜\n"
+        "/budget - Check your budget 💳\n"
+        "/analytics - View graphical analytics 📊\n"
+        "For more info, type /faq or tap the button below 👇"
+    )
+    keyboard = types.InlineKeyboardMarkup()
+    keyboard.add(types.InlineKeyboardButton("FAQ", callback_data='faq'))
+    bot.send_message(chat_id, message, parse_mode='Markdown', reply_markup=keyboard)
 
-    message = "Here are the commands you can use: \n"
-    commands = helper.getCommands()
-    for c in commands:
-        message += "/" + c + ", "
-    message += "\nUse /menu for detailed instructions about these commands."
-    bot.send_message(chat_id, message)
 
 @bot.message_handler(commands=["faq"])
 def faq(m):
