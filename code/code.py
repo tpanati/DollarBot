@@ -164,6 +164,54 @@ def start_and_menu_command(m):
     bot.send_message(chat_id, text_intro, reply_markup=keyboard, parse_mode='Markdown')
     return True
 
+@bot.callback_query_handler(func=lambda call: True)
+def callback_query(call):
+    """
+    Handles button clicks and executes the corresponding command actions.
+    """
+    command = call.data  # The command from the button clicked
+
+    # Check which command was clicked and perform the corresponding action
+    if command == "help":
+        show_help(call.message)
+    elif command == "pdf":
+        command_pdf(call.message)
+    elif command == "add":
+        command_add(call.message)
+    elif command == "menu":
+        start_and_menu_command(call.message)
+    elif command == "add_recurring":
+        command_add_recurring(call.messsage)
+    elif command == "analytics":
+        command_analytics(call.message)
+    elif command == "predict":
+        command_predict(call.message)
+    elif command == "history":
+        command_history(call.message)
+    elif command == "delete":
+        command_delete(call.message)
+    elif command == "display":
+        command_display(call.message)
+    elif command == "edit":
+        command_edit(call.message)
+    elif command == "budget":
+        command_budget(call.message)
+    elif command == "updateCategory":
+        command_updateCategory(call.message)
+    elif command == "weekly":
+        command_weekly(call.message)
+    elif command == "monthly":
+        command_monthly(call.message)
+    elif command == "sendEmail":
+        command_sendEmail(call.message)
+    else:
+        response_text = "Command not recognized."
+
+    # Acknowledge the button press
+    # Acknowledge the button press
+    bot.answer_callback_query(call.id)
+    bot.send_message(call.message.chat.id, response_text, parse_mode='Markdown')
+
 # defines how the /add command has to be handled/processed
 @bot.message_handler(commands=["add"])
 def command_add(message):
