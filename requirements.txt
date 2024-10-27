@@ -10,3 +10,6 @@ pytest
 python-telegram-bot-calendar
 mock
 tabulate
+pandas
+SpeechRecognition
+pydub
