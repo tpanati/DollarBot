@@ -1,8 +1,15 @@
 import os
-import code.code as code
 import speech_recognition as sr
 import tempfile
+import add
+import history
+import predict
+import monthly
+import weekly
+import budget
+import helper
 from pydub import AudioSegment
+from telebot import types
 
 
 def run(message, bot):
@@ -39,21 +46,54 @@ def run(message, bot):
 
 def process_command(text, message, bot):
     if "expense" in text:
-        code.command_add(message)
+        add.run(message, bot)
     elif "history" in text:
-        code.command_history(message)  # Call the existing history command
+        history.run(message, bot)  # Call the existing history command
     elif "budget" in text:
-        code.command_budget(message)  # Call the existing budget command
-    elif "menu" in text:
-        code.start_and_menu_command(message)
-    elif "help" in text:
-        code.show_help(message)
+        budget.run(message, bot)  # Call the existing budget command
     elif "weekly" in text:
-        code.command_weekly(message)
+        weekly.run(message, bot)
     elif "monthly" in text:
-        code.command_monthly(message)
+        monthly.run(message, bot)
     elif "predict" in text:
-        code.command_predict(message)
+        predict.run(message, bot)
+    elif "help" in text:
+        show_help(message, bot)
+    elif "menu" or "start" in text:
+        start_and_menu_command(message, bot)
     else:
         bot.send_message(message.chat.id, "I didn't recognize that command.")
         
+def show_help(m, bot):
+    chat_id = m.chat.id
+    message = (
+        "*Here are the commands you can use:*\n"
+        "/add - Add a new expense 💵\n"
+        "/history - View your expense history 📜\n"
+        "/budget - Check your budget 💳\n"
+        "/analytics - View graphical analytics 📊\n"
+        "For more info, type /faq or tap the button below 👇"
+    )
+    keyboard = types.InlineKeyboardMarkup()
+    keyboard.add(types.InlineKeyboardButton("FAQ", callback_data='faq'))
+    bot.send_message(chat_id, message, parse_mode='Markdown', reply_markup=keyboard)
+
+def start_and_menu_command(m, bot):
+    helper.read_json()
+    chat_id = m.chat.id
+    text_intro = (
+        "*Welcome to the Dollar Bot!* \n"
+        "DollarBot can track all your expenses with simple and easy-to-use commands :) \n"
+        "Here is the complete menu:\n\n"
+    )
+
+    commands = helper.getCommands()
+    keyboard = types.InlineKeyboardMarkup()
+
+    for command, _ in commands.items():  # Unpack the tuple to get the command name
+        button_text = f"/{command}"
+        keyboard.add(types.InlineKeyboardButton(text=button_text, callback_data=command))  # Use `command` as a string
+
+    text_intro += "_Click a command button to use it._"
+    bot.send_message(chat_id, text_intro, reply_markup=keyboard, parse_mode='Markdown')
+    return True
