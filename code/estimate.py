@@ -29,6 +29,7 @@ import time
 import helper
 import logging
 from telebot import types
+from exception import NoSpendingRecordsError, EstimateNotAvailableError
 
 # === Documentation of estimate.py ===
 
@@ -69,13 +70,11 @@ def estimate_total(message, bot):
         DayWeekMonth = message.text
 
         if DayWeekMonth not in helper.getSpendEstimateOptions():
-            raise Exception(
-                'Sorry I can\'t show an estimate for "{}"!'.format(DayWeekMonth)
-            )
+            raise EstimateNotAvailableError(DayWeekMonth)
 
         history = helper.getUserHistory(chat_id)
         if history is None:
-            raise Exception("Oops! Looks like you do not have any spending records!")
+            raise NoSpendingRecordsError("Oops! Looks like you do not have any spending records!")
 
         bot.send_message(chat_id, "Hold on! Calculating...")
         # show the bot "typing" (max. 5 secs)

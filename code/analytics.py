@@ -29,6 +29,7 @@ import helper
 import logging
 from telebot import types
 import get_analysis
+from exception import InvalidOperationError
 
 def run(message, bot):
     """
@@ -61,7 +62,7 @@ def post_operation_selection(message, bot):
             bot.send_message(
                 chat_id, "Invalid", reply_markup=types.ReplyKeyboardRemove()
             )
-            raise Exception('Sorry I don\'t recognise this operation "{}"!'.format(op))
+            raise InvalidOperationError(op)
         if op == options["overall"]:
             get_analysis.viewOverallBudget(chat_id, bot)
         elif op == options["spend"]:

@@ -34,6 +34,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
+from exception import NoSpendingRecordsError
 
 
 # === Documentation of sendEmail.py ===
@@ -51,9 +52,9 @@ def run(message, bot):
         chat_id = message.chat.id
         user_history = helper.getUserHistory(chat_id)
         if user_history is None:
-            raise Exception("Sorry! No spending records found!")
+            raise NoSpendingRecordsError()
         if len(user_history) == 0:
-            raise Exception("Sorry! No spending records found!")
+            raise NoSpendingRecordsError()
         else:
             category = bot.send_message(message.chat.id, "Enter your email id")
             bot.register_next_step_handler(category, acceptEmailId, bot)   
@@ -71,9 +72,9 @@ def acceptEmailId(message, bot):
             user_history = helper.getUserHistory(chat_id)
             table = [["Date", "Category", "Amount"]]
             if user_history is None:
-                raise Exception("Sorry! No spending records found!")
+                raise NoSpendingRecordsError()
             if len(user_history) == 0:
-                raise Exception("Sorry! No spending records found!")
+                raise NoSpendingRecordsError()
 
             else:
                 for rec in user_history:

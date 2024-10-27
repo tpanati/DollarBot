@@ -29,6 +29,7 @@ import graphing
 import helper
 import logging
 import os
+from exception import BudgetNotFoundError
 
 # === Documentation of budget_view.py ===
 
@@ -49,8 +50,8 @@ def run(message, bot):
             display_overall_budget(message, bot)
             display_category_budget(message, bot)
         else:
-            raise Exception(
-                "Budget does not exist. Use " + helper.getBudgetOptions()["update"] + " option to add/update the budget"
+            raise BudgetNotFoundError(
+                "Budget does not exist. Use the /budget option to add/update the budget."
             )
     except Exception as e:
         helper.throw_exception(e, message, bot, logging)
