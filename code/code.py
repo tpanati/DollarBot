@@ -157,9 +157,9 @@ def start_and_menu_command(m):
     commands = helper.getCommands()
     keyboard = types.InlineKeyboardMarkup()
 
-    for command, description in commands.items():
+    for command, _ in commands.items():  # Unpack the tuple to get the command name
         button_text = f"/{command}"
-        keyboard.add(types.InlineKeyboardButton(text=button_text, callback_data=command))
+        keyboard.add(types.InlineKeyboardButton(text=button_text, callback_data=command))  # Use `command` as a string
 
     text_intro += "_Click a command button to use it._"
     bot.send_message(chat_id, text_intro, reply_markup=keyboard, parse_mode='Markdown')
@@ -171,6 +171,7 @@ def callback_query(call):
     Handles button clicks and executes the corresponding command actions.
     """
     command = call.data  # The command from the button clicked
+    response_text = ""
 
     # Check which command was clicked and perform the corresponding action
     if command == "help":
@@ -205,6 +206,8 @@ def callback_query(call):
         command_monthly(call.message)
     elif command == "sendEmail":
         command_sendEmail(call.message)
+    elif command == "faq":
+        faq(call.message)
     else:
         response_text = "Command not recognized."
 
@@ -259,7 +262,7 @@ def handle_voice(message):
             process_command(text, message)
         except sr.UnknownValueError:
             bot.reply_to(message, "Sorry, I could not understand the audio.")
-        except sr.RequestError as e:
+        except sr.RequestError :
             bot.reply_to(message, "Could not request results from the speech recognition service.")
 
     # Cleanup: remove the temporary files
