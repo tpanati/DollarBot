@@ -46,10 +46,13 @@ import updateCategory
 import weekly
 import monthly
 import sendEmail
+import voice
 import add_recurring
 from datetime import datetime
 from jproperties import Properties
-
+from telebot import types
+from telegram_bot_calendar import DetailedTelegramCalendar
+from add import cal
 
 configs = Properties()
 
@@ -103,16 +106,19 @@ bot.set_update_listener(listener)
 
 @bot.message_handler(commands=["help"])
 def show_help(m):
-
-    helper.read_json()
     chat_id = m.chat.id
+    message = (
+        "*Here are the commands you can use:*\n"
+        "/add - Add a new expense 💵\n"
+        "/history - View your expense history 📜\n"
+        "/budget - Check your budget 💳\n"
+        "/analytics - View graphical analytics 📊\n"
+        "For more info, type /faq or tap the button below 👇"
+    )
+    keyboard = types.InlineKeyboardMarkup()
+    keyboard.add(types.InlineKeyboardButton("FAQ", callback_data='faq'))
+    bot.send_message(chat_id, message, parse_mode='Markdown', reply_markup=keyboard)
 
-    message = "Here are the commands you can use: \n"
-    commands = helper.getCommands()
-    for c in commands:
-        message += "/" + c + ", "
-    message += "\nUse /menu for detailed instructions about these commands."
-    bot.send_message(chat_id, message)
 
 @bot.message_handler(commands=["faq"])
 def faq(m):
@@ -137,27 +143,77 @@ def faq(m):
 # defines how the /start and /help commands have to be handled/processed
 @bot.message_handler(commands=["start", "menu"])
 def start_and_menu_command(m):
-    """
-    start_and_menu_command(m): Prints out the the main menu displaying the features that the
-    bot offers and the corresponding commands to be run from the Telegram UI to use these features.
-    Commands used to run this: commands=['start', 'menu']
-    """
     helper.read_json()
     chat_id = m.chat.id
-
     text_intro = (
-        ("Welcome to the Dollar Bot! \n"
-         "DollarBot can track all your expenses with simple and easy to use commands :) \n"
-         "Here is the complete menu. \n\n")
+        "*Welcome to the Dollar Bot!* \n"
+        "DollarBot can track all your expenses with simple and easy-to-use commands :) \n"
+        "Here is the complete menu:\n\n"
     )
 
     commands = helper.getCommands()
-    for c in commands:  
-        # generate help text out of the commands dictionary defined at the top
-        text_intro += "/" + c + ": "
-        text_intro += commands[c] + "\n\n"
-    bot.send_message(chat_id, text_intro)
+    keyboard = types.InlineKeyboardMarkup()
+
+    for command, _ in commands.items():  # Unpack the tuple to get the command name
+        button_text = f"/{command}"
+        keyboard.add(types.InlineKeyboardButton(text=button_text, callback_data=command))  # Use `command` as a string
+
+    text_intro += "_Click a command button to use it._"
+    bot.send_message(chat_id, text_intro, reply_markup=keyboard, parse_mode='Markdown')
     return True
+
+@bot.callback_query_handler(func=lambda call: True)
+def callback_query(call):
+    """
+    Handles button clicks and executes the corresponding command actions.
+    """
+    command = call.data  # The command from the button clicked
+    response_text = ""
+
+    # Check which command was clicked and perform the corresponding action
+    if command == "help":
+        show_help(call.message)
+    elif command == "pdf":
+        command_pdf(call.message)
+    elif command == "add":
+        command_add(call.message)
+    elif command == "menu":
+        start_and_menu_command(call.message)
+    elif command == "add_recurring":
+        command_add_recurring(call.messsage)
+    elif command == "analytics":
+        command_analytics(call.message)
+    elif command == "predict":
+        command_predict(call.message)
+    elif command == "history":
+        command_history(call.message)
+    elif command == "delete":
+        command_delete(call.message)
+    elif command == "display":
+        command_display(call.message)
+    elif command == "edit":
+        command_edit(call.message)
+    elif command == "budget":
+        command_budget(call.message)
+    elif command == "updateCategory":
+        command_updateCategory(call.message)
+    elif command == "weekly":
+        command_weekly(call.message)
+    elif command == "monthly":
+        command_monthly(call.message)
+    elif command == "sendEmail":
+        command_sendEmail(call.message)
+    elif command == "faq":
+        faq(call.message)
+    elif DetailedTelegramCalendar.func()(call):  # If it’s a calendar action
+        cal(call,bot)
+    else:
+        response_text = "Command not recognized."
+
+    # Acknowledge the button press
+    # Acknowledge the button press
+    bot.answer_callback_query(call.id)
+    bot.send_message(call.message.chat.id, response_text, parse_mode='Markdown')
 
 # defines how the /add command has to be handled/processed
 @bot.message_handler(commands=["add"])
@@ -178,6 +234,15 @@ def command_weekly(message):
     the weekly analysis functionality. Commands used to run this: commands=['weekly']
     """
     weekly.run(message, bot)
+
+@bot.message_handler(content_types=['voice'])
+def handle_voice(message):
+    """
+    handle_voice(message) Takes 1 argument message which contains the message from
+    the user along with the chat ID of the user chat. It then calls voice.py to run to execute
+    voice recognition functionality. Voice invkes this command
+    """
+    voice.run(message, bot)
 
 # defines how the /monthly command has to be handled/processed
 @bot.message_handler(commands=["monthly"])
@@ -310,4 +375,4 @@ def main():
         print("Connection Timeout")
 
 if __name__ == "__main__":
-    main()
+    main() # type: ignore

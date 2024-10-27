@@ -30,6 +30,7 @@ import logging
 from telebot import types
 from telegram_bot_calendar import DetailedTelegramCalendar, LSTEP
 from datetime import datetime
+from exception import InvalidAmountError, InvalidCategoryError
 
 option = {}
 
@@ -50,24 +51,24 @@ def run(message, bot):
     calendar, step = DetailedTelegramCalendar().build()
     bot.send_message(chat_id, f"Select {LSTEP[step]}", reply_markup=calendar)
 
-    @bot.callback_query_handler(func=DetailedTelegramCalendar.func())
-    def cal(c):
-        chat_id = c.message.chat.id
-        result, key, step = DetailedTelegramCalendar().process(c.data)
 
-        if not result and key:
-            bot.edit_message_text(
-                f"Select {LSTEP[step]}",
-                chat_id,
-                c.message.message_id,
-                reply_markup=key,
-            )
-        elif result:
-            data = datetime.today().date()
-            if (result > data):
-                bot.send_message(chat_id,"Cannot select future dates, Please try /add command again with correct dates")
-            else:
-                category_selection(message,bot,result)
+def cal(c,bot):
+    chat_id = c.message.chat.id
+    result, key, step = DetailedTelegramCalendar().process(c.data)
+
+    if not result and key:
+        bot.edit_message_text(
+            f"Select {LSTEP[step]}",
+            chat_id,
+            c.message.message_id,
+            reply_markup=key,
+        )
+    elif result:
+        data = datetime.today().date()
+        if (result > data):
+            bot.send_message(chat_id,"Cannot select future dates, Please try /add command again with correct dates")
+        else:
+            category_selection(c.message,bot,result)
 
 def category_selection(msg,bot,date):
     """
@@ -113,9 +114,7 @@ def post_category_selection(message, bot, date):
             bot.send_message(
                 chat_id, "Invalid", reply_markup=types.ReplyKeyboardRemove()
             )
-            raise Exception(
-                'Sorry, I don\'t recognise this category "{}"!'.format(selected_category)
-            )
+            raise InvalidCategoryError(selected_category, "I don’t recognize this category")
         option[chat_id] = selected_category
         message = bot.send_message(
             chat_id, "How much did you spend on {}? \n(Numeric values only)".format(str(option[chat_id])),)
@@ -147,7 +146,7 @@ def post_amount_input(message, bot, selected_category, date):
         amount_entered = message.text
         amount_value = helper.validate_entered_amount(amount_entered)  # validate
         if amount_value == 0:  # cannot be $0 spending
-            raise Exception("Spent amount has to be a non-zero number.")
+            raise InvalidAmountError("Spent amount has to be a non-zero number.")
 
         date_of_entry = date.strftime(helper.getDateFormat())
         date_str, category_str, amount_str = (
@@ -178,8 +177,15 @@ def add_user_record(chat_id, record_to_be_added):
     is the expense record to be added to the store. It then stores this expense record in the store.
     """
     user_list = helper.read_json()
+    print(f"user_list before addition: {user_list}")  # Debug output
+
+    # Ensure user_list is initialized properly
+    if user_list is None:
+        user_list = {}  # Initialize as empty dictionary if read_json returned None
+
     if str(chat_id) not in user_list:
         user_list[str(chat_id)] = helper.createNewUserRecord()
 
     user_list[str(chat_id)]["data"].append(record_to_be_added)
     return user_list
+
