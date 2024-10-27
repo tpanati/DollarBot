@@ -46,13 +46,10 @@ import updateCategory
 import weekly
 import monthly
 import sendEmail
+import voice
 import add_recurring
-import os
-import tempfile
-import speech_recognition as sr
 from datetime import datetime
 from jproperties import Properties
-from pydub import AudioSegment
 from telebot import types
 from telegram_bot_calendar import DetailedTelegramCalendar
 from add import cal
@@ -240,57 +237,13 @@ def command_weekly(message):
 
 @bot.message_handler(content_types=['voice'])
 def handle_voice(message):
-    # Get the voice file
-    file_info = bot.get_file(message.voice.file_id)
-    downloaded_file = bot.download_file(file_info.file_path)
+    """
+    handle_voice(message) Takes 1 argument message which contains the message from
+    the user along with the chat ID of the user chat. It then calls voice.py to run to execute
+    voice recognition functionality. Voice invkes this command
+    """
+    voice.run(message, bot)
 
-    # Create a temporary OGG file
-    with tempfile.NamedTemporaryFile(delete=False, suffix='.ogg') as temp_ogg:
-        temp_ogg.write(downloaded_file)
-        temp_ogg_path = temp_ogg.name
-
-    # Convert OGG to WAV
-    temp_wav_path = tempfile.NamedTemporaryFile(delete=False, suffix='.wav').name
-    audio = AudioSegment.from_ogg(temp_ogg_path)
-    audio.export(temp_wav_path, format='wav')
-
-    # Use SpeechRecognition to convert voice to text
-    recognizer = sr.Recognizer()
-    with sr.AudioFile(temp_wav_path) as source:
-        audio_data = recognizer.record(source)
-        try:
-            text = recognizer.recognize_google(audio_data)
-            bot.send_message(message.chat.id, f"I heard: \"{text}\"")
-            process_command(text, message)
-        except sr.UnknownValueError:
-            bot.reply_to(message, "Sorry, I could not understand the audio.")
-        except sr.RequestError :
-            bot.reply_to(message, "Could not request results from the speech recognition service.")
-
-    # Cleanup: remove the temporary files
-    os.remove(temp_ogg_path)
-    os.remove(temp_wav_path)
-
-def process_command(text, message):
-    if "expense" in text:
-        command_add(message)
-    elif "history" in text:
-        command_history(message)  # Call the existing history command
-    elif "budget" in text:
-        command_budget(message)  # Call the existing budget command
-    elif "menu" in text:
-        start_and_menu_command(message)
-    elif "help" in text:
-        show_help(message)
-    elif "weekly" in text:
-        command_weekly(message)
-    elif "monthly" in text:
-        command_monthly(message)
-    elif "predict" in text:
-        command_predict(message)
-    else:
-        bot.send_message(message.chat.id, "I didn't recognize that command.")
-        
 # defines how the /monthly command has to be handled/processed
 @bot.message_handler(commands=["monthly"])
 def command_monthly(message):

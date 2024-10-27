@@ -1,5 +1,5 @@
 import pytest
-from code.code import process_command
+from voice import process_command
 from code.exception import InvalidOperationError
 
 # Example implementation of the process_command function (replace with your actual logic)
