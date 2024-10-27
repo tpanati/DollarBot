@@ -30,7 +30,7 @@ import logging
 from telebot import types
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-
+from exception import InvalidCategoryError, InvalidAmountError, InvalidDurationError
 
 option = {}
 
@@ -73,7 +73,7 @@ def post_category_selection(message, bot):
         selected_category = message.text
         if selected_category not in helper.getSpendCategories():
             bot.send_message(chat_id, 'Invalid', reply_markup=types.ReplyKeyboardRemove())
-            raise Exception("Sorry I don't recognise this category \"{}\"!".format(selected_category))
+            raise InvalidCategoryError(selected_category, "I don’t recognize this category")
 
         option[chat_id] = selected_category
         message = bot.send_message(chat_id, 'How much did you spend on {}? \n(Enter numeric values only)'.format(str(option[chat_id])))
@@ -107,7 +107,7 @@ def post_amount_input(message, bot, selected_category):
         amount_entered = message.text
         amount_value = helper.validate_entered_amount(amount_entered)  # validate
         if amount_value == 0:  # cannot be $0 spending
-            raise Exception("Spent amount has to be a non-zero number.")
+            raise InvalidAmountError("Spent amount has to be a non-zero number.")
 
         message = bot.send_message(chat_id, 'For how many months in the future will the expense be there? \n(Enter integer values only)')
         bot.register_next_step_handler(message, post_duration_input, bot, selected_category, amount_value)
@@ -135,7 +135,7 @@ def post_duration_input(message, bot, selected_category, amount_value):
         duration_entered = message.text
         duration_value = helper.validate_entered_duration(duration_entered)
         if duration_value == 0:
-            raise Exception("Duration has to be a non-zero integer.")
+            raise InvalidDurationError("Duration has to be a non-zero integer.")
                 
         for i in range(int(duration_value)):
             date_of_entry = (datetime.today().date() + relativedelta(months=+i)).strftime(helper.getDateFormat())

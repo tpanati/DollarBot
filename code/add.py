@@ -30,6 +30,7 @@ import logging
 from telebot import types
 from telegram_bot_calendar import DetailedTelegramCalendar, LSTEP
 from datetime import datetime
+from exception import InvalidAmountError, InvalidCategoryError
 
 option = {}
 
@@ -113,9 +114,7 @@ def post_category_selection(message, bot, date):
             bot.send_message(
                 chat_id, "Invalid", reply_markup=types.ReplyKeyboardRemove()
             )
-            raise Exception(
-                'Sorry, I don\'t recognise this category "{}"!'.format(selected_category)
-            )
+            raise InvalidCategoryError(selected_category, "I don’t recognize this category")
         option[chat_id] = selected_category
         message = bot.send_message(
             chat_id, "How much did you spend on {}? \n(Numeric values only)".format(str(option[chat_id])),)
@@ -147,7 +146,7 @@ def post_amount_input(message, bot, selected_category, date):
         amount_entered = message.text
         amount_value = helper.validate_entered_amount(amount_entered)  # validate
         if amount_value == 0:  # cannot be $0 spending
-            raise Exception("Spent amount has to be a non-zero number.")
+            raise InvalidAmountError("Spent amount has to be a non-zero number.")
 
         date_of_entry = date.strftime(helper.getDateFormat())
         date_str, category_str, amount_str = (

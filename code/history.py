@@ -29,6 +29,7 @@ import helper
 import logging
 from tabulate import tabulate
 from datetime import datetime
+from exception import NoSpendingRecordsError
 
 # === Documentation of history.py ===
 
@@ -46,9 +47,9 @@ def run(message, bot):
         user_history = helper.getUserHistory(chat_id)
         table = [["Date", "Category", "Amount"]]
         if user_history is None:
-            raise Exception("Sorry! No spending records found!")
+            raise NoSpendingRecordsError()
         if len(user_history) == 0:
-            raise Exception("Sorry! No spending records found!")
+            raise NoSpendingRecordsError()
         else:
             for rec in user_history:
                 values = rec.split(',')

@@ -29,6 +29,7 @@ import helper
 import logging
 import budget_view
 from telebot import types
+from exception import InvalidOperationError, InvalidAmountError, BudgetError, InvalidCategoryError
 
 # === Documentation of budget_update.py ===
 
@@ -62,7 +63,7 @@ def post_type_selection(message, bot):
             bot.send_message(
                 chat_id, "Invalid", reply_markup=types.ReplyKeyboardRemove()
             )
-            raise Exception('Sorry I don\'t recognise this operation "{}"!'.format(op))
+            raise InvalidOperationError(op, "Sorry, I don’t recognize this operation")
         if op == options["overall"]:
             update_overall_budget(chat_id, bot)
         elif op == options["category"]:
@@ -103,7 +104,7 @@ def post_overall_amount_input(message, bot):
         chat_id = message.chat.id
         amount_value = helper.validate_entered_amount(message.text)
         if amount_value == 0:
-            raise Exception("Invalid amount.")
+            raise InvalidAmountError("Spent amount has to be a non-zero number.")
         user_list = helper.read_json()
         if str(chat_id) not in user_list:
             user_list[str(chat_id)] = helper.createNewUserRecord()
@@ -113,7 +114,7 @@ def post_overall_amount_input(message, bot):
             for c in helper.getCategoryBudget(chat_id).values():
                 total_budget += float(c)
             if total_budget > float(amount_value):
-                raise Exception("Overall budget cannot be less than " + str(total_budget))
+                raise BudgetError("Overall budget cannot be less than " + str(total_budget))
         uncategorized_budget = helper.get_uncategorized_amount(chat_id, amount_value)
         if float(uncategorized_budget) > 0:
             if user_list[str(chat_id)]["budget"]["category"] is None:
@@ -168,9 +169,8 @@ def post_category_selection(message, bot):
                 bot.send_message(
                     chat_id, "Invalid", reply_markup=types.ReplyKeyboardRemove()
                 )
-                raise Exception(
-                    'Sorry I don\'t recognise this category "{}"!'.format(selected_category)
-                )
+                raise InvalidCategoryError(selected_category, "I don’t recognize this category")
+
             if helper.isCategoryBudgetByCategoryAvailable(chat_id, selected_category):
                 currentBudget = helper.getCategoryBudgetByCategory(
                     chat_id, selected_category
@@ -223,7 +223,7 @@ def post_category_amount_input(message, bot, category):
         chat_id = message.chat.id
         amount_value = helper.validate_entered_amount(message.text)
         if amount_value == 0:
-            raise Exception("Invalid amount.")
+            raise InvalidAmountError("Invalid amount.")
         user_list = helper.read_json()
         if str(chat_id) not in user_list:
             user_list[str(chat_id)] = helper.createNewUserRecord()
