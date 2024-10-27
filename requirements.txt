@@ -11,3 +11,4 @@ python-telegram-bot-calendar
 mock
 tabulate
 pandas
+speech_recognition
