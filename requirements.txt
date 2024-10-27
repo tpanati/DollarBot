@@ -12,3 +12,4 @@ mock
 tabulate
 pandas
 SpeechRecognition
+pydub
