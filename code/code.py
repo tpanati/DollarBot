@@ -54,8 +54,8 @@ from datetime import datetime
 from jproperties import Properties
 from pydub import AudioSegment
 from telebot import types
-
-
+from telegram_bot_calendar import DetailedTelegramCalendar
+from add import cal
 
 configs = Properties()
 
@@ -208,6 +208,8 @@ def callback_query(call):
         command_sendEmail(call.message)
     elif command == "faq":
         faq(call.message)
+    elif DetailedTelegramCalendar.func()(call):  # If it’s a calendar action
+        cal(call,bot)
     else:
         response_text = "Command not recognized."
 

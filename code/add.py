@@ -51,24 +51,24 @@ def run(message, bot):
     calendar, step = DetailedTelegramCalendar().build()
     bot.send_message(chat_id, f"Select {LSTEP[step]}", reply_markup=calendar)
 
-    @bot.callback_query_handler(func=DetailedTelegramCalendar.func())
-    def cal(c):
-        chat_id = c.message.chat.id
-        result, key, step = DetailedTelegramCalendar().process(c.data)
 
-        if not result and key:
-            bot.edit_message_text(
-                f"Select {LSTEP[step]}",
-                chat_id,
-                c.message.message_id,
-                reply_markup=key,
-            )
-        elif result:
-            data = datetime.today().date()
-            if (result > data):
-                bot.send_message(chat_id,"Cannot select future dates, Please try /add command again with correct dates")
-            else:
-                category_selection(message,bot,result)
+def cal(c,bot):
+    chat_id = c.message.chat.id
+    result, key, step = DetailedTelegramCalendar().process(c.data)
+
+    if not result and key:
+        bot.edit_message_text(
+            f"Select {LSTEP[step]}",
+            chat_id,
+            c.message.message_id,
+            reply_markup=key,
+        )
+    elif result:
+        data = datetime.today().date()
+        if (result > data):
+            bot.send_message(chat_id,"Cannot select future dates, Please try /add command again with correct dates")
+        else:
+            category_selection(c.message,bot,result)
 
 def category_selection(msg,bot,date):
     """
