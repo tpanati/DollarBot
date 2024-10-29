@@ -48,6 +48,8 @@ import monthly
 import sendEmail
 import voice
 import add_recurring
+import os
+from pdf import create_summary_pdf
 from datetime import datetime
 from jproperties import Properties
 from telebot import types
@@ -88,13 +90,15 @@ def listener(user_requests):
             )
 
     message = (
-        ("Sorry, I can't understand messages yet :/\n"
-         "I can only understand commands that start with /. \n\n"
-         "Type /faq or /help if you are stuck.")
+        ("I'm here to help, but I can only respond to specific commands for now.\n\n"
+    "To get started, try typing a command that begins with '/'.\n"
+    "If you're unsure, type /faq or /help to see a list of available commands.\n\n"
+    "Thanks for understanding! 😊")
     )
 
     try:
         helper.read_json()
+        global user_list
         chat_id = user_requests[0].chat.id
 
         if user_requests[0].text[0] != "/":
@@ -105,25 +109,24 @@ def listener(user_requests):
 bot.set_update_listener(listener)
 
 @bot.message_handler(commands=["help"])
-def show_help(m):
+def help(m):
+
+    helper.read_json()
+    global user_list
     chat_id = m.chat.id
-    message = (
-        "*Here are the commands you can use:*\n"
-        "/add - Add a new expense 💵\n"
-        "/history - View your expense history 📜\n"
-        "/budget - Check your budget 💳\n"
-        "/analytics - View graphical analytics 📊\n"
-        "For more info, type /faq or tap the button below 👇"
-    )
-    keyboard = types.InlineKeyboardMarkup()
-    keyboard.add(types.InlineKeyboardButton("FAQ", callback_data='faq'))
-    bot.send_message(chat_id, message, parse_mode='Markdown', reply_markup=keyboard)
+    message = "Here are the commands you can use: \n"
+    commands = helper.getCommands()
+    for c in commands:
+        message += "/" + c + ", "
+    message += "\nUse /menu for detailed instructions about these commands."
+    bot.send_message(chat_id, message)
 
 
 @bot.message_handler(commands=["faq"])
 def faq(m):
 
     helper.read_json()
+    global user_list
     chat_id = m.chat.id
 
     faq_message = (
@@ -144,6 +147,7 @@ def faq(m):
 @bot.message_handler(commands=["start", "menu"])
 def start_and_menu_command(m):
     helper.read_json()
+    global user_list
     chat_id = m.chat.id
     text_intro = (
         "*Welcome to the Dollar Bot!* \n"
@@ -154,12 +158,11 @@ def start_and_menu_command(m):
     commands = helper.getCommands()
     keyboard = types.InlineKeyboardMarkup()
 
-    for command, _ in commands.items():  # Unpack the tuple to get the command name
-        button_text = f"/{command}"
-        keyboard.add(types.InlineKeyboardButton(text=button_text, callback_data=command))  # Use `command` as a string
-
-    text_intro += "_Click a command button to use it._"
-    bot.send_message(chat_id, text_intro, reply_markup=keyboard, parse_mode='Markdown')
+    for c in commands:  
+        # generate help text out of the commands dictionary defined at the top
+        text_intro += "/" + c + ": "
+        text_intro += commands[c] + "\n\n"
+    bot.send_message(chat_id, text_intro)
     return True
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -172,7 +175,7 @@ def callback_query(call):
 
     # Check which command was clicked and perform the corresponding action
     if command == "help":
-        show_help(call.message)
+        help(call.message)
     elif command == "pdf":
         command_pdf(call.message)
     elif command == "add":
@@ -361,6 +364,91 @@ def command_predict(message):
     analyze budget and spending trends and suggest a future budget. Commands to run this commands=["predict"]
     """
     predict.run(message, bot)
+
+# handles /summary command
+@bot.message_handler(commands=["summary"])
+def command_summary(message):
+    """
+    command_summary(message): Takes the message with the user's chat ID and 
+    calls the helper function to generate the summary.
+    """
+    helper.generate_summary(message.chat.id, bot)
+
+# handles /report command
+@bot.message_handler(commands=["report"])
+def command_report(message):
+    """
+    command_report(message): Takes the message with the user's chat ID and 
+    requests a date range for the report, then calls the helper function to generate it.
+    """
+    chat_id = message.chat.id
+    bot.send_message(chat_id, "Please enter the start and end dates for the report (format: YYYY-MM-DD to YYYY-MM-DD).")    
+
+    # Listen for the next message containing the date range
+    @bot.message_handler(func=lambda msg: "-" in msg.text and "to" in msg.text)
+    def handle_date_range(msg):
+        date_range = msg.text.split("to")
+        if len(date_range) == 2:
+            start_date = date_range[0].strip()
+            end_date = date_range[1].strip()
+            # Generate the report and send it
+            helper.generate_report(chat_id, bot, start_date, end_date)
+        else:
+            bot.send_message(chat_id, "Invalid format. Please try again using 'YYYY-MM-DD to YYYY-MM-DD'.")
+
+@bot.message_handler(commands=["socialmedia"])
+def command_socialmedia(message):
+    """
+    command_socialmedia(message): Generates a shareable link for the user's expense summary that can
+    be posted on social media platforms.
+    """
+    chat_id = message.chat.id
+    
+    # Generate or fetch the link to the user's expense summary
+    summary_link = generate_shareable_link(chat_id)
+    
+    # Message with options for social media platforms
+    if summary_link:
+        response_message = (
+            "Here’s your shareable link to your expense summary: \n"
+            f"{summary_link} \n\n"
+            "Share this link on your social media:\n"
+            "1. Facebook: [Share on Facebook](https://www.facebook.com/sharer/sharer.php?u={summary_link})\n"
+            "2. Twitter: [Share on Twitter](https://twitter.com/share?url={summary_link}&text=Check%20out%20my%20expense%20summary!)\n"
+            "3. LinkedIn: [Share on LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url={summary_link})"
+        )
+        bot.send_message(chat_id, response_message, parse_mode="Markdown")
+    else:
+        bot.send_message(chat_id, "Failed to generate a shareable link. Please try again later.")
+
+def generate_shareable_link(chat_id):
+    """
+    Generates a shareable link for the user's expense summary.
+    This function creates a PDF summary of the user's expenses, uploads it to a cloud storage service,
+    and returns a shareable link.
+    """
+    try:
+        # Assuming `pdf.create_summary_pdf(chat_id)` exists in pdf.py and generates the PDF path
+        file_path = pdf.create_summary_pdf(chat_id)
+        
+        # For demonstration purposes, simulate creating a shareable link
+        # In production, use an upload service, like Google Drive or Dropbox, to get a public link
+        shareable_link = f"https://example.com/shared_files/{os.path.basename(file_path)}"
+        
+        # Log or print to check link
+        print("Generated shareable link:", shareable_link)
+        
+        return shareable_link
+    except Exception as e:
+        logging.exception("Error generating shareable link: " + str(e))
+        return None
+    
+def addUserHistory(chat_id, user_record):
+    global user_list
+    if not (str(chat_id) in user_list):
+        user_list[str(chat_id)] = []
+    user_list[str(chat_id)].append(user_record)
+    return user_list    
 
 def main():
     """
