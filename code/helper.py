@@ -428,8 +428,10 @@ def get_uncategorized_amount(chatId, amount):
     uncategorized_budget = overall_budget - category_budget
     return str(round(uncategorized_budget,2))
 
-def display_remaining_budget(message, bot):
-    print("inside")
+def display_remaining_budget(message, bot, cat):
+    """
+    Display the remaining budget for both the overall budget and a specific category.
+    """
     chat_id = message.chat.id
     display_remaining_category_budget(message, bot, cat)
     display_remaining_overall_budget(message, bot)
@@ -439,22 +441,65 @@ def display_remaining_overall_budget(message, bot):
     chat_id = message.chat.id
     remaining_budget = calculateRemainingOverallBudget(chat_id)
     print("here", remaining_budget)
-    if remaining_budget >= 0:
+
+    # Check if remaining_budget is None
+    if remaining_budget is None:
+        msg = "Error: Unable to calculate remaining budget."
+    elif remaining_budget >= 0:
         msg = "\nRemaining Overall Budget is $" + str(remaining_budget)
     else:
         msg = (
-            "\nBudget Exceded!\nExpenditure exceeds the budget by $" + str(remaining_budget)[1:]
+            "\nBudget Exceeded!\nExpenditure exceeds the budget by $" + str(remaining_budget)[1:]
         )
+    
     bot.send_message(chat_id, msg)
 
 def calculateRemainingOverallBudget(chat_id):
     budget = getOverallBudget(chat_id)
+    
+    # Check if budget is valid
+    if budget is None:
+        print("Error: Overall budget not found.")
+        return None  # Or handle this case appropriately
+
     history = getUserHistory(chat_id)
+
+    # If history is empty or None, handle it
+    if not history:
+        print("Error: User history not found.")
+        return float(budget)  # No spendings means remaining budget is the full amount
+
     query = datetime.now().today().strftime(getMonthFormat())
+
+    # Filters history for entries that match the current month
     queryResult = [value for _, value in enumerate(history) if str(query) in value]
-    if budget == None:
-        return -calculate_total_spendings(queryResult)
-    return float(budget) - calculate_total_spendings(queryResult)
+
+    total_spendings = calculate_total_spendings(queryResult)
+
+    # Handle case where total_spendings might be None
+    if total_spendings is None:
+        print("Error: Total spendings could not be calculated.")
+        total_spendings = 0  # Assuming no spendings if calculation fails
+
+    # Calculate and return the remaining budget
+    return float(budget) - total_spendings
+
+
+def display_remaining_category_budget(message, bot, cat):
+    """
+    Display the remaining budget for a specific category.
+    """
+    chat_id = message.chat.id
+    remaining_budget = calculateRemainingCategoryBudget(chat_id, cat)
+    
+    if remaining_budget >= 0:
+        msg = f"\nRemaining budget for {cat} category is ${remaining_budget:.2f}"
+    else:
+        msg = (
+            f"\nBudget Exceeded for {cat} category!\nExpenditure exceeds the budget by ${abs(remaining_budget):.2f}"
+        )
+    
+    bot.send_message(chat_id, msg)
 
 def calculate_total_spendings(queryResult):
     total = 0
