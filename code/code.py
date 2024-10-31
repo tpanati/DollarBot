@@ -396,11 +396,21 @@ def command_summary(message):
 @bot.message_handler(commands=["report"])
 def command_report(message):
     """
-    command_report(message): Takes the message with the user's chat ID and 
-    requests a date range for the report, then calls the helper function to generate it.
+    Handles the /report command, requesting a date range for the report.
     """
     chat_id = message.chat.id
-    bot.send_message(chat_id, "Please enter the start and end dates for the report (format: YYYY-MM-DD to YYYY-MM-DD).")    
+    bot.send_message(chat_id, "Please enter the date range for the report (format: YYYY-MM-DD to YYYY-MM-DD).")    
+
+    @bot.message_handler(func=lambda msg: validate_date_range(msg.text))
+    def handle_date_range(msg):
+        date_range = msg.text.split("to")
+        start_date, end_date = date_range[0].strip(), date_range[1].strip()
+        helper.generate_report(chat_id, bot, start_date, end_date)
+
+def validate_date_range(text):
+    # Implement a proper date validation logic
+    return "-" in text and "to" in text
+ 
 
     # Listen for the next message containing the date range
     @bot.message_handler(func=lambda msg: "-" in msg.text and "to" in msg.text)
