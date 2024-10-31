@@ -414,6 +414,8 @@ def command_report(message):
         else:
             bot.send_message(chat_id, "Invalid format. Please try again using 'YYYY-MM-DD to YYYY-MM-DD'.")
 
+import urllib.parse
+
 @bot.message_handler(commands=["socialmedia"])
 def command_socialmedia(message):
     """
@@ -425,19 +427,23 @@ def command_socialmedia(message):
     # Generate or fetch the link to the user's expense summary
     summary_link = generate_shareable_link(chat_id)
     
-    # Message with options for social media platforms
     if summary_link:
+        # URL encode the summary link
+        encoded_link = urllib.parse.quote(summary_link)
+        
+        # Message with options for social media platforms
         response_message = (
-            "Here’s your shareable link to your expense summary: \n"
-            f"{summary_link} \n\n"
-            "Share this link on your social media:\n"
-            "1. Facebook: [Share on Facebook](https://www.facebook.com/sharer/sharer.php?u={summary_link})\n"
-            "2. Twitter: [Share on Twitter](https://twitter.com/share?url={summary_link}&text=Check%20out%20my%20expense%20summary!)\n"
-            "3. LinkedIn: [Share on LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url={summary_link})"
+            "Your shareable link to your expense summary has been generated successfully! 🎉\n"
+            f"{summary_link}\n\n"
+            "Share this link on your favorite social media platforms:\n"
+            f"1. Facebook: [Share on Facebook](https://www.facebook.com/sharer/sharer.php?u={encoded_link})\n"
+            f"2. Twitter: [Share on Twitter](https://twitter.com/share?url={encoded_link}&text=Check%20out%20my%20expense%20summary!)\n"
+            f"3. LinkedIn: [Share on LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url={encoded_link})"
         )
         bot.send_message(chat_id, response_message, parse_mode="Markdown")
     else:
-        bot.send_message(chat_id, "Failed to generate a shareable link. Please try again later.")
+        bot.send_message(chat_id, "Oops! We couldn't generate a shareable link for you. Please try again later.")
+
 
 def generate_shareable_link(chat_id):
     """
