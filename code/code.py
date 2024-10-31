@@ -216,7 +216,10 @@ def callback_query(call):
     # Acknowledge the button press
     # Acknowledge the button press
     bot.answer_callback_query(call.id)
+if response_text:
     bot.send_message(call.message.chat.id, response_text, parse_mode='Markdown')
+else:
+    bot.send_message(call.message.chat.id, "An error occurred. Please try again.", parse_mode='Markdown')
 
 # defines how the /add command has to be handled/processed
 @bot.message_handler(commands=["add"])
