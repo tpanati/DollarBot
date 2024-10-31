@@ -165,61 +165,76 @@ def start_and_menu_command(m):
     bot.send_message(chat_id, text_intro)
     return True
 
+# code.py
+
 @bot.callback_query_handler(func=lambda call: True)
 def callback_query(call):
     """
     Handles button clicks and executes the corresponding command actions.
     """
-    command = call.data  # The command from the button clicked
-    response_text = ""
+    response_text = ""  # Initialize an empty response text
 
     # Check which command was clicked and perform the corresponding action
-    if command == "help":
-        help(call.message)
-    elif command == "pdf":
-        command_pdf(call.message)
-    elif command == "add":
-        command_add(call.message)
-    elif command == "menu":
-        start_and_menu_command(call.message)
-    elif command == "add_recurring":
-        command_add_recurring(call.messsage)
-    elif command == "analytics":
-        command_analytics(call.message)
-    elif command == "predict":
-        command_predict(call.message)
-    elif command == "history":
-        command_history(call.message)
-    elif command == "delete":
-        command_delete(call.message)
-    elif command == "display":
-        command_display(call.message)
-    elif command == "edit":
-        command_edit(call.message)
-    elif command == "budget":
-        command_budget(call.message)
-    elif command == "updateCategory":
-        command_updateCategory(call.message)
-    elif command == "weekly":
-        command_weekly(call.message)
-    elif command == "monthly":
-        command_monthly(call.message)
-    elif command == "sendEmail":
-        command_sendEmail(call.message)
-    elif command == "faq":
-        faq(call.message)
+    if call.data == "summary":
+        response_text = "Here is your summary report."
+    elif call.data == "report":
+        response_text = "Here is your detailed report."
+    elif call.data == "socialmedia":
+        response_text = "Share your summary on social media!"
+    else:
+        response_text = "Unknown command received."
+
+    # Additional command handling (if needed)
+    if call.data == "help":
+        response_text = help(call.message)
+    elif call.data == "pdf":
+        response_text = command_pdf(call.message)
+    elif call.data == "add":
+        response_text = command_add(call.message)
+    elif call.data == "menu":
+        response_text = start_and_menu_command(call.message)
+    elif call.data == "add_recurring":
+        response_text = command_add_recurring(call.message)
+    elif call.data == "analytics":
+        response_text = command_analytics(call.message)
+    elif call.data == "predict":
+        response_text = command_predict(call.message)
+    elif call.data == "history":
+        response_text = command_history(call.message)
+    elif call.data == "delete":
+        response_text = command_delete(call.message)
+    elif call.data == "display":
+        response_text = command_display(call.message)
+    elif call.data == "edit":
+        response_text = command_edit(call.message)
+    elif call.data == "budget":
+        response_text = command_budget(call.message)
+    elif call.data == "updateCategory":
+        response_text = command_updateCategory(call.message)
+    elif call.data == "weekly":
+        response_text = command_weekly(call.message)
+    elif call.data == "monthly":
+        response_text = command_monthly(call.message)
+    elif call.data == "sendEmail":
+        response_text = command_sendEmail(call.message)
+    elif call.data == "faq":
+        response_text = faq(call.message)
     elif DetailedTelegramCalendar.func()(call):  # If it’s a calendar action
-        cal(call,bot)
+        cal(call, bot)
+        response_text = "Calendar action processed."
     else:
         response_text = "Command not recognized."
 
     # Acknowledge the button press
-    # Acknowledge the button press
     bot.answer_callback_query(call.id)
-if response_text:
-    bot.send_message(call.message.chat.id, response_text, parse_mode='Markdown')
-else:
-    bot.send_message(call.message.chat.id, "An error occurred. Please try again.", parse_mode='Markdown')
+
+    # Send the response back to the user
+    if response_text:
+        bot.send_message(call.message.chat.id, response_text, parse_mode='Markdown')
+    else:
+        bot.send_message(call.message.chat.id, "An error occurred. Please try again.", parse_mode='Markdown')
+
+
 
 # defines how the /add command has to be handled/processed
 @bot.message_handler(commands=["add"])
