@@ -165,7 +165,7 @@ def post_amount_input(message, bot, selected_category, date):
                 amount_str, category_str, date_str
             ),
         )
-        helper.display_remaining_budget(message, bot, cat)  # Ensure 'cat' is defined in this context
+        helper.display_remaining_budget(message, bot, selected_category)  # Use 'selected_category' instead of 'cat'
 
     except Exception as e:
         logging.exception(str(e))
@@ -189,4 +189,3 @@ def add_user_record(chat_id, record_to_be_added):
 
     user_list[str(chat_id)]["data"].append(record_to_be_added)
     return user_list
-

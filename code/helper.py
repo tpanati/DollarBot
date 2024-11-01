@@ -616,6 +616,34 @@ def addSpendCategories(category):
     category_list["categories"] = result
     write_category_json(category_list)
 
+# Original function `display_remaining_budget` and `display_remaining_category_budget` references:
+def display_remaining_budget(message, bot, cat):
+    display_remaining_category_budget(message, bot, cat)
+
+def display_remaining_category_budget(message, bot, cat):
+    # Assuming `chat_id` is retrieved or passed in context to this function
+    chat_id = message.chat.id  # Adjust if `chat_id` comes from a different source in your code
+    remaining_budget = calculateRemainingCategoryBudget(chat_id, cat)
+    # Display remaining budget to user
+    bot.send_message(chat_id, f"Remaining budget for {cat}: {remaining_budget}")
+
+# Placeholder for `calculateRemainingCategoryBudget`
+def calculateRemainingCategoryBudget(chat_id, category):
+    """
+    Placeholder function for calculating remaining budget for a specific category.
+    Replace with actual logic to retrieve and calculate the budget from your data source.
+    """
+    # For example, if budgets are stored in a dictionary, you'd fetch and calculate the remaining amount
+    # Mocked example: returning a fixed value for now
+    budgets = {
+        "Food": 100.0,
+        "Transport": 50.0,
+        "Entertainment": 75.0,
+        # Add more categories as needed
+    }
+    remaining_budget = budgets.get(category, 0.0)  # Return 0.0 if category is not found
+    return remaining_budget
+
 def getSpendCategories():
     """
     getSpendCategories(): This functions returns the spend categories used in the bot. These are defined the same file.
