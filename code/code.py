@@ -53,6 +53,7 @@ from jproperties import Properties
 from telebot import types
 from telegram_bot_calendar import DetailedTelegramCalendar
 from add import cal
+import currencyconvert
 
 configs = Properties()
 
@@ -60,7 +61,7 @@ with open("user.properties", "rb") as read_prop:
     configs.load(read_prop)
 
 api_token = str(configs.get("api_token").data)
-
+print(f"API Token from properties file: {api_token}")
 bot = telebot.TeleBot(api_token)
 
 telebot.logger.setLevel(logging.INFO)
@@ -113,6 +114,7 @@ def show_help(m):
         "/history - View your expense history 📜\n"
         "/budget - Check your budget 💳\n"
         "/analytics - View graphical analytics 📊\n"
+        "/currencies - Convert your expenses to a different currency 💱\n"
         "For more info, type /faq or tap the button below 👇"
     )
     keyboard = types.InlineKeyboardMarkup()
@@ -205,6 +207,8 @@ def callback_query(call):
         command_sendEmail(call.message)
     elif command == "faq":
         faq(call.message)
+    elif command == "currencies":  
+        handle_currencies_command(call.message) 
     elif DetailedTelegramCalendar.func()(call):  # If it’s a calendar action
         cal(call,bot)
     else:
@@ -362,17 +366,52 @@ def command_predict(message):
     """
     predict.run(message, bot)
 
+@bot.message_handler(commands=["currencies"])
+def handle_currencies_command(message):
+    chat_id = message.chat.id
+    user_history = helper.getUserHistory(chat_id)
+
+    if user_history is None:
+        bot.send_message(chat_id, "No spending records available!")
+        return
+
+    # Ask user for target currency with reordered list including new currencies
+    markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
+    markup.add("GBP", "CAD", "INR", "CHF", "EUR")
+    msg = bot.reply_to(message, "Which currency do you want to convert to?", reply_markup=markup)
+    bot.register_next_step_handler(msg, process_currency_selection)
+
+def process_currency_selection(message):
+    chat_id = message.chat.id
+    currency_code = message.text
+
+    # Verify selected currency
+    if currency_code not in ["GBP", "CAD", "INR", "CHF", "EUR"]:
+        bot.send_message(chat_id, "Invalid currency selection.")
+        return
+
+    # Get spending data in selected currency
+    history = helper.getUserHistory(chat_id)
+    if history:
+        query_results = [entry for entry in history if datetime.now().strftime(helper.getMonthFormat()) in entry]
+        print(query_results)
+        spending_text = currencyconvert.calculate_spendings_in_currency(query_results, currency_code)
+        print(spending_text)
+        bot.send_message(chat_id, f"Here are your spendings in {currency_code}:\n{spending_text}")
+    else:
+        bot.send_message(chat_id, "No spending history available.")        
+
 def main():
     """
     main() The entire bot's execution begins here. It ensure the bot variable begins
     polling and actively listening for requests from telegram.
     """
     try:
-        bot.polling(none_stop=True)
+
+        bot.polling(non_stop=True)
     except Exception as e:
         logging.exception(str(e))
         time.sleep(3)
         print("Connection Timeout")
-
 if __name__ == "__main__":
     main() # type: ignore
