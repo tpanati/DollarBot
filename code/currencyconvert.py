@@ -41,22 +41,38 @@ def get_conversion_rate(currency_code):
             return DOLLARS_TO_CANADIAN_DOLLAR
     return 1
 
-def calculate_spendings_in_currency(query_results, currency_code):
+def get_latest_spendings():
+    # Retrieve stored spendings data from JSON using helper
+    spendings = helper.read_json()
+    if not spendings:
+        return []
+
+    # Flatten the records into a list for easier processing
+    all_spendings = []
+    for user_data in spendings.values():
+        all_spendings.extend(user_data.get("data", []))
+    print("Retrieved spendings:", all_spendings)      #Debug output
+    return all_spendings
+
+def calculate_spendings_in_currency( currency_code):
     # Calculate spendings and convert them
+    query_results = get_latest_spendings()
+    print("Query results:", query_results)
     total_dict = {}
     rate = get_conversion_rate(currency_code)
+    print(f"Conversion rate for {currency_code}: {rate}")
 
     for row in query_results:
         # date, category, money
-        s = row.split(',')
-        category = s[1]
-        amount = float(s[2])
-        
-        # Aggregate amounts per category
-        if category in total_dict:
-            total_dict[category] += amount
+        if row.count(',') == 2:
+            s = row.split(',')
+            category = s[1]
+            amount = float(s[2])
         else:
-            total_dict[category] = amount
+            print(f"Skipping malformed entry: {row}")
+        # Aggregate amounts per category
+        total_dict[category] = total_dict.get(category, 0) + amount
+        
 
     # Format spending summary in the chosen currency
     total_text = ""
@@ -64,8 +80,10 @@ def calculate_spendings_in_currency(query_results, currency_code):
         converted_amount = round(amount * rate, 2)
         currency_symbol = get_currency_symbol(currency_code)
         total_text += f"{category} {currency_symbol}{converted_amount}\n"
-    
-    return total_text
+    print(f"Conversion rate for {currency_code}: {rate}")
+    print(f"Total dictionary of spendings: {total_dict}")
+
+    return total_text if total_text else "No converted spendings available."
 
 def get_currency_symbol(currency_code):
     return {
