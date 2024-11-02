@@ -392,12 +392,21 @@ def process_currency_selection(message):
 
     # Get spending data in selected currency
     history = helper.getUserHistory(chat_id)
+    print("User history:", history)  # Debugging line
+
+
     if history:
         query_results = [entry for entry in history if datetime.now().strftime(helper.getMonthFormat()) in entry]
-        print(query_results)
-        spending_text = currencyconvert.calculate_spendings_in_currency(query_results, currency_code)
-        print(spending_text)
-        bot.send_message(chat_id, f"Here are your spendings in {currency_code}:\n{spending_text}")
+        print("Query results:", query_results)
+        total_spendings = sum(entry['amount'] for entry in query_results)  # Adjust this line based on your entry structure
+        print("Total spendings in USD:", total_spendings)
+
+        converted_amount = helper.convert_currency(total_spendings, 'USD', currency_code)
+        
+        if converted_amount is not None:
+            bot.send_message(chat_id, f"Your total spendings in {currency_code} is approximately {converted_amount:.2f}.")
+        else:
+            bot.send_message(chat_id, "Error during currency conversion.")
     else:
         bot.send_message(chat_id, "No spending history available.")        
 
