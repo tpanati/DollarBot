@@ -32,6 +32,7 @@ import graphing
 import logging
 from telebot import types
 from datetime import datetime
+from exception import DisplayOptionError, NoHistoryError
 
 # === Documentation of display.py ===
 
@@ -73,14 +74,19 @@ def display_total(message, bot):
         chat_id = message.chat.id
         DayWeekMonth = message.text
 
+        # Filter out non-spending-related commands such as "/help"
+        if DayWeekMonth.startswith("/"):
+            bot.reply_to(message, "This command is not related to spendings.")
+            return
+
         if DayWeekMonth not in helper.getSpendDisplayOptions():
-            raise Exception(
-                'Sorry I can\'t show spendings for "{}"!'.format(DayWeekMonth)
+            raise DisplayOptionError(
+               'Sorry I can\'t show spendings for "{}"!'.format(DayWeekMonth)
             )
 
         history = helper.getUserHistory(chat_id)
         if history is None:
-            raise Exception("Oops! Looks like you do not have any spending records!")
+            raise NoHistoryError("Oops! Looks like you do not have any spending records!")
 
         bot.send_message(chat_id, "Hold on! Calculating...")
         # show the bot "typing" (max. 5 secs)
@@ -88,6 +94,7 @@ def display_total(message, bot):
         time.sleep(0.5)
 
         total_text = ""
+        queryResult = []
         if DayWeekMonth == "Day":
             query = datetime.now().today().strftime(helper.getDateFormat())
             # query all that contains today's date
@@ -122,6 +129,7 @@ def display_total(message, bot):
     except Exception as e:
         logging.exception(str(e))
         bot.reply_to(message, str(e))
+
 
 def calculate_spendings(queryResult):
     """

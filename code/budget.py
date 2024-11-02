@@ -31,6 +31,7 @@ import budget_update
 import budget_delete
 import logging
 from telebot import types
+from exception import InvalidOperationError
 
 # === Documentation of budget.py ===
 
@@ -65,7 +66,7 @@ def post_operation_selection(message, bot):
             bot.send_message(
                 chat_id, "Invalid", reply_markup=types.ReplyKeyboardRemove()
             )
-            raise Exception('Sorry I don\'t recognise this operation "{}"!'.format(op))
+            raise InvalidOperationError(op, "Sorry, I don’t recognize this operation")
         if op == options["update"]:
             budget_update.run(message, bot)
         elif op == options["view"]:
