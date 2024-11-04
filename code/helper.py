@@ -42,11 +42,11 @@ analytics_options = {"overall": "Overall budget split by Category", "spend": "Sp
 
 # Currency conversion rates 
 exchange_rates = {
-    "USD_TO_EUR": 0.85,
-    "EUR_TO_USD": 1.18,
-    "USD_TO_GBP": 0.76,
-    "GBP_TO_USD": 1.32,
-    # Add more pairs as needed
+    "USD_TO_GBP": 0.78,
+    "USD_TO_CAD": 1.34,
+    "USD_TO_INR": 84,
+    "USD_TO_EUR": 0.95,
+    "USD_TO_CHF": 0.9,
 }
 
 # set of implemented commands and their description
