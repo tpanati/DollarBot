@@ -374,6 +374,7 @@ def handle_currencies_command(message):
     if user_history is None:
         bot.send_message(chat_id, "No spending records available!")
         return
+    print("Retrieved user history:", user_history)
 
     # Ask user for target currency with reordered list including new currencies
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
@@ -392,23 +393,38 @@ def process_currency_selection(message):
 
     # Get spending data in selected currency
     history = helper.getUserHistory(chat_id)
-    print("User history:", history)  # Debugging line
+    query_results = []
+    
+    # Filter entries based on the current month and format them for the conversion function
+    for entry in history:
+        try:
+            entry_date = datetime.strptime(entry.split(',')[0], "%d-%b-%Y")
+            if entry_date.strftime("%b-%Y") == datetime.now().strftime("%b-%Y"):
+                query_results.append(entry)
+        except ValueError:
+            print("Skipping malformed date entry:", entry)  # Debug for malformed entries
+    print("Filtered query results:", query_results)  # Debug output
 
 
-    if history:
-        query_results = [entry for entry in history if datetime.now().strftime(helper.getMonthFormat()) in entry]
-        print("Query results:", query_results)
-        total_spendings = sum(entry['amount'] for entry in query_results)  # Adjust this line based on your entry structure
-        print("Total spendings in USD:", total_spendings)
+    if query_results:
+        try:
+            # Sum the spendings from the current month's entries
+            total_spendings = sum(float(entry.split(',')[2]) for entry in query_results)
+            print("Total spendings in USD:", total_spendings)  # Debug
 
-        converted_amount = helper.convert_currency(total_spendings, 'USD', currency_code)
-        
-        if converted_amount is not None:
-            bot.send_message(chat_id, f"Your total spendings in {currency_code} is approximately {converted_amount:.2f}.")
-        else:
-            bot.send_message(chat_id, "Error during currency conversion.")
+            # Convert the total spending to the selected currency
+            converted_amount = helper.convert_currency(total_spendings, 'USD', currency_code)
+
+            # Display the result or error message
+            if converted_amount is not None:
+                bot.send_message(chat_id, f"Your total spendings in {currency_code} is approximately {converted_amount:.2f}.")
+            else:
+                bot.send_message(chat_id, "Error during currency conversion.")
+        except Exception as e:
+            print("Error during conversion:", e)  # Log any errors
+            bot.send_message(chat_id, "An error occurred while calculating spendings. Please try again.")
     else:
-        bot.send_message(chat_id, "No spending history available.")        
+        bot.send_message(chat_id, "No spending history available for the current month.")
 
 def main():
     """
