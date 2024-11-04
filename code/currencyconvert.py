@@ -16,30 +16,32 @@ DOLLARS_TO_SWISS_FRANC = 0.9
 
 # Fetch real-time rates or fallback to defaults
 def get_conversion_rate(currency_code):
-    try:
-        if currency_code == 'INR':
-            return c.get_rate('USD', 'INR')
-        elif currency_code == 'EUR':
-            return c.get_rate('USD', 'EUR')
-        elif currency_code == 'CHF':
-            return c.get_rate('USD', 'CHF')
-        elif currency_code == 'GBP':
-            return c.get_rate('USD', 'GBP')
-        elif currency_code == 'CAD':
-            return c.get_rate('USD', 'CAD')
-    except:
-        # Fallback rates
-        if currency_code == 'INR':
-            return DOLLARS_TO_RUPEES
-        elif currency_code == 'EUR':
-            return DOLLARS_TO_EUROS
-        elif currency_code == 'CHF':
-            return DOLLARS_TO_SWISS_FRANC
-        elif currency_code == 'GBP':
-            return DOLLARS_TO_POUNDS
-        elif currency_code == 'CAD':
-            return DOLLARS_TO_CANADIAN_DOLLAR
-    return 1
+
+    fallback_rates = {
+        'INR': DOLLARS_TO_RUPEES,
+        'EUR': DOLLARS_TO_EUROS,
+        'CHF': DOLLARS_TO_SWISS_FRANC,
+        'GBP': DOLLARS_TO_POUNDS,
+        'CAD': DOLLARS_TO_CANADIAN_DOLLAR
+    }
+    if currency_code in fallback_rates:
+        try:
+            # Attempt to get the conversion rate from the API
+            rate = c.get_rate('USD', currency_code)
+            if rate is not None:  # Check if the rate is valid
+                return rate
+            else:
+                print(f"No rate returned for {currency_code}, using fallback rate.")
+        
+        except Exception as e:
+            print(f"API call failed for {currency_code}: {e}")
+
+        # If API call fails or returns no valid rate, use fallback
+        print(f"Using fallback rate for {currency_code}: {fallback_rates[currency_code]}")
+        return fallback_rates[currency_code]
+    else:
+        raise ValueError(f"No conversion rate available for currency: {currency_code}")
+
 
 def get_latest_spendings():
     # Retrieve stored spendings data from JSON using helper
